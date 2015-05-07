@@ -1,0 +1,104 @@
+{% extends 'huskers/base-new.html' %}
+{% block title %} Players from the state of {{ title }} - {% endblock %}
+{% load statename %}
+
+{% block content %}
+
+	<div class="jumbotron name">
+		<div class="container">
+			<h1>{{ players.count }} Husker{{ players|pluralize }} from {{ title|state_name }}</h1>
+		</div>
+		</div>
+
+
+	<div class="container">
+
+		<div class="col-sm-10">
+
+
+	<div id="center">
+		{% if scholarships %}
+	<table class="table player-list">
+        <thead>
+        	<tr>
+                <th class="text-muted">{{ scholarships.count }} scholarship athlete{{ scholarships|pluralize }}</th>
+                <th></th>
+                <th>Pos</th>
+                <th>Ht</th>
+                <th>Wt</th>
+				<th>Hometown</th>
+				<th>Year</th>
+        	</tr>
+		</thead>
+		<tbody>
+        {% for player in scholarships %}
+		<tr>
+                <td><a href="/huskers/player/{{ player.player_name|slugify }}">{{ player.player_name }}</a></td>
+                <td>{% if player.stars_247c %}{% if player.stars_247c == "5 stars" %}<img class="rating" src="/media/huskers/five-stars.png">{% endif %}{% if player.stars_247c == "4 stars" %}<img class="rating" src="/media/huskers/four-stars.png">{% endif %}{% if player.stars_247c == "3 stars" %}<img class="rating" src="/media/huskers/three-stars.png">{% endif %}{% if player.stars_247c == "2 stars" %}<img class="rating" src="/media/huskers/two-stars.png">{% endif %}{% if player.stars_247c == "1 stars" %}<img class="rating" src="/media/huskers/one-star.png">{% endif %}{% endif %}</td>
+                <td>{{ player.position }}</td>
+                <td>{{ player.height }}</td>
+                <td>{{ player.weight }}</td>
+				<td>{{ player.city }}</td>
+				<td><a href="/huskers/class/{{ player.year }}" style="font-weight:normal; text-decoration: underline;">{{ player.year }}</a></td>
+				
+        </tr>
+		{% endfor %}
+		</tbody>
+				
+		</table>
+		{% endif %}
+		
+		{% if walkons %}
+		<table class="table player-list">
+        <thead>
+        	<tr>
+                <th class="text-muted">{{ walkons.count }} walk-on{{ walkons|pluralize }}</th>
+                <th></th>
+                <th>Pos</th>
+                <th>Ht</th>
+                <th>Wt</th>
+				<th>Hometown</th>
+				<th>Year</th>
+        	</tr>
+		</thead>
+		<tbody>
+        {% for player in walkons %}
+		<tr>
+                <td><a href="/huskers/player/{{ player.player_name|slugify }}">{{ player.player_name }}</a></td>
+                <td>{% if player.stars_247c %}{% if player.stars_247c == "5 stars" %}<img class="rating" src="/media/huskers/five-stars.png">{% endif %}{% if player.stars_247c == "4 stars" %}<img class="rating" src="/media/huskers/four-stars.png">{% endif %}{% if player.stars_247c == "3 stars" %}<img class="rating" src="/media/huskers/three-stars.png">{% endif %}{% if player.stars_247c == "2 stars" %}<img class="rating" src="/media/huskers/two-stars.png">{% endif %}{% if player.stars_247c == "1 stars" %}<img class="rating" src="/media/huskers/one-star.png">{% endif %}{% endif %}</td>
+                <td>{{ player.position }}</td>
+                <td>{{ player.height }}</td>
+                <td>{{ player.weight }}</td>
+				<td>{{ player.city }}</td>
+				<td><a href="/huskers/class/{{ player.year }}" style="font-weight:normal; text-decoration: underline;">{{ player.year }}</a></td>
+				
+        </tr>
+		{% endfor %}
+		</tbody>
+				
+		</table>
+		
+		{% endif %}
+		
+		
+		
+		
+	</div>
+	</div>
+	
+	<div class="col-sm-2">
+		
+		<h5><b>{{ title }} players by position</b></h5>
+			
+		<table class="table">
+		{% for position in positions %}
+		<tr><td>{{ position.position }}</td><td>{{ position.positioncount }}</td></tr>
+		{% endfor %}
+		</table>
+	</div>
+
+
+</div><!-- /container -->
+
+
+{% endblock %}

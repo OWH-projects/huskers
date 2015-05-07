@@ -1,0 +1,62 @@
+{% extends 'huskers/base-new.html' %}
+
+{% block title %}Huskers in the NFL Draft - {% endblock %}
+
+{% block extra-styles %}
+<style type="text/css">
+	.jumbotron h1 { font-size: 3em; }
+	.red { color: #c80000; }
+</style>
+{% endblock %}
+
+{% block content %}
+
+	<div class="jumbotron name">
+		<div class="container">
+			<h4 class="red"><b>NEBRASKA FOOTBALL</b></h4>
+			<h1>Huskers picked in the {{ year }} NFL Draft</h1>
+		</div>
+		</div>
+
+	<div class="container">
+	
+	<div class="row" id="scholarships">
+		<div id="center" class="col-sm-12">
+
+			<table class="table player-list">
+				<thead>
+					<tr>
+						<th class="text-muted">{{ players.count }} player{{ players|pluralize }} drafted</th>
+						<th>Team</th>
+						<th>Position</th>
+						<th class="hidden-xs hidden-sm">Round</th>
+						<th class="hidden-xs hidden-sm">Pick no.</th>
+					</tr>
+				</thead>
+				
+				<tbody>	
+				
+				{% for player in players %}
+				<tr>
+					<td><a href="/huskers/player/{{ player.player_name|slugify }}">{{ player.player_name }}</a></td>
+					<td><a href="/huskers/draft/{{ player.draft_team.team_name_slug }}">{{ player.draft_team.team_name }}</a></td>
+					<td>{{ player.position }}</td>
+					<td>{{ player.draft_round }}</td>
+					<td>{{ player.draft_overall_pick }}</td>
+				</tr>
+				{% endfor %}
+				
+				
+				</tbody>
+			</table>
+			
+		</div>
+	</div>
+	
+	
+	</div><!-- /container -->
+	
+	{% include 'huskers/jumbo-search.html' %}	
+	
+
+{% endblock %}

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map map_file="maps/usa.swf" zoom="100%" zoom_x="0%" zoom_y="0%"> 
+<areas> 
+{% for state in statelist %}
+<area mc_name="{{state.state}}" title="{{state.state}}" value="{{state.statecount}}" url="/huskers/state/{{ state.state }}"/> 
+{% endfor %}
+</areas>
+
+  <movies>
+  <movie oid="movie1" text_box_x="36" text_box_y="366" text_box_width="190" text_box_height="120" title="Map chart example">
+    <description>
+      <![CDATA[This is map chart example. The more people live in a country, the more intense colour is. Dragging, zooming and small map is disabled]]>
+    </description>
+
+<labels>
+    <label x="30" y="!50" text_size="18" color="#FFFFFF" remain="false">
+      <text>US Population</text>
+    </label>
+  </labels>
+
+  </movie>  
+</movies>
+<background><color>#FF33FF</color></background>
+</map>

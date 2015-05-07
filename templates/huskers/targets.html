@@ -1,0 +1,57 @@
+{% extends 'huskers/base.html' %}
+
+{% block title %} Husker targets for Class of {{ year }} - Nebraska Cornhuskers football roster database - Omaha.com {% endblock %}
+
+{% block content %}
+
+<div class="white">
+
+<div class="brt-nav" style="margin: 0 -30px 30px -30px;">
+
+		<ul class="navItems">
+			<li><a href="http://omaha.com/huskers">HOME</a></li>
+			<li class=""><a href="http://sports.omaha.com/category/bigred">BLOG</a></li>
+
+			
+			<li><a href="http://www.omaha.com/section/bigten/">BIG TEN</a></li>
+
+			<li class=""><a href="http://dataomaha.com/huskers/recruiting" target="_blank">RECRUITING</a></li>
+			
+		</ul>
+		
+			<div class="nav_link_social">
+				<li><a href="http://www.twitter.com/owhbigred" target="_blank"><img src="http://bloximages.newyork1.vip.townnews.com/omaha.com/content/tncms/live/global/resources/images/_site/_huskers/twitter-bird.png">&nbsp;&nbsp;@OWHbigred &raquo;</a></li>
+				<li><a href="http://www.facebook.com/bigredtoday" target="_blank"><img src="http://bloximages.newyork1.vip.townnews.com/omaha.com/content/tncms/live/global/resources/images/_site/_huskers/facebook-logo.png">&nbsp;&nbsp;BRT on Facebook &raquo;</a></li>
+			</div>
+		
+		<div style="clear: both;"></div>
+</div>
+
+
+
+
+<div class="name">
+
+<h4><a href="/huskers/">&laquo; Main</a> / <a href="/huskers/class/{{ year }}">Class of {{ year }}</a></h4>
+<h1>{{ targets.count }} targets for {{ year }}</h1>
+
+</div>
+
+<table class="player-list" style="margin-top: 20px;">
+
+{% for target in targets %}
+	<tr>
+		<td>{{ target.player_name }}</td>
+		<td>{{ target.height }}</td>
+		<td>{{ target.weight }}</td>
+		<td>{{ target.position }}</td>
+		<td>{{ target.city }}, {{ target.state }}</td>
+	</tr>
+{% endfor %}
+
+</table>
+
+
+</div>
+
+{% endblock %}

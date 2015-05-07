@@ -1,0 +1,64 @@
+{% extends 'huskers/base.html' %}
+<title> results for {{ query }}</title>
+{% block title %}Search results for {{ query|escape }} - Nebraska Cornhuskers football roster database - Omaha.com {% endblock %}
+
+{% load humanize %}
+
+{% block content %}
+
+<div class="white">
+
+<div class="brt-nav" style="margin: 0 -30px 30px -30px;">
+
+		<ul class="navItems">
+			<li><a href="http://omaha.com/huskers">HOME</a></li>
+			<li class=""><a href="http://sports.omaha.com/category/bigred">BLOG</a></li>
+
+			
+			<li><a href="http://www.omaha.com/section/bigten/">BIG TEN</a></li>
+
+			<li class=""><a href="http://dataomaha.com/huskers/recruiting" target="_blank">RECRUITING</a></li>
+			
+		</ul>
+		
+			<div class="nav_link_social">
+				<li><a href="http://www.twitter.com/owhbigred" target="_blank"><img src="http://bloximages.newyork1.vip.townnews.com/omaha.com/content/tncms/live/global/resources/images/_site/_huskers/twitter-bird.png">&nbsp;&nbsp;@OWHbigred &raquo;</a></li>
+				<li><a href="http://www.facebook.com/bigredtoday" target="_blank"><img src="http://bloximages.newyork1.vip.townnews.com/omaha.com/content/tncms/live/global/resources/images/_site/_huskers/facebook-logo.png">&nbsp;&nbsp;BRT on Facebook &raquo;</a></li>
+			</div>
+		
+		<div style="clear: both;"></div>
+</div>
+
+  <h1>Search results for <span style="color: #666;"> {{ query|escape }}</span></h1>
+	<br />
+  {% if query %}
+    {% if results %}
+      <table class="player-list">
+	  <tr>
+			<td><b>Name</b></td>
+			<td><b>Class</b></td>
+			<td><b>Position</b></td>
+			<td><b>Height</b></td>
+			<td><b>Weight</b></td>
+			<td><b>Hometown</b></td>
+		<tr>
+      {% for player in results %}
+       <tr>
+            <td><a href="/huskers/player/{{ player.player_name|slugify }}">{{ player.player_name|escape }}</a></td>
+            <td><a href="/huskers/class/{{ player.year }}" style="font-weight:normal; text-decoration: underline;">{{ player.year }}</a></td>
+            <td>{{ player.position }}</td>
+			<td>{{ player.height }}</td>
+			<td>{{ player.weight }}</td>
+			<td>{{ player.city }}, {{ player.state }}</td>
+        </tr>
+      {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p>No records found</p>
+    {% endif %}
+  {% endif %}
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,224 @@
+{% extends 'huskers/base-old.html' %}
+
+
+{% block title %}Nebraska Cornhuskers football recruiting - Big Red Today - Omaha.com - Omaha World-Herald{% endblock %}
+
+{% block header %}
+	<link rel="stylesheet" type="text/css" href="/media/huskers/recruiting-page.css" />
+	<link rel="stylesheet" type="text/css" href="/media/huskers/recruiting-page-mobile.css" media="screen and (max-width:641px)" />
+	
+	<meta name="description" content="Nebraska football recruiting news, information and analysis from the Omaha World-Herald." />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+
+
+{% endblock %}
+
+{% block content %}
+
+
+<div class="white">
+
+<div class="brt-nav" style="margin: 0 -30px 30px -30px;">
+
+		<ul class="navItems">
+			<li><a href="http://omaha.com/huskers">HOME</a></li>
+			<li class=""><a href="http://www.omaha.com/huskers/blogs/">BLOG</a></li>
+
+			
+			<li><a href="http://www.omaha.com/bigten/">BIG TEN</a></li>
+
+			<li class=""><a href="http://dataomaha.com/huskers/recruiting" target="_blank">RECRUITING</a></li>
+			
+		</ul>
+		
+			<div class="nav_link_social">
+				<li><a href="http://www.twitter.com/owhbigred" target="_blank"><img src="http://bloximages.newyork1.vip.townnews.com/omaha.com/content/tncms/live/global/resources/images/_site/_huskers/twitter-bird.png">&nbsp;&nbsp;@OWHbigred &raquo;</a></li>
+				<li><a href="http://www.facebook.com/bigredtoday" target="_blank"><img src="http://bloximages.newyork1.vip.townnews.com/omaha.com/content/tncms/live/global/resources/images/_site/_huskers/facebook-logo.png">&nbsp;&nbsp;BRT on Facebook &raquo;</a></li>
+			</div>
+		
+		<div style="clear: both;"></div>
+</div>
+
+
+	<div class="left">
+
+	<div class="left-box">
+		<h2><a href="/huskers/class/2016">2016 recruits</a> &raquo;</h2>
+	
+		<table class="recruits-list">
+						
+		<tbody>
+	
+		{% for player in recentlist %}
+		{% if player.status == "Scholarship" or player.status == null and player.target == null %}
+			<tr>
+				<td rowspan="2"><a href="/huskers/player/{{player.player_name|slugify }}" target="_blank"><img title="{{ player.player_name }}" class="mug" src="/media/{{ player.cropped_mug }}"></a></td>
+				<td style="border: 0; padding-bottom: 5px;"><a href="/huskers/player/{{player.player_name|slugify }}" target="_blank">{{ player.player_name }}</a></td>
+				<td style="border: 0; padding-bottom: 5px;">{{ player.height }}</td>
+				<td style="border: 0; padding-bottom: 5px;">{{ player.weight }}</td>
+			</tr>
+			<tr>
+				<td colspan="2" style="padding-top: 0;">{{ player.city }}, {{ player.state }}</td>
+				<td style="padding-top: 0;"><b>{{ player.position }}</b></td>
+			</tr>
+			{% endif %}
+			{% endfor %}
+		</tbody>
+		
+		</table>
+
+	</div>
+
+	<div class="left-box">
+		<h2><a href="/huskers">Husker rosters</a> &raquo;</h2>
+		<p>From 1984-2012, all Huskers are listed in the year in which they first appear on the official Nebraska football roster (Redshirts show up in the year following their non-playing redshirt year, and are denoted as a redshirt freshman). Players added later are associated with the year in which they first commit to play for or enroll at NU.</p>
+		<p>All information based on Huskers.com official rosters or local reports.</p>
+	
+		<form name="jump">
+				<select onchange="window.open(this.options[this.selectedIndex].value,'_top')">
+				<option selected>Select a year</option>
+				{% for year in yearlist %}
+				<option value="/huskers/class/{{ year.year }}">{{ year.year }}</option>
+				{% endfor %}
+				</select>
+		</form>
+		
+		<br>
+		
+		<form action="/huskers/search" method="GET">
+        	<input type="text" class="search-box" name="q" value="{{ query|escape }}" width="150">
+        	<input style="margin-top: 5px;" type="submit" value="Name search">
+        </form>
+
+	
+	</div>
+	
+
+			<div style="clear: both;"></div>
+
+
+	</div><!-- end div.left -->
+	
+	<div class="center">
+	
+	{% for story in headlines %}
+	<div class="story">
+		
+		{% if forloop.first %}
+		<a href="{{ story.link }}" target="_blank">{% if story.photo %}<img class="big" src="/media/{{ story.photo }}" /></a>{% endif %}
+		<h1><a href="{{ story.link }}" target="_blank">{{ story.hed }}</a></h1>
+		{% else %}
+		<h1><a href="{{ story.link }}" target="_blank">{{ story.hed }}</a></h1>
+		{% if story.photo %}<a href="{{ story.link }}" target="_blank"><img src="/media/{{ story.photo }}" /></a>{% endif %}
+		{% endif %}
+		<p class="source"><a href="{{ story.link }}" target="_blank">via {{ story.source }}</a></p>
+		<p>{{ story.body|safe }}</p>
+		<!-- <p>Priority: {{ story.priority }}</p> -->
+		
+		{% if story.subscription %}<p class="subscribe">&#9733; <em>Subscription required</em></p>{% endif %}
+		
+		<div style="clear: both;"></div>
+		
+	
+	</div>
+	{% endfor %}
+	
+	
+	
+	</div><!-- end div.center -->
+	
+	
+	<div class="right">
+	
+
+		<div class="right-box">
+			<h2><a href="https://twitter.com/OWHbigred/big-red-recruiting" target="_blank">Top tweets</a> &raquo;</h2>
+			
+			<a class="twitter-timeline" href="https://twitter.com/OWHsports/husker-recruiting" data-widget-id="294604180654522369">Tweets from @OWHsports/husker-recruiting</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+
+
+		</div>
+		
+		<div class="right-box">
+			<h2>Tracking the recruits</h2>
+			<p>Where have NU's recruits come from? Hover over a state in the map below to see how many commits NU has signed from each state going back to 1984.</p>
+			
+			
+			<!-- AMMAP SECTION ALL GOES AS ONE-->
+				<body onLoad="ammap.focus()">
+				<!-- saved from url=(0013)about:internet -->
+				<!-- ammap script-->
+				  <script type="text/javascript" src="/media/ammaps/swfobject.js"></script>
+					<div id="flashcontent">
+						<strong>You need to upgrade your Flash Player</strong>
+					</div>
+				
+					<script type="text/javascript">
+						// <![CDATA[		
+						var so = new SWFObject("/media/ammaps/ammap.swf", "ammap", "300px", "210px", "8", "#ffffff");
+				    so.addVariable("path", "/media/ammaps/");
+						so.addVariable("data_file", escape("/huskers/main"));
+				    so.addVariable("settings_file", escape("/media/ammaps/huskermap_settings.xml"));		
+						so.addVariable("preloader_color", "#999999");
+						so.write("flashcontent");
+						// ]]>
+					</script>
+			<!-- END OF AMMAP -->
+		
+		</div>
+		
+
+		<div class="right-box">
+			<h2>Top high schools</h2>
+			<p>Which schools are producing the most Cornhuskers? See the chart below for the Top 10 since 1984.</p>
+			
+			 <div class="chart">
+	    		<ul class="chartlist clublist">
+	    		{% for school in topschools %}
+	    			<li>
+	            			<p><b>{{ school.highschool }}</b> ({{ school.city }})</p>
+	            			<span class="count">{{ school.schoolcount }}</span>
+	            			<span class="index" style="width: {% widthratio school.schoolcount topschoolcount.schoolcount  180 %}px"></span>
+	    			</li>
+	    		{% endfor %}
+	    		</ul>
+	 		</div>
+	 		
+	 		<div style="clear: both;"></div>
+	 	</div>
+	 	
+	
+	
+	</div><!-- end div.right -->
+	
+	
+
+	<div style="clear: both;"></div>
+	
+
+
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+<div style="clear: both;"></div>
+
+
+</div><!-- outer -->
+
+
+{% endblock %}
+
+
+
+

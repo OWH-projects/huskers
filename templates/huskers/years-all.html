@@ -1,0 +1,60 @@
+{% extends 'huskers/base-new.html' %}
+
+{% block title %} Husker recruiting classes - {% endblock %}
+
+{% block extra-styles %}
+<style type="text/css">
+	.red { color: #c80000; }
+</style>
+{% endblock %}
+
+{% block content %}
+
+	<div class="jumbotron name">
+		<div class="container">
+			<h4 class="red"><b>NEBRASKA FOOTBALL</b></h4>
+			<h1>Husker recruiting classes</h1>
+		</div>
+		</div>
+
+	<div class="container">
+
+		<div class="row">
+		
+		
+		<div id="center" class="col-sm-12">
+
+			<table class="table player-list">
+				<thead>
+					<tr>
+						<th class="text-muted">Year</th>
+						<th>Scholarship players</th>
+						<th>Walk-ons</th>
+					</tr>
+				</thead>
+				
+				<tbody>	
+				{% for year in allyears %}
+				<tr>
+					<td><a href="/huskers/class/{{ year.year }}">{{ year.year }}</a></td>
+					<td>{{ year.scholarshipcount }}</td>
+					<td>{% for thisyear in walkons %}{% if thisyear.year == year.year %}{{ thisyear.walkoncount }}{% endif %}{% endfor %}</td>
+				</tr>
+				{% endfor %}
+				</tbody>
+			</table>
+		</div>
+		</div>
+		
+		
+		
+		
+	
+	</div><!-- /container -->
+	
+	{% include 'huskers/jumbo-search.html' %}
+	
+
+
+
+{% endblock %}

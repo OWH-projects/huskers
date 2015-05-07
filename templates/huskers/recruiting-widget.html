@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<!-- Page built April 2013 to pull recruiting headlines into left rail of omaha.com/huskers -->
+
+
+<head>
+	<meta name="description" content="Nebraska football recruiting news, information and analysis from the Omaha World-Herald." />
+	
+	<style type="text/css">
+	
+		body { font-family: 'Helvetica Neue', Helvetica, Arial; width: 150px; margin: 0; }
+		a { color: inherit; text-decoration: none; }
+		img { width: 50px; float: right; margin: 0 0 15px 15px; }
+		h1 { font-size: 12px; }
+		p { font-size: 12px;}
+		p.summary, p.source { color: #777; }
+		p.summary { margin-top: 5px; }
+		p.source { font-style: italic; font-size: 11px; margin-bottom: 4px; }
+		p.subscribe { font-size: 11px; }
+		p.extra-link { text-align: right; font-size: 11px; font-weight: bold;}
+		
+	
+	</style>
+
+</head>
+
+
+<body>
+	
+	
+	
+	{% for story in headlines %}
+	<div class="story">
+		
+		{% if forloop.first %}
+		<a href="{{ story.link }}" target="_blank">{% if story.photo %}<img class="big" src="/media/{{ story.photo }}" /></a>{% endif %}
+		<h1><a href="{{ story.link }}" target="_blank">{{ story.hed }}</a></h1>
+		{% else %}
+		<h1><a href="{{ story.link }}" target="_blank">{{ story.hed }}</a></h1>
+		{% if story.photo %}<a href="{{ story.link }}" target="_blank"><img src="/media/{{ story.photo }}" /></a>{% endif %}
+		{% endif %}
+		<p class="source"><a href="{{ story.link }}" target="_blank">via {{ story.source }}</a></p>
+		<p class="summary">{% if story.body|wordcount > 32 %}{{ story.body|safe|truncatewords_html:32 }}{% else %}{{ story.body|safe }}{% endif %}</p>
+		<!-- <p>Priority: {{ story.priority }}</p> -->
+		
+		{% if story.subscription %}<p class="subscribe">&#9733; <em>Subscription required</em></p>{% endif %}
+		
+		<div style="clear: both;"></div>
+		
+	
+	</div>
+	{% endfor %}
+
+	<p class="extra-link"><a href="http://www.dataomaha.com/huskers/recruiting" target="_blank">MORE RECRUITING NEWS </a>&raquo;</p>
+
+
+</body>
+
+</html>

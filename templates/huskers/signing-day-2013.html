@@ -1,0 +1,271 @@
+{% extends 'huskers/base.html' %}
+{% block title %}Signing Day 2013 - Nebraska Cornhuskers football rosters database - Omaha.com - Omaha World-Herald{% endblock %}
+
+{% block header %}
+
+	<link rel="stylesheet" type="text/css" href="/media/huskers/signing-day-2013.css">
+
+{% endblock %}
+
+
+{% block content %}
+
+
+<div class="main"> 
+
+<div class="brt-nav" style="margin: -30px -30px 30px -30px;">
+
+		<ul class="navItems">
+			<li><a href="http://omaha.com/huskers">HOME</a></li>
+			<li class=""><a href="http://sports.omaha.com/category/bigred">BLOG</a></li>
+
+			
+			<li><a href="http://www.omaha.com/section/bigten/">BIG TEN</a></li>
+
+			<li class=""><a href="http://dataomaha.com/huskers/recruiting" target="_blank">RECRUITING</a></li>
+			
+		</ul>
+		
+			<div class="nav_link_social">
+				<li><a href="http://www.twitter.com/owhbigred" target="_blank"><img src="http://omaha.com/images/subsite/huskers/twitter-bird.png">&nbsp;&nbsp;@OWHbigred &raquo;</a></li>
+				<li><a href="http://www.facebook.com/bigredtoday" target="_blank"><img src="http://omaha.com/images/subsite/huskers/facebook-logo.png">&nbsp;&nbsp;BRT on Facebook &raquo;</a></li>
+			</div>
+		
+		<div style="clear: both;"></div>
+</div>
+
+<div class="section intro"> 
+	<h1>SIGNING DAY 2013</h1>
+	<p class="signing-intro">The World-Herald has you covered with all of the latest information on Nebraska football's class of 2013.</p> 
+	<div style="clear: both;"></div>
+	
+</div> 
+
+<div class="left">
+
+		{% if video %}
+		<h2>LIVE ACCESS</h2>
+			{% for video in video %}
+				{{ video.body|safe }}
+			{% endfor %}
+
+		{% endif %}
+	
+		<br /><br />
+		
+		<h2>TOP STORIES</h2>
+
+		{% for story in headline %}
+
+		<div class="story">
+			<a href="{{ story.link }}"><img class="main-photo" src="/media/{{ story.photo }}"></a>
+		<h1 class="hed"><a href="{{ story.link }}">{{ story.hed }}</a></h1>
+		<p class="summary">{{ story.body|safe|linebreaks }}</p>
+		</div>
+		
+		{% endfor %}
+
+			
+		
+		<div class="blog">
+		
+		<h2 style="margin-top: 30px;"><a href="http://sports.omaha.com/category/bigred" target="_blank">BIG RED TODAY BLOG</a> &raquo; </h2>
+		                        {% load rssplug %}
+                                {% rssplug "http://sports.omaha.com/tag/recruiting/feed/" "huskers/note3.html" %}
+        </div>
+		
+		
+		
+</div><!-- end left -->
+
+
+
+<div class="center">
+
+
+<h2>LIVE CHAT</h2>
+		<iframe src="http://www.coveritlive.com/index2.php/option=com_altcaster/task=viewaltcast/altcast_code=0d73d97ab9/height=750/width=460" scrolling="no" height="750px" width="460px" frameBorder ="0" allowTransparency="true"  ><a href="http://www.coveritlive.com/mobile.php/option=com_mobile/task=viewaltcast/altcast_code=0d73d97ab9" >Signing Day 2013</a></iframe>
+		<br>
+		<br>
+		
+
+		{% if rankings %}
+		<h2>TRACKING THE BIG TEN</H2>
+			{% for story in rankings %}
+				{{ story.body|safe }}
+			{% endfor %}
+		{% endif %}
+		<br />
+		
+		<h2>CLASS OF 2013 MAP</h2>
+
+			<p>Where is the Class of 2013 from? Hover over a state in the map below to see how many commits NU has signed from each state. Check out our <a href="/huskers">full database</a> to see each Husker recruiting class going back to 1984.</p>
+			<br>
+
+
+		
+		
+			<!-- AMMAP SECTION ALL GOES AS ONE-->
+			<body onLoad="ammap.focus()">
+			<!-- saved from url=(0013)about:internet -->
+			<!-- ammap script-->
+ 				<script type="text/javascript" src="/media/ammaps/swfobject.js"></script>
+        			<div id="flashcontent">
+                		<strong>You need to upgrade your Flash Player</strong>
+        			</div>
+
+		        <script type="text/javascript">
+                	// <![CDATA[
+                		var so = new SWFObject("/media/ammaps/ammap.swf", "ammap", "460px", "360px", "8", "#ffffff");
+    				so.addVariable("path", "/media/ammaps/");
+                		so.addVariable("data_file", escape("/huskers/main/2013"));
+    				so.addVariable("settings_file", escape("/media/ammaps/huskermap_settings.xml"));
+                		so.addVariable("preloader_color", "#999999");
+                		so.write("flashcontent");
+                	// ]]>
+        		</script>
+			<!-- END OF AMMAP (Caps are good) -->
+
+
+		<h2>PHOTOS AND VIDEO</h2>
+		
+		<table>
+
+<thead>
+<tr><th style="text-align: left;"></th></tr>
+</thead>
+
+<tbody>
+<tr><td style="text-align: center;"><a href="http://sports.omaha.com/2013/02/06/video-live-interview-with-de-ernest-suttles/"><img src="http://omaha.com/assets/images/OW865326.JPG" width="215px"></a><br><p style="font-size: 11px; font-family: arial, georgia, sans-serif;"><b>VIDEO:</b> ERNEST SUTTLES</td><td style="text-align: center;"><a href="http://sports.omaha.com/2013/02/06/video-josh-banderas-signs-his-letter-of-intent/"><img src="http://omaha.com/assets/images/OW865426.JPG" width="215px"></a><br><p style="font-size: 11px; font-family: arial, georgia, sans-serif;"><b>VIDEO:</b> JOSH BANDERAS</td></tr>
+<tr><td style="text-align: center;"><a href="http://sports.omaha.com/2013/02/06/video-husker-i-back-terrell-newby/"><img src="http://omaha.com/assets/images/OW865226.JPG" width="215px"></a><br><p style="font-size: 11px; font-family: arial, georgia, sans-serif;"><b>VIDEO:</b> TERRELL NEWBY</td><td style="text-align: center;"><a href="http://sports.omaha.com/2013/02/06/video-randy-gregory-talks-about-his-commitment/"><img src="http://omaha.com/assets/images/OW864926.JPG" width="215px"></a><br><p style="font-size: 11px; font-family: arial, georgia, sans-serif;"><b>VIDEO:</b> RANDY GREGORY</td></tr>
+<tr><td style="text-align: center;"><a href="http://sports.omaha.com/2013/02/06/video-bo-pelini-signing-day-press-conference/"><img src="http://omaha.com/assets/images/OW865126.JPG" width="215px"></a><br><p style="font-size: 11px; font-family: arial, georgia, sans-serif;"><b>VIDEO:</b> BO PELINI</td><td style="text-align: center;"><a href="http://sports.omaha.com/2013/02/06/video-live-interview-with-gabriel-miller/"><img src="http://omaha.com/assets/images/OW864826.JPG" width="215px"></a><br><p style="font-size: 11px; font-family: arial, georgia, sans-serif;"><b>VIDEO:</b> GABRIEL MILLER</td></tr>
+<tr><td style="text-align: center;"><a href="http://sports.omaha.com/2013/02/06/video-meet-nus-2013-recruits/"><img src="http://omaha.com/assets/images/OW865026.JPG" width="215px"></a><br><p style="font-size: 11px; font-family: arial, georgia, sans-serif;"><b>VIDEO:</b> RECRUITING CLASS BREAKDOWN</td><td style="text-align: center;"><a href="http://odc.omaha.com/index.php?u_page=5002&p=4272" target="_blank"><img src="http://omaha.com/assets/images/OW865526.JPG" width="215px"></a><br><p style="font-size: 11px; font-family: arial, georgia, sans-serif;"><b>PHOTOS:</b> NU'S 2013 CLASS</td></tr>
+</tbody>
+
+</table>
+
+
+
+		
+		<!-- 
+			<a href="http://odc.omaha.com/index.php?u_page=5002&p=4272" target="_blank">
+				<img src="http://dataomaha.com/media/huskers/stanton.jpg" width="100%">
+			</a>
+		<p><a href="http://odc.omaha.com/index.php?u_page=5002&p=4272" target="_blank">Photo Showcase: Signing Day 2013</a></p>
+		
+		-->
+
+
+	
+
+</div><!-- end center -->
+
+
+
+
+
+
+
+
+		<div class="right">
+
+			<h2 class="bios"><a href="/huskers/class/2013">PLAYER BIOS</a> &raquo;</h2>
+			
+			<p><img src="http://dataomaha.com/media/huskermugs/x-mark-green.png" width="10px">  Signed &nbsp; <img src="http://dataomaha.com/media/huskermugs/x-mark-gray.png" width="10px"> Committed</p>
+			<br>
+			
+			<p style="font-size: 11px; font-style: italic;">Click names to read bios and watch highlight videos</p>
+			<br>
+			<ul>
+			{% for player in recentlist %}
+				{% if player.status != "Walk-on" %}
+				<li class="husker-recruit">
+				
+					<a href="/huskers/player/{{player.player_name|slugify }}"><img class="mug" src="/media/{{ player.cropped_mug }}"></a>
+					<p><a href="/huskers/player/{{player.player_name|slugify }}">
+		{{ player.player_name }}</a>&emsp; {% if player.signed == 1 %} <img 
+		src="http://dataomaha.com/media/huskermugs/x-mark-green.png" class="check"> {% else %} <img src="http://dataomaha.com/media/huskermugs/x-mark-gray.png" class="check"> {% endif %}</p>
+					<p>{{ player.position }} &nbsp; &nbsp; {{ player.height }}, {{ player.weight }}</p>
+					<p>{{ player.city }}, {{ player.state }}</p>
+				
+				</li>
+				{% endif %}
+				{% endfor %}
+			
+			</ul>
+			
+			<p><a href="/huskers/class/2013#targets">2013 targets</a> &raquo;</p>
+
+			
+			
+			<div style="clear:both;"></div>
+	
+	
+		
+	
+		</div><!-- end right -->
+
+
+
+
+
+
+
+
+
+
+	
+
+
+<div style="clear: both;"></div>
+
+</div>
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=203719719688922";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
+
+
+{% endblock %}
+
+
+<script type="text/javascript" src="http://edge.quantserve.com/quant.js"></script>
+
+<noscript>
+<a href="http://www.quantcast.com/p-f5LbblMdUG-tM" target="_blank"><img 
+src="http://pixel.quantserve.com/pixel/p-f5LbblMdUG-tM.gif" style="display: none;" border="0" height="1" 
+width="1" alt="Quantcast"/></a>
+</noscript>
+<!-- End Quantcast tag -->
+
+<script language="JavaScript" type="text/javascript" src="http://www.omaha.com/js/s_code.js"></script>
+<script language="JavaScript" type="text/javascript">
+s.Account="saxoomahaworldherald"
+s.cookieDomainPeriods="2"
+s.pageName="Section: Husker Signing Day,Section Overview"
+s.server="S260608AT1VW822"
+s.channel="Husker Signing Day"
+/* Traffic Variables */
+s.prop1="Section"
+/* E-commerce Variables */
+s.events="events"
+/* Hierarchy Variables */
+s.hier1="Husker Signing Day,Section Overview,No Profile"
+/************* DO NOT ALTER ANYTHING BELOW THIS LINE ! **************/
+var s_code=s.t();
+if(s_code)document.write(s_code)
+</script>
+
+<noscript>
+<img src="http://grndsinchant.112.2O7.net/b/ss/grndsinchant/1/H.2--NS/0"height="1" width="1" border="0" alt="" 
+/></noscript>
+
+
+

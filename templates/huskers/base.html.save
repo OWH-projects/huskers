@@ -1,0 +1,20 @@
+{% block title %}{% endblock %}
+
+
+<link rel="stylesheet" href="/media/huskers.css" type="text/css"> 
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.4.2.min.js"></script> <script src="http://cdn.jquerytools.org/1.2.3/jquery.tools.min.js"></script> 
+
+{% load humanize %} 
+
+</head> 
+
+<body> 
+
+huskers! 
+
+{% block content %} 
+{% endblock %} 
+
+</body>
+</html>

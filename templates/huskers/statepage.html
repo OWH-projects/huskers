@@ -1,0 +1,102 @@
+{% extends 'huskers/base.html' %}
+{% block title %} Players from the state of {{ title }} - Nebraska Cornhuskers football roster database - Omaha.com {% endblock %}
+
+{% block content %}
+
+<div class="white">
+
+<div class="brt-nav" style="margin: 0 -30px 30px -30px;">
+
+		<ul class="navItems">
+			<li><a href="http://omaha.com/huskers">HOME</a></li>
+			<li class=""><a href="http://sports.omaha.com/category/bigred">BLOG</a></li>
+
+			
+			<li><a href="http://www.omaha.com/section/bigten/">BIG TEN</a></li>
+
+			<li class=""><a href="http://dataomaha.com/huskers/recruiting" target="_blank">RECRUITING</a></li>
+			
+		</ul>
+		
+			<div class="nav_link_social">
+				<li><a href="http://www.twitter.com/owhbigred" target="_blank"><img src="http://bloximages.newyork1.vip.townnews.com/omaha.com/content/tncms/live/global/resources/images/_site/_huskers/twitter-bird.png">&nbsp;&nbsp;@OWHbigred &raquo;</a></li>
+				<li><a href="http://www.facebook.com/bigredtoday" target="_blank"><img src="http://bloximages.newyork1.vip.townnews.com/omaha.com/content/tncms/live/global/resources/images/_site/_huskers/facebook-logo.png">&nbsp;&nbsp;BRT on Facebook &raquo;</a></li>
+			</div>
+		
+		<div style="clear: both;"></div>
+</div>
+
+
+
+
+<div class="name">
+
+<h4><a href="/huskers/">&laquo; Main</a></h4>
+
+<h1>{{ playercount.statecount }} Huskers from {{ title }}</h1>
+
+</div>
+
+<table class="player-list">
+        <tr>
+                <td><b>Name</td>
+                <td><b>Pos</b></td>
+                <td><b>Ht</b></td>
+                <td><b>Wt</b></td>
+				<td><b>Hometown</b></td>
+				<td><b>Year</b></td>
+        </tr>
+
+        {% for player in statelist %}
+		{% if not player.status = "Target" %}
+		<tr>
+                <td><a href="/huskers/player/{{ player.player_name|slugify }}">{{ player.player_name }}</a></td>
+                <td>{{ player.position }}</td>
+                <td>{{ player.height }}</td>
+                <td>{{ player.weight }}</td>
+				<td>{{ player.city }}</td>
+				<td><a href="/huskers/class/{{ player.year }}" style="font-weight:normal; text-decoration: underline;">{{ player.year }}</a></td>
+				
+        </tr>
+		{% endif %}
+		{% endfor %}
+				
+		</table>
+
+		
+<table class="player-list" style="margin-top: 20px; font-size: 80%;">
+        <tr>
+                <td><b>Targets</td>
+                <td><b>Pos</b></td>
+                <td><b>Ht</b></td>
+                <td><b>Wt</b></td>
+				<td><b>Hometown</b></td>
+				<td><b>Year</b></td>
+				<td><b>Schools</b></td>
+        </tr>
+
+        {% for player in statelist %}
+		{% if player.status = "Target" %}
+		<tr>
+                <td><a href="/huskers/player/{{ player.player_name|slugify }}">{{ player.player_name }}</a></td>
+                <td>{{ player.position }}</td>
+                <td>{{ player.height }}</td>
+                <td>{{ player.weight }}</td>
+				<td>{{ player.city }}</td>
+				<td><a href="/huskers/class/{{ player.year }}" style="font-weight:normal; text-decoration: underline;">{{ player.year }}</a></td>
+				<td>{{ player.target_schools }}</td>
+				
+        </tr>
+		{% endif %}
+		{% endfor %}
+				
+		</table>		
+		
+		
+<div style="clear:both;"></div>
+
+
+</div><!-- end white container -->
+
+
+{% endblock %}

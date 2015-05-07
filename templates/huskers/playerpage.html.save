@@ -1,0 +1,48 @@
+{% extends 'huskers/base.html' %}
+{% block content %}
+
+<div class="name">
+
+<h1>{{ player.player_name }}</h1>
+<h4><a href="/huskers/class/{{ player.year }}">Class of {{ player.year }}</a></h4>
+
+</div>
+
+<div class="rail">
+
+<img src="/media/{{ player.mugshot }}" width="200px">
+
+<h2>Position: {{ player.position }}</h2>
+<h2>Height: {{ player.height }}</h2>
+<h2>Weight: {{ player.weight }}</h2>
+<h2>Hometown: {{ player.city }}, {{ player.state }}</h2>
+</div>
+
+<div class="container">
+{% autoescape off %}{{ player.bio|linebreaks }}{% endautoescape %}
+</div>
+
+
+<div class="sidebar">
+
+        <p>SECLECT A CLASS:</p>
+                {% for year in yearlist %}
+                <li><a href="/huskers/class/{{ year.year }}">{{ year.year }}</a></li>
+                {% endfor %}
+                <div style="clear: both;"></div>
+        </ul>
+
+<!--
+	<p>Other players in class</p>
+		<ul>
+			{% for classmate in playerlist %}
+			<a href="/huskers/player/{{ classmate.player_name|slugify }}"><li>{{ classmate.player_name }}</li></a>
+			{% endfor %}
+		</ul>
+-->
+
+
+</div>
+
+
+{% endblock %}

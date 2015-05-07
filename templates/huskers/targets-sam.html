@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<style>
+	body { font-family: sans-serif; }
+	li { list-style: none; margin-bottom: 2em; }
+	p { line-height: 1; margin: 0; }
+</style>
+</head>
+
+
+<body>
+<h1>{{ targets.count }} targets for {{ year }}</h1>
+
+{% for target in targets %}
+	<li>
+		<p><b>{{ target.player_name }}, {{ target.height }} / {{ target.weight }}, {{ target.position }}, {{ target.city }} ({{ target.state }}) {{ target.highschool }}: {{ target.target_schools }}</b></p>
+		<p>247: {{ target.stars_247 }} / {{ target.rating_national_247 }} / {{ target.rating_position_247 }}</p>
+		<p>247C: {{ target.stars_247c }} / {{ target.rating_national_247c }} / {{ target.rating_position_247c }}</p>
+		<p>ESPN: {{ target.stars_scouts }} / {{ target.rating_national_espn }} / {{ target.rating_position_espn }}</p>
+		<p>Rivals: {{ target.stars_rivals }} / {{ target.rating_national_rivals }} / {{ target.rating_position_rivals }}</p>
+		<p>Scout: {{ target.stars_fox }} / {{ target.rating_national_scout }} / {{ target.rating_position_scout }}</p>
+	</li>
+{% endfor %}
+</body>
+</html>

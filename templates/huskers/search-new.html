@@ -1,0 +1,88 @@
+{% extends 'huskers/base-new.html' %}
+{% load statename %}
+
+{% block title %}{% if query %}Search results for {{ query|escape }}{% else %}Search Husker recruits{% endif %} - {% endblock %}
+
+{% block extra-styles %}
+<style type="text/css">
+	.red { color: #c80000; }
+</style>
+{% endblock %}
+
+{% block content %}
+
+{% if query %}
+
+
+<div class="jumbotron name">
+<div class="container">
+  <h4 class="red"><b>Search results</b></h4>
+  <h1>You searched <span style="color: #ccc;">"{{ query|escape }}"</span></h1>
+</div>
+</div>
+
+
+{% else %}
+<div class="jumbotron name">
+<div class="container">
+		<h1>Every Husker ever.</h1>
+			<p style="margin: 1.2em 0em;" class="lead">These are the players who built the Nebraska football program from the ground up.</p>
+			
+		
+        <div class="col-lg-8 col-lg-offset-2">
+		<form class="form-inline" action="/huskers/search" method="GET">
+
+	    <div class="input-group">
+    	  <input type="text" class="form-control" placeholder="Search for..." type="search" name="q" value="{{ query|escape }}">
+    	  <span class="input-group-btn">
+    	    <button class="btn btn-danger" type="submit">Find player</button>
+    	  </span>
+    	</div><!-- /input-group -->
+  		</form>
+  		</div><!-- /.col-lg-6 -->
+</div>
+</div>
+	
+{% endif %}
+
+<div class="container">
+  {% if query %}
+
+	<div id="center" class="col-sm-12">
+
+    {% if results %}
+      <table class="table">
+	  
+	  	<thead><tr>
+			<th>Name</th>
+			<th>Class</th>
+			<th>Status</th>
+			<th>Position</th>
+			<th>Height</th>
+			<th>Weight</th>
+			<th>Hometown</th>
+		</tr></thead>
+		<tbody>
+      {% for player in results %}
+       <tr>
+            <td><a href="/huskers/player/{{ player.player_name|slugify }}">{{ player.player_name|escape }}</a></td>
+            <td><a href="/huskers/class/{{ player.year }}">{{ player.year }}</a></td>
+			<td>{{ player.status }}</td>
+            <td>{{ player.position }}</td>
+			<td>{{ player.height }}</td>
+			<td>{{ player.weight }}</td>
+			<td>{{ player.city }}, {{ player.state }}</td>
+        </tr>
+      {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p>No records found</p>
+    {% endif %}
+  
+  	</div>
+  {% endif %}
+
+</div>
+
+{% endblock %}

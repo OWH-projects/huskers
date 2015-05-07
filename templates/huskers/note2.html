@@ -1,0 +1,8 @@
+{% load i18n %}
+{% load rssplug %}
+
+<li class="rss-hed">
+<h5><a href="{{ item.link }}">{{ item.title|safe }}</a></h5>
+<p class="summary">{{ item.summary|safe }}</p>
+</li>
+

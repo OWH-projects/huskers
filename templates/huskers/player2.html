@@ -1,0 +1,372 @@
+{% extends 'huskers/base-new.html' %}
+{% load statename %}
+
+{% block title %}{{ player.player_name }} - {{ player.position }} - Class of {{ player.year }} -{% endblock %}
+
+
+{% block extra-styles %}
+<style type="text/css">
+	.red { color: #c80000; }
+	.white { color: #ccc; text-decoration: underline; }
+</style>
+{% endblock %}
+
+
+{% block content %}
+
+		<div class="jumbotron name">
+		<div class="container">
+			<h4><a href="/huskers/class/{{ player.year }}"><b>Class of {{ player.year }}{% if player.status = "Target" %} target{% endif %}</b></a></h4>
+			<h1>{{ player.player_name }}</h1>
+		</div>
+		</div>
+
+	<div class="container">
+	
+	
+	<div id="rail" class="col-sm-3"><!-- always show the left rail -->
+
+			{% if player.cropped_mug %}
+				<div class="player-stats">
+				<img src="/media/{{ player.cropped_mug }}" class="left-mug" style="border-radius: 50%; width: 80%; margin: 1em 10% 0 10%;">
+				</div>
+			{% endif %}
+			
+			
+			<div class="player-stats">
+				<table>
+				<tr><td>Position<span class="visible-xs visible-sm"><b>{{ player.position }}</b></span></td><td class="hidden-xs hidden-sm">{{ player.position }}</td></tr>
+				<tr><td>Height<span class="visible-xs"><b>{{ player.height }}</b></span></td><td class="hidden-xs hidden-sm">{{ player.height }}</td></tr>
+				<tr><td>Weight<span class="visible-xs visible-sm"><b>{{ player.weight }}</b></span></td><td class="hidden-xs hidden-sm">{{ player.weight }}</td></tr>
+				<tr><td>Hometown<span class="visible-xs visible-sm"><b>{{ player.city }}, <a class="white" href="/huskers/state/{{ player.state }}">{{ player.state }}</a></b></span></td><td class="hidden-xs hidden-sm">{{ player.city }}, <a class="white" href="/huskers/state/{{ player.state }}">{{ player.state }}</a></td></tr>
+				<tr><td>High school<span class="visible-xs visible-sm"><b>{{ player.highschool }}</b></span></td><td class="hidden-xs hidden-sm">{{ player.highschool }}</td></tr>
+				{% if player.status and player.status != "Target" %}<tr><td class="hidden-xs hidden-sm">Recruitment<span class="visible-xs visible-sm"><b>{{ player.status }}</b></span></td><td class="hidden-xs hidden-sm">{{ player.status }}</td></tr>{% endif %}
+				{% if player.recruiter_1 %}<tr><td class="hidden-xs hidden-sm">{% if player.recruiter_2 %}Recruiters{% else %}Recruiter{% endif %}<span class="visible-xs visible-sm"><b>{{ player.recruiter_1 }}{% if player.recruiter_2 %}, {{ player.recruiter_2 }}{% endif %}</b></span></td><td class="hidden-xs hidden-sm">{{ player.recruiter_1 }}{% if player.recruiter_2 %},<br> {{ player.recruiter_2 }}{% endif %}</td></tr>{% endif %}
+
+				</table>
+				
+			
+			</div>
+			
+			
+			
+		</div>
+		
+		
+		{% if player.status == "Target" and not player.mugshot %}
+		
+			<div id="center" class="col-sm-7">
+		 	{% else %}
+				<div id="center" class="col-sm-7">
+		 	{% endif %}
+	
+			{% if player.status = "Target" %}
+				<div class="player-bio">
+				
+					{% if player.bio %}
+						{% autoescape off %}
+							{{ player.bio|linebreaks }}
+						{% endautoescape %}
+
+					{% else %}
+				
+					<h3 class="red"><b>{{ player.first_name }} {{ player.last_name }} is a Nebraska football target in the Class of {{ player.year }}.</b></h3> 
+					
+					{% if player.target_schools %}<p>Also being pursued by {{ player.target_schools }}.</p>{% endif %}
+					<br />
+					
+					<table class="table">
+						<thead>
+							<th>Ratings service</th>
+							<th>Stars</th>
+							
+						</thead>
+					
+						<tbody>
+							<tr>
+								<td>247</td>
+								<td>
+									{% if player.stars_247 == "5 stars" %}<img class="rating" src="/media/huskers/five-stars.png">{% endif %}
+									{% if player.stars_247 == "4 stars" %}<img class="rating" src="/media/huskers/four-stars.png">{% endif %}
+									{% if player.stars_247 == "3 stars" %}<img class="rating" src="/media/huskers/three-stars.png">{% endif %}
+									{% if player.stars_247 == "2 stars" %}<img class="rating" src="/media/huskers/two-stars.png">{% endif %}
+									{% if player.stars_247 == "1 stars" %}<img class="rating" src="/media/huskers/one-star.png">{% endif %}
+									{% if player.stars_247 == "Unranked" %}<img class="rating" src="/media/huskers/not-rated.png">{% endif %}
+								</td>
+										
+							</tr>
+							<tr>
+								<td>247 Composite</td>
+								<td>
+									{% if player.stars_247c == "5 stars" %}<img class="rating" src="/media/huskers/five-stars.png">{% endif %}
+									{% if player.stars_247c == "4 stars" %}<img class="rating" src="/media/huskers/four-stars.png">{% endif %}
+									{% if player.stars_247c == "3 stars" %}<img class="rating" src="/media/huskers/three-stars.png">{% endif %}
+									{% if player.stars_247c == "2 stars" %}<img class="rating" src="/media/huskers/two-stars.png">{% endif %}
+									{% if player.stars_247c == "1 stars" %}<img class="rating" src="/media/huskers/one-star.png">{% endif %}
+									{% if player.stars_247c == "Unranked" %}<img class="rating" src="/media/huskers/not-rated.png">{% endif %}
+								</td>
+							
+							</tr>
+							<tr>
+								<td>ESPN</td>
+								<td>{% if player.stars_scouts == "5 stars" %}<img class="rating" src="/media/huskers/five-stars.png">{% endif %}
+									{% if player.stars_scouts == "4 stars" %}<img class="rating" src="/media/huskers/four-stars.png">{% endif %}
+									{% if player.stars_scouts == "3 stars" %}<img class="rating" src="/media/huskers/three-stars.png">{% endif %}
+									{% if player.stars_scouts == "2 stars" %}<img class="rating" src="/media/huskers/two-stars.png">{% endif %}
+									{% if player.stars_scouts == "1 stars" %}<img class="rating" src="/media/huskers/one-star.png">{% endif %}
+									{% if player.stars_scouts == "Unranked" %}<img class="rating" src="/media/huskers/not-rated.png">{% endif %}
+								</td>
+							
+							</tr>
+							<tr>
+								<td>Rivals</td>
+								<td>
+									{% if player.stars_rivals == "5 stars" %}<img class="rating" src="/media/huskers/five-stars.png">{% endif %}
+									{% if player.stars_rivals == "4 stars" %}<img class="rating" src="/media/huskers/four-stars.png">{% endif %}
+									{% if player.stars_rivals == "3 stars" %}<img class="rating" src="/media/huskers/three-stars.png">{% endif %}
+									{% if player.stars_rivals == "2 stars" %}<img class="rating" src="/media/huskers/two-stars.png">{% endif %}
+									{% if player.stars_rivals == "1 stars" %}<img class="rating" src="/media/huskers/one-star.png">{% endif %}
+									{% if player.stars_rivals == "Unranked" %}<img class="rating" src="/media/huskers/not-rated.png">{% endif %}
+								</td>
+							
+							</tr>
+							<tr>
+								<td>Scout</td>
+								<td>
+									{% if player.stars_fox == "5 stars" %}<img class="rating" src="/media/huskers/five-stars.png">{% endif %}
+									{% if player.stars_fox == "4 stars" %}<img class="rating" src="/media/huskers/four-stars.png">{% endif %}
+									{% if player.stars_fox == "3 stars" %}<img class="rating" src="/media/huskers/three-stars.png">{% endif %}
+									{% if player.stars_fox == "2 stars" %}<img class="rating" src="/media/huskers/two-stars.png">{% endif %}
+									{% if player.stars_fox == "1 stars" %}<img class="rating" src="/media/huskers/one-star.png">{% endif %}
+									{% if player.stars_fox == "Unranked" %}<img class="rating" src="/media/huskers/not-rated.png">{% endif %}
+								</td>
+								
+							</tr>
+						</tbody>
+					</table>
+					
+						{% endif %}
+					
+				</div>
+			
+			{% else %}
+
+
+			{% if player.bio %}
+				<div class="player-bio">
+				{% autoescape off %}
+					{{ player.bio|linebreaks }}
+				{% endautoescape %}
+				</div>
+				
+				
+				{% else %}
+					<div class="player-bio">
+					<p>{{ player.player_name }} joined the Huskers in {{ player.year }} {% if player.status == "Scholarship" %}after earning a scholarship{% endif %}{% if player.status == "Walk-on" %} as a walk-on {% endif %} at the {{ player.position }} position. At {{ player.height }} and {{ player.weight }} pounds, {{ player.last_name }} came to NU after playing previously at {{ player.highschool }}. He is from {{ player.city }}{% if player.state %}, {{ player.state }}{% else %}, {{ player.country }}{% endif %}. 
+					<p>Learn more about Nebraska's <a href="/huskers/class/{{ player.year }}">Class of {{ player.year }}</a> or scroll down to see players similar to {{ player.last_name }} in Husker history.</p> 
+					</div>
+			{% endif %}
+			
+			{% endif %}
+
+		</div>
+		
+		
+		{% if player.mugshot or player.hudl_image or player.badges or player.hudl_embed or player.status == "Scholarship" and player.stars_247 and player.stars_rivals and player.stars_scouts %}
+		<div class="col-sm-2" id="right">
+		
+			{% if player.mugshot %}<p><a href="#" data-toggle="modal" data-target=".bs-example-modal-lg"><img src="/media/{{ player.mugshot }}" class="extra-photo"></a></p>{% endif %}
+	
+			{% if player.feature_photo_credit %}<p class="photo-credit">Photo: {{ player.feature_photo_credit }}</p>{% endif %}
+		
+		
+			<table class="ratings">
+			{% if player.status != "Target"  or player.status == "Target" and player.bio %}
+
+				<tr><td></td></tr>				
+				{% if player.stars_247 or player.stars_rivals or player.stars_scouts %}<tr><td><b>Ratings</b></td><td></td></tr>{% endif %}
+
+					{% if player.stars_247 %}<tr class="small"><td><p>247Sports</td><td class="r">
+						{% if player.stars_247 == "5 stars" %}<img class="rating" src="/media/huskers/five-stars.png">{% endif %}
+						{% if player.stars_247 == "4 stars" %}<img class="rating" src="/media/huskers/four-stars.png">{% endif %}
+						{% if player.stars_247 == "3 stars" %}<img class="rating" src="/media/huskers/three-stars.png">{% endif %}
+						{% if player.stars_247 == "2 stars" %}<img class="rating" src="/media/huskers/two-stars.png">{% endif %}
+						{% if player.stars_247 == "1 stars" %}<img class="rating" src="/media/huskers/one-star.png">{% endif %}
+						{% if player.stars_247 == "Unranked" %}<img class="rating" src="/media/huskers/not-rated.png">{% endif %}
+					</td></tr>{% endif %}
+
+					{% if player.stars_rivals %}<tr class="small"><td><p>Rivals </td><td class="r">
+						{% if player.stars_rivals == "5 stars" %}<img class="rating" src="/media/huskers/five-stars.png">{% endif %}
+						{% if player.stars_rivals == "4 stars" %}<img class="rating" src="/media/huskers/four-stars.png">{% endif %}
+						{% if player.stars_rivals == "3 stars" %}<img class="rating" src="/media/huskers/three-stars.png">{% endif %}
+						{% if player.stars_rivals == "2 stars" %}<img class="rating" src="/media/huskers/two-stars.png">{% endif %}
+						{% if player.stars_rivals == "1 stars" %}<img class="rating" src="/media/huskers/one-star.png">{% endif %}
+						{% if player.stars_rivals == "Unranked" %}<img class="rating" src="/media/huskers/not-rated.png">{% endif %}
+					</td></tr>{% endif %}
+
+					
+					{% if player.stars_scouts %}<tr class="small"><td><p>ESPN </td><td class="r">
+						{% if player.stars_scouts == "5 stars" %}<img class="rating" src="/media/huskers/five-stars.png">{% endif %}
+						{% if player.stars_scouts == "4 stars" %}<img class="rating" src="/media/huskers/four-stars.png">{% endif %}
+						{% if player.stars_scouts == "3 stars" %}<img class="rating" src="/media/huskers/three-stars.png">{% endif %}
+						{% if player.stars_scouts == "2 stars" %}<img class="rating" src="/media/huskers/two-stars.png">{% endif %}
+						{% if player.stars_scouts == "1 stars" %}<img class="rating" src="/media/huskers/one-star.png">{% endif %}
+						{% if player.stars_scouts == "Unranked" %}<img class="rating" src="/media/huskers/not-rated.png">{% endif %}
+					</td></tr>{% endif %}
+
+					{% if player.stars_scouts %}<tr class="small"><td><p>Scout </td><td class="r">
+						{% if player.stars_fox == "5 stars" %}<img class="rating" src="/media/huskers/five-stars.png">{% endif %}
+						{% if player.stars_fox == "4 stars" %}<img class="rating" src="/media/huskers/four-stars.png">{% endif %}
+						{% if player.stars_fox == "3 stars" %}<img class="rating" src="/media/huskers/three-stars.png">{% endif %}
+						{% if player.stars_fox == "2 stars" %}<img class="rating" src="/media/huskers/two-stars.png">{% endif %}
+						{% if player.stars_fox == "1 stars" %}<img class="rating" src="/media/huskers/one-star.png">{% endif %}
+						{% if player.stars_fox == "Unranked" %}<img class="rating" src="/media/huskers/not-rated.png">{% endif %}
+					</td></tr>{% endif %}	
+					
+					{% endif %}
+
+			
+			</table>
+		
+				{% if player.hudl_image %}
+					<br />
+					<p><b>Hudl highlights</b></p>
+					<p><a href="#" data-toggle="modal" data-target=".bs-example-modal-lg-video"><img src="/media/{{ player.hudl_image }}" style="width: 100%;" /></a></p>
+					
+				{% endif %}
+				
+				{% if player.badges %}
+					<br />
+					<p><b>Badges</b></p>
+					<p>
+					{% for badge in player.badges.all %}
+						<a href="#"><img src="/media/{{ badge.image }}" class="col-xs-6 player-badge" data-toggle="tooltip" data-placement="top" title="{{ badge.name }} - {{ badge.notes }}"/></a>
+					{% endfor %}
+					</p>				
+				{% endif %}
+		
+		
+			<!-- ADVERTISMENT BEGINS -->
+		
+			<div>
+				
+				<!-- <p style="padding-top: 20px; text-align: center; color: #eee; font-size: .7em; text-transform: uppercase;">Advertisement</p> -->
+				
+				<a class="ad" title="Follow Big Red Today on Twitter and Facebook. Twitter.com/OWHbigred and Facebook.com/BigRedToday." href="http://facebook.com/bigredtoday" target="_blank"><img style="width: 100%;" src="http://bloximages.newyork1.vip.townnews.com/omaha.com/content/tncms/assets/v3/editorial/9/c2/9c200f10-b92f-11e4-822b-efe10d1709dd/54e77f302dd7c.image.jpg"></a>
+			
+			</div>
+			
+			<!-- ADVERTISMENT ENDS -->
+		
+		
+		</div>
+		
+		{% endif %}
+		
+
+	</div><!-- main/container -->
+	
+	{% if player.hudl_embed %}
+	<!-- Large modal -->
+	
+	<div class="modal fade bs-example-modal-lg-video" id="video-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-lg">
+	    <div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title">Hudl highlight video</h4>
+			</div>
+			
+	    	<div class="modal-body">
+				<div style="width: auto; margin: 0 auto;">{{ player.hudl_embed|safe }}</div>
+			</div>
+	    </div>
+	  </div>
+	</div>
+	{% endif %}
+	
+	{% if player.mugshot %}
+	<!-- Large modal -->
+	
+	<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-lg">
+	    <div class="modal-content">
+	    	
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title">{{ player.player_name }}</h4>
+			</div>
+			<div class="modal-body">
+	      	<img src="/media/{{ player.mugshot }}" class="modal-photo" />
+	      	{% if player.feature_photo_credit %}<p>Photo: {{ player.feature_photo_credit }}</p>{% endif %}
+	      	</div>
+	    </div>
+	  </div>
+	</div>
+	{% endif %}
+	
+	
+	
+	<div class="jumbotron browse">
+		
+		<div class="container">
+			<h2>Similar players in Husker history</h2>
+			<br>
+			<div class="row">
+				<div class="col-md-3">
+					<p class="alert alert-black"><a href="/huskers">More at {{ player.position }} &raquo;</a></p>
+				</div>
+				<div class="col-md-9">
+					<p>{% for player in same_position %}<a href="/huskers/player/{{ player.player_name|slugify }}">{{ player.player_name }}</a>&nbsp;&bull;&nbsp; {% endfor %}</p>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-3">
+					<p class="alert alert-black"><a href="/huskers/class/{{ player.year }}">More in {{ player.year }} &raquo;</a></p>
+				</div>
+				<div class="col-md-9">
+					<p>{% for player in same_year %}<a href="/huskers/player/{{ player.player_name|slugify }}">{{ player.player_name }}</a>&nbsp;&bull;&nbsp; {% endfor %}</p>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-md-3">
+					<p class="alert alert-black"><a href="/huskers/state/{{ player.state }}">More from {{ player.state|state_name }}&nbsp;&raquo;</a></p>
+				</div>
+				<div class="col-md-9">
+					<p>{% for player in same_state %}<a href="/huskers/player/{{ player.player_name|slugify }}">{{ player.player_name }}</a>&nbsp;&bull;&nbsp; {% endfor %}</p>
+				</div>
+			</div>
+		</div>
+
+
+{% include 'huskers/jumbo-search.html' %}
+
+
+
+	</div><!-- /browse -->
+
+
+
+
+
+
+	
+	
+{% endblock %}
+
+{% block extra-scripts %}
+
+<!--Script stops video from playing when modal is closed-->
+<script>
+    $("#video-modal").on('hidden.bs.modal', function (e) {
+        $("#video-modal iframe").attr("src", $("#video-modal iframe").attr("src"));
+    });
+	  $('[data-toggle="tooltip"]').tooltip()
+
+
+</script>   
+
+
+{% endblock %}

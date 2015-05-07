@@ -1,0 +1,171 @@
+{% extends 'huskers/base-new.html' %}
+
+{% block title %} Class of {{ title }} - {% endblock %}
+
+{% block extra-styles %}
+<style type="text/css">
+	.red { color: #c80000; }
+</style>
+{% endblock %}
+
+{% block content %}
+
+	<div class="jumbotron name">
+		<div class="container">
+			<h4 class="red"><b>NEBRASKA FOOTBALL</b></h4>
+			<h1>Class of {{ title }}</h1>
+		</div>
+		</div>
+
+	<div class="container">
+
+		<div class="row hidden-sm hidden-xs" style="margin-bottom: 2em;">
+		
+			<div class="btn-group btn-group-lg btn-group-justified">
+				<a class="btn btn-default active" id="button-scholarships">Scholarship players&nbsp;<span class="badge">{{ scholarships.count }}</span></a>
+				<a class="btn btn-default" id="button-walk-ons">Walk-Ons&nbsp;<span class="badge">{{ walkons.count }}</span></a>
+				<a class="btn btn-default" id="button-targets">Targets&nbsp;<span class="badge">{{ targets.count }}</span></a>
+			</div>
+		
+		</div>
+
+
+		<div class="row" id="scholarships">
+		<div id="center" class="col-sm-12">
+
+			<table class="table player-list">
+				<thead>
+					<tr>
+						<th class="text-muted">{{ scholarships.count }} scholarship player{{ scholarships|pluralize }}</th>
+						<th></th>
+						<th>Position</th>
+						<th class="hidden-xs hidden-sm">Height</th>
+						<th class="hidden-xs hidden-sm">Weight</th>
+						<th class="hidden-xs hidden-sm">State</th>
+					</tr>
+				</thead>
+				
+				<tbody>	
+				{% for player in scholarships %}
+				<tr>
+					<td><a href="/huskers/player/{{ player.player_name|slugify }}">{{ player.player_name }}</a></td>
+					<td>{% if player.stars_247c %}{% if player.stars_247c == "5 stars" %}<img class="rating" src="/media/huskers/five-stars.png">{% endif %}{% if player.stars_247c == "4 stars" %}<img class="rating" src="/media/huskers/four-stars.png">{% endif %}{% if player.stars_247c == "3 stars" %}<img class="rating" src="/media/huskers/three-stars.png">{% endif %}{% if player.stars_247c == "2 stars" %}<img class="rating" src="/media/huskers/two-stars.png">{% endif %}{% if player.stars_247c == "1 stars" %}<img class="rating" src="/media/huskers/one-star.png">{% endif %}{% endif %}</td>
+					<td>{{ player.position }}</td>
+					<td class="hidden-xs hidden-sm">{{ player.height }}</td>
+					<td class="hidden-xs hidden-sm">{{ player.weight }}</td>
+					<td class="hidden-xs hidden-sm">{{ player.state }}</td>
+				</tr>
+				{% endfor %}
+				</tbody>
+			</table>
+		</div>
+		</div>
+		
+		<div class="row" id="walk-ons">
+		<div id="center" class="col-sm-12">
+
+			{% if walkons %}
+			<table class="table player-list">
+				<thead>
+					<tr>
+						<th class="text-muted">{{ walkons.count }} walk-on{{ walkons|pluralize }}</th>
+						<th></th>
+						<th>Position</th>
+						<th class="hidden-xs hidden-sm">Height</th>
+						<th class="hidden-xs hidden-sm">Weight</th>
+						<th class="hidden-xs hidden-sm">State</th>
+					</tr>
+				</thead>
+				
+				<tbody>	
+				{% for player in walkons %}
+				<tr>
+					<td><a href="/huskers/player/{{ player.player_name|slugify }}">{{ player.player_name }}</a></td>
+					<td>{% if player.stars_247c %}{% if player.stars_247c == "5 stars" %}<img class="rating" src="/media/huskers/five-stars.png">{% endif %}{% if player.stars_247c == "4 stars" %}<img class="rating" src="/media/huskers/four-stars.png">{% endif %}{% if player.stars_247c == "3 stars" %}<img class="rating" src="/media/huskers/three-stars.png">{% endif %}{% if player.stars_247c == "2 stars" %}<img class="rating" src="/media/huskers/two-stars.png">{% endif %}{% if player.stars_247c == "1 stars" %}<img class="rating" src="/media/huskers/one-star.png">{% endif %}{% endif %}</td>
+					<td>{{ player.position }}</td>
+					<td class="hidden-xs hidden-sm">{{ player.height }}</td>
+					<td class="hidden-xs hidden-sm">{{ player.weight }}</td>
+					<td class="hidden-xs hidden-sm">{{ player.state }}</td>
+				</tr>
+				{% endfor %}
+				</tbody>
+				
+			</table>
+			{% else %}
+			<h4>No walk-ons signed.</h4>
+			{% endif %}
+		</div>
+		</div>
+		
+		{% if targets %}
+		<div class="row" id="targets">
+		<div id="center" class="col-sm-12">
+
+			<table class="table player-list">
+				<thead>
+					<tr>
+						<th class="text-muted">{{ targets.count }} target{{ targets|pluralize }}</th>
+						<th></th>
+						<th>Position</th>
+						<th class="hidden-xs hidden-sm">Height</th>
+						<th class="hidden-xs hidden-sm">Weight</th>
+						<th class="hidden-xs hidden-sm">State</th>
+					</tr>
+				</thead>
+				
+				<tbody>	
+				{% for player in targets %}
+				<tr>
+					<td><a href="/huskers/player/{{ player.player_name|slugify }}">{{ player.player_name }}</a></td>
+					<td>{% if player.stars_247c %}{% if player.stars_247c == "5 stars" %}<img class="rating" src="/media/huskers/five-stars.png">{% endif %}{% if player.stars_247c == "4 stars" %}<img class="rating" src="/media/huskers/four-stars.png">{% endif %}{% if player.stars_247c == "3 stars" %}<img class="rating" src="/media/huskers/three-stars.png">{% endif %}{% if player.stars_247c == "2 stars" %}<img class="rating" src="/media/huskers/two-stars.png">{% endif %}{% if player.stars_247c == "1 stars" %}<img class="rating" src="/media/huskers/one-star.png">{% endif %}{% endif %}</td>
+					<td>{{ player.position }}</td>
+					<td class="hidden-xs hidden-sm">{{ player.height }}</td>
+					<td class="hidden-xs hidden-sm">{{ player.weight }}</td>
+					<td class="hidden-xs hidden-sm">{{ player.state }}</td>
+				</tr>
+				{% endfor %}
+				</tbody>
+			</table>
+
+		</div>	
+		</div>
+		{% endif %}
+	
+	</div><!-- /container -->
+	
+	{% include 'huskers/jumbo-search.html' %}
+	
+
+
+
+{% endblock %}
+
+{% block extra-scripts %}
+
+	<script>
+		$('a#button-scholarships').click(function() {
+			$('div#scholarships').show();
+			$('div#walk-ons').hide();
+			$('div#targets').hide();
+			$(this).addClass('active')
+			$('a').not(this).removeClass('active');
+		});
+		
+		$('a#button-walk-ons').click(function() {
+			$('div#scholarships').hide();
+			$('div#walk-ons').show();
+			$('div#targets').hide();
+			$(this).addClass('active')
+			$('a').not(this).removeClass('active');
+		});
+		
+		$('a#button-targets').click(function() {
+			$('div#scholarships').hide();
+			$('div#walk-ons').hide();
+			$('div#targets').show();
+			$(this).addClass('active');
+			$('a').not(this).removeClass('active');
+		});
+	</script>
+
+{% endblock %}

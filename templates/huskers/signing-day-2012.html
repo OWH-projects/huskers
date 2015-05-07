@@ -1,0 +1,391 @@
+{% extends 'huskers/base.html' %}
+{% block title %}Signing Day 2012 - Nebraska Cornhuskers football rosters database - Omaha.com - Omaha World-Herald{% endblock %}
+
+{% block header %}
+
+<style type="text/css">
+
+	body {
+		background: #9D0D02 url(http://www.omaha.com/images/subsite/bigred/bigred_bg.png);
+	}
+		
+	div.brt-nav {
+		border: 0;
+		width: 960px;
+		padding: 0 10px;
+		background: #000;
+		margin: -30px 0 40px -30px;
+		color: #ccc;
+		font-size: 12px;
+		}
+		
+	div.brt-nav li {
+		float: left;
+		}
+	
+	div.intro {
+		border-bottom: 1px solid #eee;
+		}
+		
+	div#omaha-header {
+		background: none;
+	}
+	
+	div#omaha-header img.logo {
+		width: 980px;
+		}
+		
+	div.outer {
+		width: 980px;
+		padding: 0;
+		}
+	
+	div.brt-nav a {
+		color: inherit;
+		}
+
+	div.main {
+		width: 920px;
+		padding: 30px; 
+		border: 1px solid #000; 
+		background: #fff; 
+		margin: 0 0 50px 0; 
+		box-shadow: 0 0 10px #444;
+	}
+	
+	div.rail {
+		width: 300px; 
+		margin-right: 30px;
+		float: left;
+	}
+	
+	a {
+		color: #9d0d02;
+		font-weight: bold;
+		}
+		
+	.rail h2, .box h2, .chat h2 {
+		border-bottom: 1px solid #ccc;
+		margin-bottom: 15px;
+		}
+		
+	div.chat {
+		border-left: 1px solid #ccc; 
+		padding-left: 30px; 
+		float: left; 
+		width: 550px;
+	}
+
+	
+	li.husker-recruit {
+		float: left;
+		width: 170px;
+		height: 60px;
+		border-bottom: 1px solid #eee;
+		margin: 0 15px 15px 0;
+	}
+	
+	
+	li.husker-recruit:nth-child(3n) {
+		margin-right: 0;
+		}
+		
+	img.mug {
+		width: 40px; 
+		float: left;
+		margin-right: 10px;
+		border: 1px solid transparent;
+		}
+		
+	img.mug:hover {
+		border: 1px solid #9d0d02;
+		}
+		
+	img.check {
+		float: right;
+		width: 15px;
+		margin-top: -25px;
+		}
+		
+	p.signing-intro {
+		margin: -45px 0 20px 0;
+		width: 540px;
+		float: right;
+		}
+		
+	h1.hed {
+		line-height: 120%;
+		margin-top: 15px;
+		}
+	
+</style>
+
+
+{% endblock %}
+
+
+{% block content %}
+
+
+<div class="main"> 
+
+<div class="brt-nav">
+
+	<ul>
+			<li><a href="http://omaha.com/bigred">Big Red Today home</a> &raquo;</li>
+			<li style="float: right;">
+				<a href="https://twitter.com/share" class="twitter-share-button" data-via="OWHbigred">Tweet</a>
+		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+			<div class="fb-like" data-href="http://dataomaha.com/huskers/signing-day-2012" data-send="false" data-width="340" data-show-faces="false" data-colorscheme="dark"></div>
+			</li>
+			
+			<div style="clear: both;">
+	</ul>
+		
+
+
+</div>
+
+<div class="section intro"> 
+	<h1>SIGNING DAY 2012</h1>
+	<p class="signing-intro">The World-Herald has you covered with all of the latest information on Nebraska football's class of 2012.</p> 
+	<div style="clear: both;"></div>
+	
+	
+	
+</div> 
+
+
+
+
+<div class="section" style="border-bottom: 3px solid #ccc;" >
+
+	<div class="rail">
+
+
+		<h2>TOP STORIES</h2>
+
+		{% for story in headline %}
+
+		<div class="story">
+			<a href="{{ story.link }}"><img style="border: 0;" class="main-photo" src="/media/{{ story.photo }}"></a>
+		<h1 class="hed"><a href="{{ story.link }}">{{ story.hed }}</a></h1>
+		<p class="summary">{{ story.body|safe|linebreaks }}</p>
+		</div>
+		
+		{% endfor %}
+
+		<div class="story">
+		<h2 class="hed"><a href="http://omaha.com/section/bigred05">More signing day headlines</a> &raquo;</h2>
+		</div>
+
+		
+		<div class="story ad"><!-- this is for the ad -->
+		
+		<!--Iframe Tag  -->
+
+<!-- begin ZEDO for channel: Big Red Sports , publisher: Omaha World Herald , Ad Dimension: 300xAny-2 - 1 x 1 -->
+
+<iframe src="http://c5.zedo.com/jsc/c5/ff2.html?n=1431;c=487;s=1;d=32;w=1;h=1" frameborder=0 marginheight=0 marginwidth=0 scrolling="no" allowTransparency="true" width=1 height=1></iframe>
+
+<!-- end ZEDO for channel: Big Red Sports , publisher: Omaha World Herald , Ad Dimension: 300xAny-2 - 1 x 1 -->
+
+
+		
+		</div>
+		<!-- .story for the ad -->
+
+		<div class="blog">
+		
+		<h2 style="margin-top: 30px;">BIG RED TODAY BLOG</H2>
+		                        {% load rssplug %}
+                                {% rssplug "http://sports.omaha.com/tag/recruiting/feed/" "huskers/note3.html" %}
+        </div>
+		
+		
+		<div class="story photos">
+
+		<h2 style="margin-top: 30px;">PHOTOS AND VIDEO</h2>
+		<a href="http://odc.omaha.com/index.php?u_page=5002&p=3283">
+				<img src="http://dataomaha.com/media/huskers/jwesterkamp.jpg">
+			</a>
+		<p style="margin-top: 15px;" class="hed"><a href="http://odc.omaha.com/index.php?u_page=5002&p=3283">Photo Showcase: Signing day 2012</a></p>
+		 
+			
+		</div>
+		
+		
+
+	</div>
+
+
+
+	<div class="chat">
+
+		<div class="section">
+
+	<h2 class="bios">PLAYER BIOS</h2>
+	
+	<p style="float: left; margin: -38px 0 0 185px;"><img src="http://dataomaha.com/media/huskermugs/x-mark-green.png" width="10px">  Signed &nbsp; <img 
+src="http://dataomaha.com/media/huskermugs/x-mark-gray.png" width="10px"> Committed</p>
+	<p style="float: right; margin-top: -40px;"><a href="/huskers/class/2012#targets">2012 targets</a> &raquo;</p>
+
+	
+	
+	<div style="clear:both;"></div>
+	
+	
+	<ul>
+	{% for player in recentlist %}
+		{% if player.status != "Walk-on" %}
+		<li class="husker-recruit">
+		
+			<a href="/huskers/player/{{player.player_name|slugify }}"><img class="mug" src="/media/{{ player.cropped_mug }}"></a>
+			<p><a href="/huskers/player/{{player.player_name|slugify }}">
+{{ player.player_name }}</a></p>
+			<p>{{ player.position }} &nbsp; &nbsp; {{ player.height }}, {{ player.weight }}</p>
+			<p>{{ player.city }}, {{ player.state }}</p>
+			{% if player.signed == 1 %} <img 
+src="http://dataomaha.com/media/huskermugs/x-mark-green.png" class="check"> {% else %} <img src="http://dataomaha.com/media/huskermugs/x-mark-gray.png" class="check"> {% endif %}
+		
+		
+		</li>
+		{% endif %}
+		{% endfor %}
+	
+	</ul>
+	
+	
+	<div style="clear:both;"></div>
+	
+	
+		
+	
+			</div><!-- end player bios -->
+
+
+
+
+
+		<h2 style="margin-bottom: 10px;">LIVE CHAT</h2>
+		<iframe src="http://www.coveritlive.com/index2.php/option=com_altcaster/task=viewaltcast/altcast_code=27097ae4cc/height=835/width=545" scrolling="no" height="835px" width="545px" frameBorder="0" allowTransparency="true" ><a href="http://www.coveritlive.com/mobile.php/option=com_mobile/task=viewaltcast/altcast_code=27097ae4cc" >Signing Day 2012</a></iframe>
+		<br>
+		<br>
+
+		<h2 style="margin-top: 30px;">HUSKERS ILLUSTRATED BOARD</h2>
+		<p>What do you think about the Class of 2012? Make sure to get your voice heard on the <a href="http://nebraska.247sports.com/Board/Nebraska-Cornhuskers-Message-Board-Forum-142">Huskers Illustrated message board</a>. Join the conversation today!</p>
+
+		<br><br>
+
+		
+		<h2 style="margin-bottom: 10px;">CLASS OF 2012 MAP</h2>
+
+			<!-- AMMAP SECTION ALL GOES AS ONE-->
+			<body onLoad="ammap.focus()">
+			<!-- saved from url=(0013)about:internet -->
+			<!-- ammap script-->
+ 				<script type="text/javascript" src="/media/ammaps/swfobject.js"></script>
+        			<div id="flashcontent">
+                		<strong>You need to upgrade your Flash Player</strong>
+        			</div>
+
+		        <script type="text/javascript">
+                	// <![CDATA[
+                		var so = new SWFObject("/media/ammaps/ammap.swf", "ammap", "510px", "400px", "8", "#ffffff");
+    				so.addVariable("path", "/media/ammaps/");
+                		so.addVariable("data_file", escape("/huskers/main/2012"));
+    				so.addVariable("settings_file", escape("/media/ammaps/huskermap_settings.xml"));
+                		so.addVariable("preloader_color", "#999999");
+                		so.write("flashcontent");
+                	// ]]>
+        		</script>
+			<!-- END OF AMMAP (Caps are good) -->
+
+
+	<div class="story" style="margin-top: 30px; border-bottom: 0;">
+			
+			<h2>MORE RECRUITING INFO</h2>
+
+			<div style="width: 250px; float: left; margin-right: 20px;">
+			
+			<a href="http://dataomaha.com/big-ten/"><img src="http://dataomaha.com/media/huskers/big-ten-map-small.jpg" style="width: 100%; border: 1px solid #ccc; margin-bottom: 10px;" /></a>
+			<p><a href="http://dataomaha.com/big-ten/">Big Ten Battlegrounds</a></p>
+			<p>Learn about historical recruiting battles around the conference. This Omaha World-Herald database contains every football recruit that signed with a Big Ten school from 2002 to 2011.</p>
+			</div>
+
+			<div style="width: 250px; float: left;">
+			
+			<a href="http://nebraska.247sports.com/Article/Sign-up-today-and-get-30-days-of-HuskersIllustratedcom-FREE-56465"><img src="http://dataomaha.com/media/huskers/247-sports.jpg" style="width: 100%; border: 1px solid #ccc; margin-bottom: 10px;" /></a>
+			<p><a href="http://nebraska.247sports.com/Article/Sign-up-today-and-get-30-days-of-HuskersIllustratedcom-FREE-56465">HuskersIllustrated.com</a>
+			<p>Sign up for a 30-day trial with The World-Herald's recruiting partner.</p>
+			</div>
+		
+		</div>
+
+
+
+	</div>
+
+	<div style="clear:both;"></div>
+
+</div><!-- end top section -->
+
+
+
+
+
+	
+
+
+<div style="clear: both;"></div>
+
+</div>
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=203719719688922";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
+
+
+{% endblock %}
+
+
+<script type="text/javascript" src="http://edge.quantserve.com/quant.js"></script>
+
+<noscript>
+<a href="http://www.quantcast.com/p-f5LbblMdUG-tM" target="_blank"><img 
+src="http://pixel.quantserve.com/pixel/p-f5LbblMdUG-tM.gif" style="display: none;" border="0" height="1" 
+width="1" alt="Quantcast"/></a>
+</noscript>
+<!-- End Quantcast tag -->
+
+<script language="JavaScript" type="text/javascript" src="http://www.omaha.com/js/s_code.js"></script>
+<script language="JavaScript" type="text/javascript">
+s.Account="saxoomahaworldherald"
+s.cookieDomainPeriods="2"
+s.pageName="Section: Husker Signing Day,Section Overview"
+s.server="S260608AT1VW822"
+s.channel="Husker Signing Day"
+/* Traffic Variables */
+s.prop1="Section"
+/* E-commerce Variables */
+s.events="events"
+/* Hierarchy Variables */
+s.hier1="Husker Signing Day,Section Overview,No Profile"
+/************* DO NOT ALTER ANYTHING BELOW THIS LINE ! **************/
+var s_code=s.t();
+if(s_code)document.write(s_code)
+</script>
+
+<noscript>
+<img src="http://grndsinchant.112.2O7.net/b/ss/grndsinchant/1/H.2--NS/0"height="1" width="1" border="0" alt="" 
+/></noscript>
+
+
+

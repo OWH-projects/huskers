@@ -1,0 +1,83 @@
+{% extends 'huskers/base-new.html' %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+
+	<div class="jumbotron">
+    <div class="container">
+			<h1>Every Husker ever.</h1>
+			<p class="lead">Take a trip back through the recent history of the Nebraska football program.</p>
+			
+		<form class="form-inline" action="/huskers/newsearch" method="GET">
+			<div class="form-group">
+        		<input class="form-control input-lg" type="search" name="q" value="{{ query|escape }}">
+        	</div>
+        	<button class="btn btn-danger btn-lg" type="submit">Find player</button>
+        </form>
+			
+	</div>
+	</div>
+
+	<div class="container white">
+
+		<div id="recruits" class="col-md-3">	
+			
+				<h2>Recent recruits</h2>
+			<ul class="recent-recruits clearfix">
+		{% for player in recentlist %}
+			<li class="recruit">
+				<a href="/huskers/player/{{player.player_name|slugify }}"><img src="/media/{{ player.cropped_mug }}" class="player-mug"></a>
+				<h4><a href="/huskers/player/{{player.player_name|slugify }}">{{ player.first_name }}<br>{{ player.last_name }}</a></h4>
+				<p><b>{{ player.position }}</b> &bull; {{ player.height }} &bull; {{ player.weight }}</p>
+				<p class="small year">Class of {{ player.year }}</p>
+			</li>
+		{% endfor %}
+			</ul>
+			
+			
+		</div>
+
+
+		<div id="center" class="col-md-6">
+			<h2>Where are they from?</h2>
+			<div id="chartdiv"></div>
+				
+		</div>
+
+		<div id="menu-3" class="col-md-3">
+			<h2>Subhed 3</h2>
+			<p>More summary text</p>
+
+			<form name="search">
+				<select class="form-control" onchange="window.open(this.options[this.selectedIndex].value,'_top')">
+				<option selected>Select a year</option>
+				{% for year in yearlist %}
+				<option value="/huskers/class/{{ year.year }}">{{ year.year }}</option>
+				{% endfor %}
+				</select>
+			</form>
+			
+			<h2>Subhed here</h2>
+			<p>Summary text here</p>
+			<table class="table table-responsive table-striped">
+				<thead>
+					<tr><th>Column</th><th>Column</th></tr>
+				</thead>
+				<tbody>
+					<tr><td>Column</td><td>Column</td></tr>
+					<tr><td>Column</td><td>Column</td></tr>
+					<tr><td>Column</td><td>Column</td></tr>
+					<tr><td>Column</td><td>Column</td></tr>
+					<tr><td>Column</td><td>Column</td></tr>				
+				</tbody>
+			</table>
+		
+
+
+		</div>
+
+
+    </div><!-- /.container -->
+
+{% endblock %}

@@ -1,0 +1,28 @@
+from django.conf.urls import *
+from django.views.generic import TemplateView
+
+urlpatterns = patterns('',
+    (r'^/signing-day-2011$', 'huskers.views.Signing'),
+    (r'^/signing-day-2012$', 'huskers.views.Signing2012'),
+    (r'^/signing-day-2013$', 'huskers.views.Signing2013'),
+    (r'^/signing-day-2014$', 'huskers.views.Signing2014'),
+    (r'^/signing-day-2015$', 'huskers.views.Signing2015'),
+    (r'^/preview$', 'huskers.views.Splash'),
+    (r'^/recruiting/widget', 'huskers.views.RecruitingWidget'),
+    (r'^/recruiting', 'huskers.views.Recruiting'),
+    (r'^/draft/(?P<year>[0-9]+)$', 'huskers.views.DraftSingleYear'),
+    (r'^/draft/(?P<slug>[a-zA-Z_.-]+)$', 'huskers.views.DraftSingleTeam'),
+    (r'^/draft$', 'huskers.views.DraftPicks'),
+    (r'^/player/(?P<playername>[a-zA-Z0-9_.-]+)$', 'huskers.views.PlayerPage'),
+    (r'^/class/(?P<year>[0-9]+)/sam$', 'huskers.views.TargetsSam'),
+    (r'^/class/(?P<year>[0-9]+)/targets$', 'huskers.views.Targets'),
+    (r'^/class/(?P<year>[0-9_.-]+)', 'huskers.views.Year'),
+    (r'^/class$', 'huskers.views.AllYears'),
+    (r'^/state/map$', 'huskers.views.StateMap'),
+    (r'^/state/(?P<state>[a-zA-Z_.-]+)$', 'huskers.views.State2'),
+    (r'^/state$', 'huskers.views.AllStates'),
+    (r'^/search$', 'huskers.views.Search2'),
+    (r'^/main/(?P<year>[0-9_.-]+)$', 'huskers.views.YearXML'),
+    (r'^/main$', 'huskers.views.StateXML'),
+    (r'^', 'huskers.views.Recruiting'),
+)
