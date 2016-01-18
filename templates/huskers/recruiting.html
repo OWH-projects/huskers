@@ -169,25 +169,6 @@
 		
 		</div>
 		
-
-		<div class="right-box">
-			<h2>Top high schools</h2>
-			<p>Which schools are producing the most Cornhuskers? See the chart below for the Top 10 since 1984.</p>
-			
-			 <div class="chart">
-	    		<ul class="chartlist clublist">
-	    		{% for school in topschools %}
-	    			<li>
-	            			<p><b>{{ school.highschool }}</b> ({{ school.city }})</p>
-	            			<span class="count">{{ school.schoolcount }}</span>
-	            			<span class="index" style="width: {% widthratio school.schoolcount topschoolcount.schoolcount  180 %}px"></span>
-	    			</li>
-	    		{% endfor %}
-	    		</ul>
-	 		</div>
-	 		
-	 		<div style="clear: both;"></div>
-	 	</div>
 	 	
 	
 	
