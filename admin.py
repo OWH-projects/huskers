@@ -8,10 +8,10 @@ class PlayerAdmin(admin.ModelAdmin):
     list_filter = ['status', 'year', 'position',]
     fieldsets = (
         (None, {
-            'fields': ('year', 'player_name', ('first_name', 'last_name'), 'position', ('height', 'weight'), ('city', 'state', 'country'), 'highschool', 'bio', ('status', 'target_schools'), 'signed', )
+            'fields': ('year', 'player_name', ('first_name', 'last_name'), 'position', ('height', 'weight'), ('city', 'state', 'country'), 'highschool', 'bio', 'bio_huskers', 'related_features', ('status', 'target_schools', 'transfer_status', 'juco_name'), 'commit_date', 'decommit_date', 'official_visit_date', 'signed', 'used_redshirt')
         }),
         ('Photos', {
-            'fields': ('mugshot', 'feature_photo_credit', 'cropped_mug')
+            'fields': ('mugshot', 'feature_photo_credit', 'feature_photo_caption', 'cropped_mug')
         }),
         ('Ratings', {
             'fields': (('stars_247', 'rating_national_247', 'rating_position_247'), ('stars_247c', 'rating_national_247c', 'rating_position_247c'), ('stars_rivals', 'rating_national_rivals', 'rating_position_rivals'), ('stars_scouts', 'rating_national_espn', 'rating_position_espn'), ('stars_fox', 'rating_national_scout', 'rating_position_scout'))
@@ -27,6 +27,9 @@ class PlayerAdmin(admin.ModelAdmin):
         }),	    
         ('NFL Draft', {
             'fields': ('draft_year', 'draft_team', 'draft_round', 'draft_overall_pick', 'draft_notes',)
+        }),
+        ('Social media', {
+            'fields': ('player_twitter', 'player_instagram',)
         }),		)
 
 class RecruitHeadlineAdmin(admin.ModelAdmin):

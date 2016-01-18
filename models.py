@@ -9,12 +9,17 @@ stars = (
     ('1 star', '1 star'),
     ('Unranked', 'Unranked'),
 )
-    
+
+transfer_status = (
+    ('Junior college', 'Junior college'),
+    ('University', 'University'),
+)
 
 recruit_status = (
     ('Scholarship', 'Scholarship'),
     ('Walk-on', 'Walk-on'),
     ('Target', 'Target'),
+    ('Decommit', 'Decommit'),
 )
 
 class Recruiter(models.Model):
@@ -68,8 +73,11 @@ class Player(models.Model):
     first_name = models.CharField(max_length=100, blank=True, null=True)
     last_name = models.CharField(max_length=100, blank=True)
     status = models.CharField(max_length=20, null=True, blank=True, choices=recruit_status)
+    transfer_status = models.CharField(max_length=20, null=True, blank=True, choices=transfer_status)
+    juco_name = models.CharField(max_length=75, null=True, blank=True)
     mugshot = models.ImageField('Featured Photo', upload_to='huskermugs/', max_length=100, null=True, blank=True)
     feature_photo_credit = models.CharField(max_length=255, null=True, blank=True)
+    feature_photo_caption = models.TextField(null=True, blank=True)
     cropped_mug = models.ImageField('Mugshot', upload_to='huskermugs/', max_length=100, null=True, blank=True)
     position = models.CharField(max_length=75, null=True, blank=True, help_text='Enter QB for quarterback, LB for linebacker, etc.')
     height = models.CharField(max_length=7, blank=True, null=True, help_text='Example: 6/2')
@@ -79,9 +87,15 @@ class Player(models.Model):
     country = models.CharField(max_length=100, null=True, blank=True, help_text='Non-USA only')
     highschool= models.CharField(max_length=75, null=True, blank=True)
     bio = models.TextField(null=True, blank=True)
+    bio_huskers = models.CharField(max_length=200, null=True, blank=True, help_text='Link to Huskers.com bio')
+    related_features = models.TextField(null=True, blank=True)
     lastchange = models.DateTimeField(auto_now=True)
     nameslug = models.CharField(max_length=100, null=True, blank=True, editable=False)
+    commit_date = models.DateField(blank=True, null=True)
+    decommit_date = models.DateField(blank=True, null=True)
+    official_visit_date = models.DateField(blank=True, null=True)
     signed = models.BooleanField()
+    used_redshirt = models.NullBooleanField()
     hudl_title = models.CharField(max_length=300, null=True, blank=True)
     hudl_image = models.ImageField(upload_to='huskermugs/hudl/', max_length=100, null=True, blank=True)
     hudl_embed = models.TextField(null=True, blank=True)
@@ -111,6 +125,8 @@ class Player(models.Model):
     draft_round = models.CharField(max_length=100, null=True, blank=True)
     draft_overall_pick = models.PositiveIntegerField(null=True, blank=True)
     draft_notes = models.TextField(null=True, blank=True)
+    player_twitter = models.CharField(max_length=100, null=True, blank=True, help_text='Username only. No @ symbol.')
+    player_instagram = models.CharField(max_length=100, null=True, blank=True, help_text='Username only. No @ symbol.')
 	
     def save(self):
         self.nameslug = slugify(self.player_name)
