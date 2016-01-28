@@ -14,58 +14,53 @@
 		<div class="container">
 			<h4 class="red"><b>NEBRASKA FOOTBALL</b></h4>
 			<h1>Class of {{ title }}</h1>
+			
 		</div>
 		</div>
 
 	<div class="container">
+	<div class="col-sm-10">
 
-		<div class="row hidden-sm hidden-xs" style="margin-bottom: 2em;">
-		
-			<div class="btn-group btn-group-lg btn-group-justified">
-				<a class="btn btn-default active" id="button-scholarships">Scholarship players&nbsp;<span class="badge">{{ scholarships.count }}</span></a>
-				<a class="btn btn-default" id="button-walk-ons">Walk-Ons&nbsp;<span class="badge">{{ walkons.count }}</span></a>
-				<a class="btn btn-default" id="button-targets">Targets&nbsp;<span class="badge">{{ targets.count }}</span></a>
-			</div>
-		
-		</div>
+		<div id="center">
 
 
-		<div class="row" id="scholarships">
-		<div id="center" class="col-sm-12">
-
-			<table class="table player-list">
+		<a name="scholarships"></a>
+			
+			<div class="table-responsive">
+			<table class="table player-list sortable">
 				<thead>
 					<tr>
-						<th class="text-muted">{{ scholarships.count }} scholarship player{{ scholarships|pluralize }}</th>
+						<th class="text-muted" colspan=2>{{ scholarships.count }} scholarship player{{ scholarships|pluralize }}</th>
 						<th></th>
 						<th>Position</th>
 						<th class="hidden-xs hidden-sm">Height</th>
 						<th class="hidden-xs hidden-sm">Weight</th>
 						<th class="hidden-xs hidden-sm">State</th>
+						<th class="hidden-xs hidden-sm">Recruiters</th>
 					</tr>
 				</thead>
 				
 				<tbody>	
 				{% for player in scholarships %}
 				<tr>
-					<td><a href="/huskers/player/{{ player.player_name|slugify }}">{{ player.player_name }}</a></td>
+					<td style="width: 60px;">{% if player.cropped_mug %}<a href="/huskers/player/{{ player.player_name|slugify }}"><img src="/media/{{ player.cropped_mug }}" style="border-radius: 50%; width: 40px;" /></a>{% endif %}</td>
+					<td><a href="/huskers/player/{{ player.player_name|slugify }}"><b>{{ player.player_name }}</b></a></td>
 					<td>{% if player.stars_247c %}{% if player.stars_247c == "5 stars" %}<img class="rating" src="/media/huskers/five-stars.png">{% endif %}{% if player.stars_247c == "4 stars" %}<img class="rating" src="/media/huskers/four-stars.png">{% endif %}{% if player.stars_247c == "3 stars" %}<img class="rating" src="/media/huskers/three-stars.png">{% endif %}{% if player.stars_247c == "2 stars" %}<img class="rating" src="/media/huskers/two-stars.png">{% endif %}{% if player.stars_247c == "1 stars" %}<img class="rating" src="/media/huskers/one-star.png">{% endif %}{% endif %}</td>
 					<td>{{ player.position }}</td>
 					<td class="hidden-xs hidden-sm">{{ player.height }}</td>
 					<td class="hidden-xs hidden-sm">{{ player.weight }}</td>
 					<td class="hidden-xs hidden-sm">{{ player.state }}</td>
+					<td class="hidden-xs hidden-sm">{% if player.recruiter_1 %}<a class="text-muted" href="/huskers/recruiter/{{ player.recruiter_1.nameslug }}">{{ player.recruiter_1.full_name }}</a>{% endif %}{% if player.recruiter_2 %}, <a class="text-muted" href="/huskers/recruiter/{{ player.recruiter_2.nameslug }}">{{ player.recruiter_2.full_name }}</a>{% endif %}</td>
 				</tr>
 				{% endfor %}
 				</tbody>
 			</table>
-		</div>
-		</div>
+			</div>
 		
-		<div class="row" id="walk-ons">
-		<div id="center" class="col-sm-12">
-
-			{% if walkons %}
-			<table class="table player-list">
+		{% if walkons %}
+		<a name="walk-ons"></a>
+			<div class="table-responsive">
+			<table class="table player-list sortable">
 				<thead>
 					<tr>
 						<th class="text-muted">{{ walkons.count }} walk-on{{ walkons|pluralize }}</th>
@@ -80,7 +75,7 @@
 				<tbody>	
 				{% for player in walkons %}
 				<tr>
-					<td><a href="/huskers/player/{{ player.player_name|slugify }}">{{ player.player_name }}</a></td>
+					<td><a href="/huskers/player/{{ player.player_name|slugify }}"><b>{{ player.player_name }}</b></a></td>
 					<td>{% if player.stars_247c %}{% if player.stars_247c == "5 stars" %}<img class="rating" src="/media/huskers/five-stars.png">{% endif %}{% if player.stars_247c == "4 stars" %}<img class="rating" src="/media/huskers/four-stars.png">{% endif %}{% if player.stars_247c == "3 stars" %}<img class="rating" src="/media/huskers/three-stars.png">{% endif %}{% if player.stars_247c == "2 stars" %}<img class="rating" src="/media/huskers/two-stars.png">{% endif %}{% if player.stars_247c == "1 stars" %}<img class="rating" src="/media/huskers/one-star.png">{% endif %}{% endif %}</td>
 					<td>{{ player.position }}</td>
 					<td class="hidden-xs hidden-sm">{{ player.height }}</td>
@@ -91,17 +86,16 @@
 				</tbody>
 				
 			</table>
+			</div>
+			
 			{% else %}
 			<h4>No walk-ons signed.</h4>
 			{% endif %}
-		</div>
-		</div>
 		
 		{% if targets %}
-		<div class="row" id="targets">
-		<div id="center" class="col-sm-12">
-
-			<table class="table player-list">
+		<a name="targets"></a>
+			<div class="table-responsive">
+			<table class="table player-list sortable">
 				<thead>
 					<tr>
 						<th class="text-muted">{{ targets.count }} target{{ targets|pluralize }}</th>
@@ -116,7 +110,7 @@
 				<tbody>	
 				{% for player in targets %}
 				<tr>
-					<td><a href="/huskers/player/{{ player.player_name|slugify }}">{{ player.player_name }}</a></td>
+					<td><a href="/huskers/player/{{ player.player_name|slugify }}"><b>{{ player.player_name }}</b></a></td>
 					<td>{% if player.stars_247c %}{% if player.stars_247c == "5 stars" %}<img class="rating" src="/media/huskers/five-stars.png">{% endif %}{% if player.stars_247c == "4 stars" %}<img class="rating" src="/media/huskers/four-stars.png">{% endif %}{% if player.stars_247c == "3 stars" %}<img class="rating" src="/media/huskers/three-stars.png">{% endif %}{% if player.stars_247c == "2 stars" %}<img class="rating" src="/media/huskers/two-stars.png">{% endif %}{% if player.stars_247c == "1 stars" %}<img class="rating" src="/media/huskers/one-star.png">{% endif %}{% endif %}</td>
 					<td>{{ player.position }}</td>
 					<td class="hidden-xs hidden-sm">{{ player.height }}</td>
@@ -126,11 +120,37 @@
 				{% endfor %}
 				</tbody>
 			</table>
+			</div>
 
-		</div>	
-		</div>
 		{% endif %}
+		</div><!-- /center -->
+	</div>
 	
+	<div class="col-sm-2" id="right">
+
+			<table class="table table-condensed">
+				<thead><tr><th colspan="2">Class breakdown</th><th></th></tr></thead>
+				<tbody>
+					<tr><td><a href="#scholarships">Scholarships</a></td><td class="r">{{ scholarships.count }}</td></tr>
+					<tr><td><a href="#walk-ons">Walk-Ons</a></td><td class="r">{{ walkons.count }}</td></tr>
+					<tr><td><a href="#targets">Targets</td><td class="r">{{ targets.count }}</td></tr>
+				</tbody>
+			</table>
+			
+			<table class="table table-condensed">
+				<thead><tr><th>Ratings</th><th></th></tr></thead>
+				<tbody>
+					<tr><td>5 stars</td><td class="r">{{ ratings.five_star|default_if_none:"0" }}</td></tr>
+					<tr><td>4 stars</td><td class="r">{{ ratings.four_star|default_if_none:"0" }}</td></tr>
+					<tr><td>3 stars</td><td class="r">{{ ratings.three_star|default_if_none:"0" }}</td></tr> 
+					<tr><td>2 stars</td><td class="r">{{ ratings.two_star|default_if_none:"0" }}</td></tr>
+				</tbody>
+			</table>
+			
+			</div>
+		
+	
+	</div>
 	</div><!-- /container -->
 	
 	{% include 'huskers/jumbo-search.html' %}
@@ -142,30 +162,19 @@
 
 {% block extra-scripts %}
 
-	<script>
-		$('a#button-scholarships').click(function() {
-			$('div#scholarships').show();
-			$('div#walk-ons').hide();
-			$('div#targets').hide();
-			$(this).addClass('active')
-			$('a').not(this).removeClass('active');
-		});
+		<script>
+		$(document).ready(function() {
 		
-		$('a#button-walk-ons').click(function() {
-			$('div#scholarships').hide();
-			$('div#walk-ons').show();
-			$('div#targets').hide();
-			$(this).addClass('active')
-			$('a').not(this).removeClass('active');
-		});
-		
-		$('a#button-targets').click(function() {
-			$('div#scholarships').hide();
-			$('div#walk-ons').hide();
-			$('div#targets').show();
-			$(this).addClass('active');
-			$('a').not(this).removeClass('active');
-		});
+			$('table.sortable').DataTable( {
+				"paging": false,
+				"searching": false,
+				"info": false,
+			} );
+		} );
+	
 	</script>
-
+	
+	
+	
+	
 {% endblock %}

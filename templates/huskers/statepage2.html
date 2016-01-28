@@ -18,7 +18,7 @@
 
 	<div id="center">
 		{% if scholarships %}
-	<table class="table player-list">
+	<table class="table player-list sortable">
         <thead>
         	<tr>
                 <th class="text-muted">{{ scholarships.count }} scholarship athlete{{ scholarships|pluralize }}</th>
@@ -49,7 +49,7 @@
 		{% endif %}
 		
 		{% if walkons %}
-		<table class="table player-list">
+		<table class="table player-list sortable">
         <thead>
         	<tr>
                 <th class="text-muted">{{ walkons.count }} walk-on{{ walkons|pluralize }}</th>
@@ -58,19 +58,20 @@
                 <th>Ht</th>
                 <th>Wt</th>
 				<th>Hometown</th>
-				<th>Year</th>
+				<th class="r">Year</th>
         	</tr>
 		</thead>
 		<tbody>
         {% for player in walkons %}
 		<tr>
-                <td><a href="/huskers/player/{{ player.player_name|slugify }}">{{ player.player_name }}</a></td>
+		
+                <td><a href="/huskers/player/{{ player.player_name|slugify }}"><b>{{ player.player_name }}</b></a></td>
                 <td>{% if player.stars_247c %}{% if player.stars_247c == "5 stars" %}<img class="rating" src="/media/huskers/five-stars.png">{% endif %}{% if player.stars_247c == "4 stars" %}<img class="rating" src="/media/huskers/four-stars.png">{% endif %}{% if player.stars_247c == "3 stars" %}<img class="rating" src="/media/huskers/three-stars.png">{% endif %}{% if player.stars_247c == "2 stars" %}<img class="rating" src="/media/huskers/two-stars.png">{% endif %}{% if player.stars_247c == "1 stars" %}<img class="rating" src="/media/huskers/one-star.png">{% endif %}{% endif %}</td>
                 <td>{{ player.position }}</td>
                 <td>{{ player.height }}</td>
                 <td>{{ player.weight }}</td>
 				<td>{{ player.city }}</td>
-				<td><a href="/huskers/class/{{ player.year }}" style="font-weight:normal; text-decoration: underline;">{{ player.year }}</a></td>
+				<td class="r"><a href="/huskers/class/{{ player.year }}" style="font-weight:normal; text-decoration: underline;">{{ player.year }}</a></td>
 				
         </tr>
 		{% endfor %}
@@ -86,13 +87,13 @@
 	</div>
 	</div>
 	
-	<div class="col-sm-2">
+	<div class="col-sm-2" id="right">
 		
-		<h5><b>{{ title }} players by position</b></h5>
+		<h5><b>{{ title|state_name }} players by position</b></h5>
 			
-		<table class="table">
+		<table class="table table-condensed">
 		{% for position in positions %}
-		<tr><td>{{ position.position }}</td><td>{{ position.positioncount }}</td></tr>
+		<tr><td>{{ position.position }}</td><td class="r">{{ position.positioncount }}</td></tr>
 		{% endfor %}
 		</table>
 	</div>
@@ -101,4 +102,20 @@
 </div><!-- /container -->
 
 
+{% endblock %}
+
+{% block extra-scripts %}
+
+	<script>
+		$(document).ready(function() {
+			$('.sortable').DataTable( {
+				"paging": false,
+				"searching": false,
+				"info": false,
+				"order": [[ 6, "desc" ]]
+			} );
+		} );
+	
+	</script>
+	
 {% endblock %}

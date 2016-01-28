@@ -1,0 +1,265 @@
+{% extends 'huskers/base-new.html' %}
+
+{% block title %}Signing Day 2016 - {% endblock %}
+
+{% block meta %}
+  
+        <meta property="og:title" content="Signing Day 2016 - Husker football coverage from the Omaha World-Herald">
+        <meta property="og:url" content="http://dataomaha.com/huskers/signing-day-2016">
+        <meta property="og:description" content="The World-Herald has you covered with all of the latest information on Nebraska football's class of 2016.">
+
+{% endblock %}
+
+{% block extra-styles %}
+    <!-- Custom styles for this template -->
+    <link href="/media/huskers/signing-day-2016.css" rel="stylesheet">
+
+{% endblock %}
+
+{% block content %}
+       
+        <div class="jumbotron">
+		<div class="container">
+                        <h1>Signing Day 2016</h1>
+                        <p class="lead">The World-Herald's 2016 Husker football signing day coverage</p>
+		</div>
+        </div>
+
+<div class="main"> 
+
+	<div class="container">
+
+
+<div class="col-sm-3" id="right">
+	
+			<h2 class="bios">RECRUITS</h2>
+			
+			<p class="note">Click for bio and highlights</p>
+			<table class="table table-condensed recruits">
+			<tbody>
+			
+				{% for player in recentlist %}
+				{% if player.status != "Walk-on" %}
+				<tr class="player" id="{{ player.player_name|slugify }}">
+					<td rowspan="2"><a href="/huskers/player/{{ player.player_name|slugify }}" target="_blank"><img class="mug" src="/media/{{ player.cropped_mug }}" /></td>
+					<td><b><a style="text-decoration: underline;" href="/huskers/player/{{ player.player_name|slugify }}" target="_blank">{{ player.first_name }} {{ player.last_name }}</a></b></td>
+					<td class="r">{% if player.stars_247c %}{% if player.stars_247 == "5 stars" %}<img class="rating" src="/media/huskers/five-stars.png">{% endif %}{% if player.stars_247 == "4 stars" %}<img class="rating" src="/media/huskers/four-stars.png">{% endif %}{% if player.stars_247 == "3 stars" %}<img class="rating" src="/media/huskers/three-stars.png">{% endif %}{% if player.stars_247 == "2 stars" %}<img class="rating" src="/media/huskers/two-stars.png">{% endif %}{% if player.stars_247 == "1 stars" %}<img class="rating" src="/media/huskers/one-star.png">{% endif %}{% endif %}</td>
+				</tr>
+				<tr class="player" id="{{ player.player_name|slugify }}">
+					<td colspan="2" style="font-size: 80%; padding-bottom: 2em !important;">{{ player.position }} &bull; {{ player.height }} &bull; {{ player.weight }}<div style="clear: both;"></div></td>
+					<td>{% if player.signed == 1 %} <img 
+		src="http://dataomaha.com/media/huskermugs/x-mark-green.png" class="check">{% endif %}</td>
+				</tr>
+				
+				
+				{% endif %}
+				{% endfor %}
+			
+			</tbody>
+			</table>
+			<div style="clear: both;"></div>
+			<p><a href="/huskers/class/2015#targets" class="targets">See list of 2016 targets &raquo;</a></p>
+			
+			<br /><br />
+			<h2>TWEETS</h2>
+			
+			<div id="twitter-widget"><a class="twitter-timeline" href="https://twitter.com/OWHsports/lists/signing-day-2015-updates" data-widget-id="562311123190300672">Tweets from https://twitter.com/OWHsports/lists/signing-day-2015-updates</a></div>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+			
+			<br />
+			<h2 id="gallery" class="hidden-xs">PHOTOS</h2>
+		
+			<p><a style="margin-bottom: 20px;" class="hidden-xs" href="http://odc.omaha.com/index.php?u_page=5002&p=5720" target="_blank"><img src="http://dataomaha.com/media/huskers/headline-photos/OzigboForSDPage.jpg" style="width: 100%;"></a></p>
+			<p><b><a href="http://odc.omaha.com/index.php?u_page=5002&p=5720" target="_blank">Class of 2016 photo gallery &raquo;</a></b></p>
+			
+			
+			<div style="clear:both;"></div>
+	
+	
+		
+	
+		</div><!-- end right -->
+
+
+	
+	
+
+<div class="col-sm-6" id="center">
+
+		{% if top_video %}
+		{% for video in top_video %}
+		
+			<h2>VIDEO</h2>
+			
+			<div id="ndn">
+			<p style="color: #ccc;">{{ video.body|safe }}</p>
+			</div>
+			
+		{% endfor %}
+		{% endif %}
+
+		<br>
+		<h2>LIVE COVERAGE</h2>
+		
+		
+		<div id="signing-day-chat">
+		<div style='display:none;'>Live Blog Signing Day 2015</div><div id='cil-root-stream-a813ace771' class='cil-root'><span class='cil-config-data' title='{"altcastCode":"a813ace771","server":"www.coveritlive.com","geometry":{"width":"fit","height":950},"configuration":{"newEntryLocation":"bottom","commentLocation":"bottom","replayContentOrder":"chronological","pinsGrowSize":"on","titlePage":"on","embedType":"stream","titleImage":"http://cdnmo.coveritlive.com/media/avitars/201501/phpudgchbhuskertalklive.jpg"}}'>&nbsp;</span></div>
+		</div><!-- /chat -->
+		
+		
+		<script type='text/javascript'>window.cilAsyncInit = function() {cilEmbedManager.init()};(function() {if (window.cilVwRand === undefined) { window.cilVwRand = Math.floor(Math.random()*10000000); }var e = document.createElement('script');e.async = true;var domain = (document.location.protocol == 'http:' || document.location.protocol == 'file:') ? 'http://cdnsl.coveritlive.com' : 'https://cdnslssl.coveritlive.com';e.src = domain + '/vw.js?v=' + window.cilVwRand;e.id = 'cilScript-a813ace771';document.getElementById('cil-root-stream-a813ace771').appendChild(e);}());</script>
+		<br>
+		<br>
+		
+		
+
+			
+		<div style="clear: both;"></div>
+		
+		
+		<h2>MORE HEADLINES</h2>
+		
+		{% for story in headline %}
+		<li class="story">
+			<img src="/media/{{ story.photo }}" class="photo" />
+			<h3><a href="{{ story.link }}" target="_blank">{{ story.hed }}&nbsp;&raquo;</a></h3>
+			<div style="clear: both;"></div>
+		</li>
+		{% endfor %}
+		
+		
+		<h2 id="poll">SIGNING DAY POLL</h2>
+		<iframe class="hidden-xs" width="100%" height="500" scrolling="no" frameborder=0 src="http://dataomaha.com/slider/husker-signing-day-polls"></iframe>
+		<p><a style="font-weight: bold;" href="http://dataomaha.com/quick-hit/416#vote-which-husker-signees-with-have-the-biggest-impact-going-forward" class="visible-xs visible-xs-block">Vote for the 2015 recruiting class' hidden gem, instant impact player and more &raquo;</a></p>
+		
+		{% if rankings %}
+		<h2 id="rankings" class="hidden-xs">BIG TEN RANKINGS</H2>
+			<div class="rankings hidden-xs">
+			{% for story in rankings %}
+				{{ story.body|safe }}
+			{% endfor %}
+			</div>
+		{% endif %}
+		<br />
+		
+		
+		<div style="clear: both;"></div>
+			
+		
+		
+		<div class="desktop">
+		<br />
+		<h2 style="padding-top: 10px;">CLASS OF 2016 MAP</h2>
+
+			<p>Where is the Class of 2016 from? Hover over a state in the map below to see how many commits NU has signed from each state.</p>
+			<br>
+
+
+		
+		
+			<!-- AMMAP SECTION ALL GOES AS ONE-->
+			<body onLoad="ammap.focus()">
+			<!-- saved from url=(0013)about:internet -->
+			<!-- ammap script-->
+ 				<script type="text/javascript" src="/media/ammaps/swfobject.js"></script>
+        			<div id="flashcontent">
+                		<strong>You need to upgrade your Flash Player</strong>
+        			</div>
+
+		        <script type="text/javascript">
+                	// <![CDATA[
+                		var so = new SWFObject("/media/ammaps/ammap.swf", "ammap", "500px", "360px", "8", "#ffffff");
+    				so.addVariable("path", "/media/ammaps/");
+                		so.addVariable("data_file", escape("/huskers/main/2016"));
+    				so.addVariable("settings_file", escape("/media/ammaps/huskermap_settings.xml"));
+                		so.addVariable("preloader_color", "#ffffff");
+                		so.write("flashcontent");
+                	// ]]>
+        		</script>
+			<!-- END OF AMMAP (Caps are good) -->
+
+		</div>
+
+		
+</div><!-- end center -->
+
+<div id="rail" class="col-sm-3">
+
+		{% if schedule %}
+		<div class="schedule">
+		<h2>SCHEDULE</h2>
+		
+			{% for schedule in schedule %}
+				{{ schedule.body|safe }}
+			{% endfor %}
+		</div>
+		{% endif %}
+	
+		
+		<h2 id="stories">TOP STORIES</h2>
+		<p class="small text-muted">{{ story_count }} Signing Day updates published so far</p>
+
+		{% if top_story %}
+		{% for story in top_story %}
+		<div class="story">
+			<a href="{{ story.link }}" target="_blank"><img class="main-photo" src="/media/{{ story.photo }}" style="width: 100%;"></a>
+		<h1 class="hed"><a href="{{ story.link }}" target="_blank">{{ story.hed }}</a></h1>
+		<p class="summary">{{ story.body|safe|linebreaks }}</p>
+		</div>
+		{% endfor %}
+		{% endif %}
+		
+		
+		
+		{% if video %}
+		<br />
+
+		<div id="video">
+			<h2>MORE VIDEO</h2>
+				{% for video in video %}
+				{% if not forloop.first %}
+					<div class="col-sm-12 more-video">
+						<a href="{{ video.link }}" target="_blank"><img src="/media/{{ video.photo }}" style="width: 100%; margin-bottom: 10px;" /></a>
+						<p><a href="{{ video.link }}" target="_blank">{{ video.hed }}</a></p>
+					</div>
+				{% endif %}
+				{% endfor %}
+			</div>
+		{% endif %}
+		
+		
+		
+		
+
+			
+		
+		
+		
+		
+</div><!-- end left -->
+	
+
+
+	</div><!-- main/container -->
+</div><!-- main -->
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=203719719688922";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
+
+
+{% endblock %}
+
+
+{% block extra-scripts %}
+
+	<script type="text/javascript" src="http://assets.inform.com/player-suite/implementation/responsive-design-demo/scripts/respond.min.js"></script>
+
+{% endblock %}

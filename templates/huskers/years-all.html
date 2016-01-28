@@ -24,7 +24,7 @@
 		
 		<div id="center" class="col-sm-12">
 
-			<table class="table player-list">
+			<table class="table player-list sortable">
 				<thead>
 					<tr>
 						<th class="text-muted">Year</th>
@@ -55,6 +55,26 @@
 	{% include 'huskers/jumbo-search.html' %}
 	
 
+
+
+{% endblock %}
+
+{% block extra-scripts %}
+
+	<script>
+
+		$(document).ready(function() {
+			$('.sortable').DataTable( {
+				"paging": false,
+				"searching": false,
+				"info": false,
+				"order": [[ 0, "desc" ]]
+				
+			} );
+		} );
+	
+	</script>
+	
 
 
 {% endblock %}

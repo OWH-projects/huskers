@@ -6,6 +6,7 @@ class PlayerAdmin(admin.ModelAdmin):
     list_editable = ['status',]
     search_fields = ['player_name']
     list_filter = ['status', 'year', 'position',]
+    filter_horizontal = [ 'badges' ]
     fieldsets = (
         (None, {
             'fields': ('year', 'player_name', ('first_name', 'last_name'), 'position', ('height', 'weight'), ('city', 'state', 'country'), 'highschool', 'bio', 'bio_huskers', 'related_features', ('status', 'target_schools', 'transfer_status', 'juco_name'), 'commit_date', 'decommit_date', 'official_visit_date', 'signed', 'used_redshirt')

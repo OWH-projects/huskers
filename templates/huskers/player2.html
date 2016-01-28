@@ -42,7 +42,14 @@
 				<tr><td>Hometown<span class="visible-xs visible-sm"><b>{{ player.city }}, <a class="white" href="/huskers/state/{{ player.state }}">{{ player.state }}</a></b></span></td><td class="hidden-xs hidden-sm">{{ player.city }}, <a class="white" href="/huskers/state/{{ player.state }}">{{ player.state }}</a></td></tr>
 				<tr><td>High school<span class="visible-xs visible-sm"><b>{{ player.highschool }}</b></span></td><td class="hidden-xs hidden-sm">{{ player.highschool }}</td></tr>
 				{% if player.status and player.status != "Target" %}<tr><td class="hidden-xs hidden-sm">Recruitment<span class="visible-xs visible-sm"><b>{{ player.status }}</b></span></td><td class="hidden-xs hidden-sm">{{ player.status }}</td></tr>{% endif %}
-				{% if player.recruiter_1 %}<tr><td class="hidden-xs hidden-sm">{% if player.recruiter_2 %}Recruiters{% else %}Recruiter{% endif %}<span class="visible-xs visible-sm"><b>{{ player.recruiter_1 }}{% if player.recruiter_2 %}, {{ player.recruiter_2 }}{% endif %}</b></span></td><td class="hidden-xs hidden-sm">{{ player.recruiter_1 }}{% if player.recruiter_2 %},<br> {{ player.recruiter_2 }}{% endif %}</td></tr>{% endif %}
+				{% if player.recruiter_1 %}
+					<tr>
+						<td class="hidden-xs hidden-sm">{% if player.recruiter_2 %}Recruiters{% else %}Recruiter{% endif %}<span class="visible-xs visible-sm"><b><a href="/huskers/recruiter/{{ player.recruiter_1.nameslug }}">{{ player.recruiter_1 }}</a>{% if player.recruiter_2 %}, <a href="/huskers/recruiter/{{ player.recruiter_2.nameslug }}">{{ player.recruiter_2 }}</a>{% endif %}</b></span></td>
+						<td class="hidden-xs hidden-sm"><a href="/huskers/recruiter/{{ player.recruiter_1.nameslug }}">{{ player.recruiter_1 }}</a>{% if player.recruiter_2 %},<br> <a href="/huskers/player.recruiter_2.nameslug }}">{{ player.recruiter_2 }}</a>{% endif %}</td>
+					</tr>
+				{% endif %}
+				{% if player.official_visit_date %}<tr><td>Official visit</td><td>{{ player.official_visit_date|date:"N j, Y" }}</td></tr>{% endif %}
+				{% if player.commit_date %}<tr><td>Commit date</td><td>{{ player.commit_date|date:"N j, Y" }}</td></tr>{% endif %}
 
 				</table>
 				
@@ -236,14 +243,23 @@
 					
 				{% endif %}
 				
-				{% if player.badges %}
+				{% if player.badges.count > 0 %}
 					<br />
 					<p><b>Badges</b></p>
+					<!-- {{ player.badges }} -->
 					<p>
 					{% for badge in player.badges.all %}
-						<a href="#"><img src="/media/{{ badge.image }}" class="col-xs-6 player-badge" data-toggle="tooltip" data-placement="top" title="{{ badge.name }} - {{ badge.notes }}"/></a>
+						<a href="/huskers/badges/{{ badge.nameslug }}"><img src="/media/{{ badge.image }}" class="col-xs-6 player-badge" data-toggle="tooltip" data-placement="top" title="{{ badge.name }} - {{ badge.notes }}"/></a>
 					{% endfor %}
-					</p>				
+					</p>	
+					<div style="clear: both;"></div>
+				{% endif %}
+		
+				
+				{% if player.related_features %}
+					<br />
+					<p><b>Related features</b></p>
+					<p>{{ player.related_features|safe|linebreaks }}</p>
 				{% endif %}
 		
 		

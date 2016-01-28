@@ -1,0 +1,45 @@
+{% extends 'huskers/base-new.html' %}
+
+{% block title %}Badges - {% endblock %}
+
+{% block extra-styles %}
+<style type="text/css">
+	.red { color: #c80000; }
+	.col-xs-3 { text-align: center; height: 280px; margin-bottom: 20px; }
+	.col-xs-3 img { width: 80%; margin: 0 10% 5% 10%; }
+</style>
+{% endblock %}
+
+{% block content %}
+
+	<div class="jumbotron name">
+		<div class="container">
+			<h4 class="red"><b>NEBRASKA FOOTBALL</b></h4>
+			<h1>Badges</h1>
+		</div>
+		</div>
+
+	<div class="container">
+	
+	<div class="row">
+	<div id="center" class="col-sm-12">
+		
+		{% for badge in badges %}
+			<div class="col-xs-3">
+				<a href="/huskers/badges/{{ badge.nameslug }}"><img src="/media/{{ badge.image }}" /></a>
+				<p><a href="/huskers/badges/{{ badge.nameslug }}">{{ badge.name }}</a></p>
+			</div>
+		
+		{% endfor %}
+		
+		
+	</div>
+	</div>
+	
+	
+	</div><!-- /container -->
+	
+	{% include 'huskers/jumbo-search.html' %}	
+	
+
+{% endblock %}

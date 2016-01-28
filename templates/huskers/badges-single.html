@@ -1,0 +1,85 @@
+{% extends 'huskers/base-new.html' %}
+
+{% block title %}{{ this_badge.name }} - {% endblock %}
+
+{% block extra-styles %}
+<style type="text/css">
+	.red { color: #c80000; }
+	h1 img { width: 80px; margin-right: 20px; }
+</style>
+{% endblock %}
+
+{% block content %}
+
+	<div class="jumbotron name">
+		<div class="container">
+			<h4 class="red"><b>NEBRASKA FOOTBALL</b></h4>
+			<h1><img src="/media/{{ this_badge.image }}" />{{ this_badge.name }} badge</h1>
+			<p class="lead" style="margin: 1.2em 0 0 0;">{{ this_badge.notes }}</p><br>
+		</div>
+		</div>
+
+	<div class="container">
+	
+	<div class="row" id="scholarships">
+		<div id="center" class="col-sm-12">
+		
+
+			<table class="table player-list sortable">
+				<thead>
+					<tr>
+						<th class="text-muted">{{ players.count }} player{{ players|pluralize }}</th>
+						<th>Position</th>
+						<th>Height</th>
+						<th>Weight</th>
+						<th>Hometown</th>
+						<th class="r">Year</th>
+					</tr>
+				</thead>
+				
+				<tbody>	
+				
+				{% for player in players %}
+				<tr>
+					<td><a href="/huskers/player/{{ player.player_name|slugify }}">{{ player.player_name }}</a></td>
+					<td>{{ player.position }}</td>
+					<td>{{ player.height }}</td>
+					<td>{{ player.weight }}</td>
+					<td>{{ player.city }}, {{ player.state }}</td>
+					<td><a href="/huskers/class/{{ player.year }}">{{ player.year }}</a></td>
+				</tr>
+				{% endfor %}
+				
+				
+				</tbody>
+			</table>
+			
+			<p><a href="/huskers/badges"><b>&laquo; More Husker badges</a></p>
+			
+		</div>
+	</div>
+	
+	
+	</div><!-- /container -->
+	
+	{% include 'huskers/jumbo-search.html' %}	
+	
+
+{% endblock %}
+
+{% block extra-scripts %}
+
+		<script>
+		$(document).ready(function() {
+		
+			$('table.sortable').DataTable( {
+				"paging": false,
+				"searching": false,
+				"info": false,
+				"order": [[ 5, "desc" ]]
+			} );
+		} );
+	
+	</script>
+	
+{% endblock %}

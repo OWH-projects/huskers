@@ -1,0 +1,53 @@
+{% extends 'huskers/base-new.html' %}
+
+{% block title %} Nebraska football coaches - {% endblock %}
+
+{% block extra-styles %}
+<style type="text/css">
+	.red { color: #c80000; }
+</style>
+{% endblock %}
+
+{% block content %}
+
+	<div class="jumbotron name">
+		<div class="container">
+			<h4 class="red"><b>NEBRASKA FOOTBALL</b></h4>
+			<h1>Recruiting coaches</h1>
+		</div>
+		</div>
+
+	<div class="container">
+
+		<div class="row" id="recruiters">
+		<div id="center" class="col-sm-12">
+
+			<table class="table player-list">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th class="r">Players recruited</th>
+					</tr>
+				</thead>
+				
+				<tbody>	
+					{% for coach in list %}
+					<tr>
+						<td><a href="/huskers/recruiter/{{ coach.nameslug }}">{{ coach.full_name }}</a></td>
+						<td class="r">{{ coach.player_count }}</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+		</div>
+	
+	</div><!-- /container -->
+	
+	{% include 'huskers/jumbo-search.html' %}
+	
+
+
+
+{% endblock %}
+

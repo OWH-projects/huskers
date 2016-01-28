@@ -32,6 +32,7 @@ class Recruiter(models.Model):
 
     def save(self):
         self.full_name = '%s %s' % (self.first_name, self.last_name)
+        self.nameslug = slugify(self.full_name)
         super(Recruiter, self).save()	
 	
     def __unicode__(self):
@@ -62,7 +63,12 @@ class Badge(models.Model):
     notes = models.TextField(blank=True, null=True)
     image = models.ImageField(upload_to='huskermugs/badge/', max_length=100, null=True, blank=True)
     internal = models.TextField(blank=True, null=True)
+    nameslug = models.CharField(max_length=100, blank=True, null=True, editable=False)
 	
+    def save(self):
+        self.nameslug = slugify(self.name)
+        super(Badge, self).save()
+
     def __unicode__(self):
         return self.name
 	

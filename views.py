@@ -70,6 +70,23 @@ def Signing2015(request):
     return render_to_response('huskers/signing-day-2015.html', dictionaries)
 
 
+def Signing2016(request):
+    recentlist = Player.objects.all().filter(status='Scholarship').filter(year='2016').order_by('last_name')
+    headline = RecruitHeadline.objects.filter(tags__icontains='signing-day-2015').order_by('-priority')
+    top_story = RecruitHeadline.objects.filter(tags__icontains='signing-day-2015-top-story').order_by('-priority')
+    video = RecruitHeadline.objects.filter(tags__icontains='signing-day-video-2015').order_by('-priority')
+    top_video = RecruitHeadline.objects.filter(tags__icontains='signing-day-video-2015-main').order_by('-priority')[:1]
+    rankings = RecruitHeadline.objects.filter(tags__icontains='signing-day-rankings-2015')
+    photos = RecruitHeadline.objects.filter(tags__icontains='signing-day-photos-2015')
+    schedule = RecruitHeadline.objects.filter(tags__icontains='signing-day-schedule-2015')
+    story_count = headline.count() + 1
+	
+    dictionaries = { 'headline':headline, 'top_story': top_story, 'recentlist': recentlist, 'video': video, 'top_video': top_video, 'rankings': rankings, 'photos': photos, 'schedule': schedule, 'story_count': story_count, }
+    return render_to_response('huskers/signing-day-2016.html', dictionaries)
+
+
+
+
 def Splash(request):
     recentlist = Player.objects.all().filter(status='Scholarship').filter(year='2014').order_by('-lastchange')
 
@@ -98,10 +115,11 @@ def AllYears(request):
 def Year(request, year):
     title = year
     scholarships = Player.objects.filter(year=year).filter(Q(status__isnull=True) | Q(status="Scholarship")).order_by("last_name", "first_name")
+    ratings = scholarships.aggregate(two_star=Sum(Case(When(stars_247c="2 stars", then=1),output_field=IntegerField())), three_star=Sum(Case(When(stars_247c="3 stars", then=1),output_field=IntegerField())), four_star=Sum(Case(When(stars_247c="4 stars", then=1),output_field=IntegerField())), five_star=Sum(Case(When(stars_247c="5 stars", then=1),output_field=IntegerField())))
     walkons = Player.objects.filter(year=year).filter(status="Walk-on").order_by("last_name", "first_name")
     targets = Player.objects.filter(year=year).filter(status="Target").order_by("last_name", "first_name")
-    
-    return render_to_response('huskers/yearpage2.html', { "title": title, "scholarships": scholarships, "walkons": walkons, "targets": targets, "years": years, "states": states, })
+	
+    return render_to_response('huskers/yearpage2.html', { "title": title, "scholarships": scholarships, "walkons": walkons, "targets": targets, "years": years, "states": states, "ratings": ratings, })
 
 
 
@@ -225,3 +243,31 @@ def DraftSingleYear(request, year):
 
     dictionaries = { 'year': year, 'players': players, }
     return render_to_response('huskers/draft-year.html', dictionaries)		
+
+def BadgesAll(request):
+    badges = Badge.objects.all().order_by('name')
+
+    dictionaries = { 'badges': badges, }
+    return render_to_response('huskers/badges-all.html', dictionaries)
+
+def BadgesSingle(request, nameslug):
+    this_badge = Badge.objects.get(nameslug=nameslug)
+    players = Player.objects.filter(badges__nameslug=nameslug)
+
+    dictionaries = { 'this_badge': this_badge, 'players': players, }
+    return render_to_response('huskers/badges-single.html', dictionaries)	
+
+def Recruiters(request):
+    list = Recruiter.objects.all().order_by('last_name')
+    for coach in list:
+	    coach.player_count = Player.objects.filter(status="Scholarship").filter(Q(recruiter_1__nameslug=coach.nameslug) | Q(recruiter_2__nameslug=coach.nameslug)).count()
+
+    dictionaries = { 'list': list, }
+    return render_to_response('huskers/recruiter-all.html', dictionaries)
+
+def RecruiterSingle(request, nameslug):
+    this_recruiter = Recruiter.objects.get(nameslug=nameslug)
+    players = Player.objects.filter(status="Scholarship").filter(Q(recruiter_1__nameslug=nameslug) | Q(recruiter_2__nameslug=nameslug)).order_by('-year')
+
+    dictionaries = { 'this_recruiter': this_recruiter, 'players': players, }
+    return render_to_response('huskers/recruiter-single.html', dictionaries)	
