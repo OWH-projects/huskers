@@ -29,6 +29,7 @@
 					<tr>
 						<th class="text-muted">Year</th>
 						<th>Scholarship players</th>
+						<th>Transfers</th>
 						<th>Walk-ons</th>
 					</tr>
 				</thead>
@@ -38,6 +39,7 @@
 				<tr>
 					<td><a href="/huskers/class/{{ year.year }}">{{ year.year }}</a></td>
 					<td>{{ year.scholarshipcount }}</td>
+					<td>{% for thisyear in transfers %}{% if thisyear.year == year.year %}{{ thisyear.transfercount }}{% endif %}{% endfor %}</td>
 					<td>{% for thisyear in walkons %}{% if thisyear.year == year.year %}{{ thisyear.walkoncount }}{% endif %}{% endfor %}</td>
 				</tr>
 				{% endfor %}

@@ -56,6 +56,41 @@
 				</tbody>
 			</table>
 			</div>
+
+
+		{% if transfers %}
+		<a name="transfers"></a>
+			<div class="table-responsive">
+			<table class="table player-list sortable">
+				<thead>
+					<tr>
+						<th class="text-muted" colspan=2>{{ transfers.count }} transfer{{ transfers|pluralize }}</th>
+						<th></th>
+						<th>Position</th>
+						<th class="hidden-xs hidden-sm">Height</th>
+						<th class="hidden-xs hidden-sm">Weight</th>
+						<th class="hidden-xs hidden-sm">State</th>
+					</tr>
+				</thead>
+				
+				<tbody>	
+				{% for player in transfers %}
+				<tr>
+					<td style="width: 60px;">{% if player.cropped_mug %}<a href="/huskers/player/{{ player.player_name|slugify }}"><img src="/media/{{ player.cropped_mug }}" style="border-radius: 50%; width: 40px;" /></a>{% endif %}</td>
+					<td><a href="/huskers/player/{{ player.player_name|slugify }}"><b>{{ player.player_name }}</b></a></td>
+					<td>{% if player.stars_247c %}{% if player.stars_247c == "5 stars" %}<img class="rating" src="/media/huskers/five-stars.png">{% endif %}{% if player.stars_247c == "4 stars" %}<img class="rating" src="/media/huskers/four-stars.png">{% endif %}{% if player.stars_247c == "3 stars" %}<img class="rating" src="/media/huskers/three-stars.png">{% endif %}{% if player.stars_247c == "2 stars" %}<img class="rating" src="/media/huskers/two-stars.png">{% endif %}{% if player.stars_247c == "1 stars" %}<img class="rating" src="/media/huskers/one-star.png">{% endif %}{% endif %}</td>
+					<td>{{ player.position }}</td>
+					<td class="hidden-xs hidden-sm">{{ player.height }}</td>
+					<td class="hidden-xs hidden-sm">{{ player.weight }}</td>
+					<td class="hidden-xs hidden-sm">{{ player.state }}</td>
+				</tr>
+				{% endfor %}
+				</tbody>
+				
+			</table>
+			</div>		
+		
+			{% endif %}
 		
 		{% if walkons %}
 		<a name="walk-ons"></a>
@@ -132,6 +167,7 @@
 				<thead><tr><th colspan="2">Class breakdown</th><th></th></tr></thead>
 				<tbody>
 					<tr><td><a href="#scholarships">Scholarships</a></td><td class="r">{{ scholarships.count }}</td></tr>
+					<tr><td><a href="#transfers">Transfers</a></td><td class="r">{{ transfers.count }}</td></tr>
 					<tr><td><a href="#walk-ons">Walk-Ons</a></td><td class="r">{{ walkons.count }}</td></tr>
 					<tr><td><a href="#targets">Targets</td><td class="r">{{ targets.count }}</td></tr>
 				</tbody>

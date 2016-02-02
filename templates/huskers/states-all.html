@@ -34,6 +34,7 @@
 					<tr>
 						<th class="text-muted">State</th>
 						<th>Scholarship players</th>
+						<th>Transfers</th>
 						<th>Walk-ons</th>
 					</tr>
 				</thead>
@@ -44,6 +45,7 @@
 				<tr>
 					<td><a href="/huskers/state/{{ state.state }}">{{ state.state|state_name }}</a></td>
 					<td>{{ state.statecount }}</td>
+					<td>{% for transferstate in transfers %}{% if transferstate.state == state.state %}{{ transferstate.transfercount }}{% endif %}{% endfor %}</td>
 					<td>{% for walkonstate in walkons %}{% if walkonstate.state == state.state %}{{ walkonstate.walkoncount }}{% endif %}{% endfor %}</td>
 				</tr>
 				{% endif %}

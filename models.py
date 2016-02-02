@@ -125,7 +125,7 @@ class Player(models.Model):
     rating_position_scout = models.CharField('Scout Position', max_length=5, null=True, blank=True)
     recruiter_1 = models.ForeignKey(Recruiter, related_name="recruiterone", null=True, blank=True)
     recruiter_2 = models.ForeignKey(Recruiter, related_name="recruitertwo",  null=True, blank=True)
-    badges = models.ManyToManyField(Badge, blank=True, null=True)
+    badges = models.ManyToManyField(Badge, blank=True)
     draft_year = models.ForeignKey(Draft, null=True, blank=True)
     draft_team = models.ForeignKey(DraftTeam, null=True, blank=True)
     draft_round = models.CharField(max_length=100, null=True, blank=True)
@@ -133,6 +133,7 @@ class Player(models.Model):
     draft_notes = models.TextField(null=True, blank=True)
     player_twitter = models.CharField(max_length=100, null=True, blank=True, help_text='Username only. No @ symbol.')
     player_instagram = models.CharField(max_length=100, null=True, blank=True, help_text='Username only. No @ symbol.')
+    offer_date = models.DateField(blank=True, null=True)
 	
     def save(self):
         self.nameslug = slugify(self.player_name)

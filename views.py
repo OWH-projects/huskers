@@ -6,17 +6,6 @@ years = Player.objects.all().values('year').distinct().order_by('-year')
 states = Player.objects.all().values('state').distinct().order_by('state')
 
 
-#def Main(request):
-#    recentlist = Player.objects.all().filter(status='Scholarship').order_by('-pk')[:5]
-#    topschools = Player.objects.all().values('highschool', 'city').annotate(schoolcount=Count('highschool')).order_by('-schoolcount')[:10]
-#    yearlist = Player.objects.all().values('year').distinct().order_by('-year')
-#    topschoolcount = topschools[0]
-
-#    dictionaries = { 'recentlist': recentlist, 'topschools': topschools, 'topschoolcount': topschoolcount, 'yearlist': yearlist, }
-#    return render_to_response('huskers/main-new.html', dictionaries)
-
-
-
 # All of the Signing Day pages
 
 def Signing(request):
@@ -71,14 +60,14 @@ def Signing2015(request):
 
 
 def Signing2016(request):
-    recentlist = Player.objects.all().filter(status='Scholarship').filter(year='2016').order_by('last_name')
-    headline = RecruitHeadline.objects.filter(tags__icontains='signing-day-2015').order_by('-priority')
-    top_story = RecruitHeadline.objects.filter(tags__icontains='signing-day-2015-top-story').order_by('-priority')
-    video = RecruitHeadline.objects.filter(tags__icontains='signing-day-video-2015').order_by('-priority')
-    top_video = RecruitHeadline.objects.filter(tags__icontains='signing-day-video-2015-main').order_by('-priority')[:1]
-    rankings = RecruitHeadline.objects.filter(tags__icontains='signing-day-rankings-2015')
-    photos = RecruitHeadline.objects.filter(tags__icontains='signing-day-photos-2015')
-    schedule = RecruitHeadline.objects.filter(tags__icontains='signing-day-schedule-2015')
+    recentlist = Player.objects.all().filter(status='Scholarship').filter(year='2016').exclude(transfer_status='University').order_by('last_name')
+    headline = RecruitHeadline.objects.filter(tags__icontains='signing-day-2016').exclude(tags__icontains='signing-day-2016-top-story').order_by('-priority')
+    top_story = RecruitHeadline.objects.filter(tags__icontains='signing-day-2016-top-story').order_by('-priority')
+    video = RecruitHeadline.objects.filter(tags__icontains='signing-day-video-2016').order_by('-priority')
+    top_video = RecruitHeadline.objects.filter(tags__icontains='signing-day-video-2016-main').order_by('-priority')[:1]
+    rankings = RecruitHeadline.objects.filter(tags__icontains='signing-day-rankings-2016')
+    photos = RecruitHeadline.objects.filter(tags__icontains='signing-day-photos-2016')
+    schedule = RecruitHeadline.objects.filter(tags__icontains='signing-day-schedule-2016')
     story_count = headline.count() + 1
 	
     dictionaries = { 'headline':headline, 'top_story': top_story, 'recentlist': recentlist, 'video': video, 'top_video': top_video, 'rankings': rankings, 'photos': photos, 'schedule': schedule, 'story_count': story_count, }
@@ -96,12 +85,12 @@ def Splash(request):
 
 
 def YearXML(request, year):
-    statelist = Player.objects.filter(year=year).values('state').filter(Q(status='Scholarship') | Q(status__isnull=True)).annotate(statecount=Count('state'))
+    statelist = Player.objects.filter(year=year).values('state').filter(Q(status='Scholarship') | Q(status__isnull=True)).exclude(transfer_status='University').annotate(statecount=Count('state'))
 
     return render_to_response('huskers/main.xml', { "statelist": statelist, }, mimetype="application/xhtml+xml")
 
 def StateXML(request):
-    statelist = Player.objects.all().values('state').filter(Q(status='Scholarship') | Q(status__isnull=True)).annotate(statecount=Count('state'))
+    statelist = Player.objects.all().values('state').filter(Q(status='Scholarship') | Q(status__isnull=True)).exclude(transfer_status='University').annotate(statecount=Count('state'))
 
     return render_to_response('huskers/main.xml', { "statelist": statelist, }, mimetype="application/xhtml+xml")
 
@@ -109,17 +98,19 @@ def StateXML(request):
 def AllYears(request):
     allyears = Player.objects.filter(Q(status='Scholarship') | Q(status__isnull=True)).order_by('-year').values('year').annotate(scholarshipcount=Count('year'))
     walkons = Player.objects.filter(status='Walk-on').order_by('-year').values('year').annotate(walkoncount=Count('year'))
-    return render_to_response('huskers/years-all.html', { "allyears": allyears, "walkons": walkons, })
+    transfers = Player.objects.filter(transfer_status='University').order_by('-year').values('year').annotate(transfercount=Count('year'))
+    return render_to_response('huskers/years-all.html', { "allyears": allyears, "walkons": walkons, "transfers": transfers, })
    	
 	
 def Year(request, year):
     title = year
-    scholarships = Player.objects.filter(year=year).filter(Q(status__isnull=True) | Q(status="Scholarship")).order_by("last_name", "first_name")
+    scholarships = Player.objects.filter(year=year).filter(Q(status__isnull=True) | Q(status="Scholarship")).exclude(transfer_status='University').order_by("last_name", "first_name")
     ratings = scholarships.aggregate(two_star=Sum(Case(When(stars_247c="2 stars", then=1),output_field=IntegerField())), three_star=Sum(Case(When(stars_247c="3 stars", then=1),output_field=IntegerField())), four_star=Sum(Case(When(stars_247c="4 stars", then=1),output_field=IntegerField())), five_star=Sum(Case(When(stars_247c="5 stars", then=1),output_field=IntegerField())))
     walkons = Player.objects.filter(year=year).filter(status="Walk-on").order_by("last_name", "first_name")
+    transfers = Player.objects.filter(year=year).filter(transfer_status="University").order_by("last_name", "first_name")
     targets = Player.objects.filter(year=year).filter(status="Target").order_by("last_name", "first_name")
 	
-    return render_to_response('huskers/yearpage2.html', { "title": title, "scholarships": scholarships, "walkons": walkons, "targets": targets, "years": years, "states": states, "ratings": ratings, })
+    return render_to_response('huskers/yearpage2.html', { "title": title, "scholarships": scholarships, "walkons": walkons, "targets": targets, "years": years, "states": states, "ratings": ratings, "transfers": transfers, })
 
 
 
@@ -132,7 +123,7 @@ def Year(request, year):
 
 
 def StateMap(request):
-    statelist = Player.objects.all().values('state').filter(Q(status='Scholarship') | Q(status__isnull=True)).annotate(statecount=Count('state'))
+    statelist = Player.objects.all().values('state').filter(Q(status='Scholarship') | Q(status__isnull=True)).exclude(transfer_status='University').annotate(statecount=Count('state'))
 
     return render_to_response('huskers/state-map.js', { "statelist": statelist, })
 
@@ -142,14 +133,16 @@ def State2(request, state):
     players = Player.objects.filter(state=state).exclude(status="Target").order_by('last_name', 'first_name')
     scholarships = players.filter(status="Scholarship")
     walkons = players.filter(status="Walk-on")
+    transfers = players.filter(transfer_status="University")
     positions = players.values("position").distinct().annotate(positioncount=Count('position')).order_by('-positioncount')
 
-    return render_to_response('huskers/statepage2.html',  { "title": title, "players": players, "scholarships": scholarships, "walkons": walkons, 'positions': positions,  "years": years, "states": states, })
+    return render_to_response('huskers/statepage2.html',  { "title": title, "players": players, "scholarships": scholarships, "walkons": walkons, 'positions': positions,  "years": years, "states": states, "transfers": transfers, })
 
 def AllStates(request):
     scholarships = Player.objects.filter(status="Scholarship").order_by('state').values('state').annotate(statecount=Count('state'))
+    transfers = Player.objects.filter(transfer_status="University").order_by('state').values('state').annotate(transfercount=Count('state'))
     walkons = Player.objects.filter(status="Walk-on").order_by('state').values('state').annotate(walkoncount=Count('state'))
-    return render_to_response('huskers/states-all.html', { "scholarships": scholarships, "walkons": walkons, })	
+    return render_to_response('huskers/states-all.html', { "scholarships": scholarships, "walkons": walkons, "transfers": transfers, })	
 	
 	
 	
@@ -194,7 +187,7 @@ def PlayerPage(request, playername):
 	
 
 def Recruiting(request):
-    recentlist = Player.objects.all().filter(year='2016').order_by('last_name', 'first_name')
+    recentlist = Player.objects.all().filter(year='2016').exclude(transfer_status="University").order_by('last_name', 'first_name')
     headlines = RecruitHeadline.objects.filter(tags__icontains='recruiting').order_by('priority').order_by('-priority')[:15]
     topschools = Player.objects.all().values('highschool', 'city').annotate(schoolcount=Count('highschool')).order_by('-schoolcount')[:10]
     topschoolcount = topschools[0]

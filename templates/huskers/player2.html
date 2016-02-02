@@ -41,17 +41,19 @@
 				<tr><td>Weight<span class="visible-xs visible-sm"><b>{{ player.weight }}</b></span></td><td class="hidden-xs hidden-sm">{{ player.weight }}</td></tr>
 				<tr><td>Hometown<span class="visible-xs visible-sm"><b>{{ player.city }}, <a class="white" href="/huskers/state/{{ player.state }}">{{ player.state }}</a></b></span></td><td class="hidden-xs hidden-sm">{{ player.city }}, <a class="white" href="/huskers/state/{{ player.state }}">{{ player.state }}</a></td></tr>
 				<tr><td>High school<span class="visible-xs visible-sm"><b>{{ player.highschool }}</b></span></td><td class="hidden-xs hidden-sm">{{ player.highschool }}</td></tr>
-				{% if player.status and player.status != "Target" %}<tr><td class="hidden-xs hidden-sm">Recruitment<span class="visible-xs visible-sm"><b>{{ player.status }}</b></span></td><td class="hidden-xs hidden-sm">{{ player.status }}</td></tr>{% endif %}
+				{% if player.status and player.status != "Target" %}<tr><td class="hidden-xs hidden-sm">Recruitment<span class="visible-xs visible-sm"><b>{% if player.transfer_status == "University" %}Transfer{% else %}{{ player.status }}{% endif %}</b></span></td><td class="hidden-xs hidden-sm">{% if player.transfer_status == "University" %}Transfer{% else %}{{ player.status }}{% endif %}</td></tr>{% endif %}
 				{% if player.recruiter_1 %}
 					<tr>
 						<td class="hidden-xs hidden-sm">{% if player.recruiter_2 %}Recruiters{% else %}Recruiter{% endif %}<span class="visible-xs visible-sm"><b><a href="/huskers/recruiter/{{ player.recruiter_1.nameslug }}">{{ player.recruiter_1 }}</a>{% if player.recruiter_2 %}, <a href="/huskers/recruiter/{{ player.recruiter_2.nameslug }}">{{ player.recruiter_2 }}</a>{% endif %}</b></span></td>
 						<td class="hidden-xs hidden-sm"><a href="/huskers/recruiter/{{ player.recruiter_1.nameslug }}">{{ player.recruiter_1 }}</a>{% if player.recruiter_2 %},<br> <a href="/huskers/player.recruiter_2.nameslug }}">{{ player.recruiter_2 }}</a>{% endif %}</td>
 					</tr>
 				{% endif %}
+				{% if player.offer_date %}<tr><td>Offer date</td><td>{{ player.offer_date|date:"N j, Y" }}</td></tr>{% endif %}
 				{% if player.official_visit_date %}<tr><td>Official visit</td><td>{{ player.official_visit_date|date:"N j, Y" }}</td></tr>{% endif %}
 				{% if player.commit_date %}<tr><td>Commit date</td><td>{{ player.commit_date|date:"N j, Y" }}</td></tr>{% endif %}
+				{% if player.decommit_date %}<tr><td>Decommit date</td><td>{{ player.decommit_date|date:"N j, Y" }}</td></tr>{% endif %}
 
-				</table>
+			</table>
 				
 			
 			</div>
@@ -61,12 +63,7 @@
 		</div>
 		
 		
-		{% if player.status == "Target" and not player.mugshot %}
-		
 			<div id="center" class="col-sm-7">
-		 	{% else %}
-				<div id="center" class="col-sm-7">
-		 	{% endif %}
 	
 			{% if player.status = "Target" %}
 				<div class="player-bio">
@@ -177,7 +174,9 @@
 			
 			{% endif %}
 
-		</div>
+			<div class="hidden-xs ndn_embed" data-config-type="InView" data-config-tracking-group="91341" data-config-width="600"></div><script type="text/javascript">var _ndnq = _ndnq || []; _ndnq.push(['embed']);</script>
+			
+		</div><!-- /center -->
 		
 		
 		{% if player.mugshot or player.hudl_image or player.badges or player.hudl_embed or player.status == "Scholarship" and player.stars_247 and player.stars_rivals and player.stars_scouts %}

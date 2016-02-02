@@ -69,8 +69,8 @@
 			<br />
 			<h2 id="gallery" class="hidden-xs">PHOTOS</h2>
 		
-			<p><a style="margin-bottom: 20px;" class="hidden-xs" href="http://odc.omaha.com/index.php?u_page=5002&p=5720" target="_blank"><img src="http://dataomaha.com/media/huskers/headline-photos/OzigboForSDPage.jpg" style="width: 100%;"></a></p>
-			<p><b><a href="http://odc.omaha.com/index.php?u_page=5002&p=5720" target="_blank">Class of 2016 photo gallery &raquo;</a></b></p>
+			<p><a style="margin-bottom: 20px;" class="hidden-xs" href="http://odc.omaha.com/index.php?u_page=5002&p=6399" target="_blank"><img src="http://bloximages.newyork1.vip.townnews.com/omaha.com/content/tncms/assets/v3/editorial/c/a2/ca213110-c7b0-11e5-90da-a38e7ba7eeb7/56ad53faa47e4.image.jpg" style="width: 100%;"></a></p>
+			<p><b><a href="http://odc.omaha.com/index.php?u_page=5002&p=6399" target="_blank">Class of 2016 photo gallery &raquo;</a></b></p>
 			
 			
 			<div style="clear:both;"></div>
@@ -84,7 +84,7 @@
 	
 	
 
-<div class="col-sm-6" id="center">
+<div class="col-sm-6" style="margin-bottom: 100px;" id="center">
 
 		{% if top_video %}
 		{% for video in top_video %}
@@ -99,12 +99,13 @@
 		{% endif %}
 
 		<br>
+		
 		<h2>LIVE COVERAGE</h2>
 		
 		
 		<div id="signing-day-chat">
-		<div style='display:none;'>Live Blog Signing Day 2015</div><div id='cil-root-stream-a813ace771' class='cil-root'><span class='cil-config-data' title='{"altcastCode":"a813ace771","server":"www.coveritlive.com","geometry":{"width":"fit","height":950},"configuration":{"newEntryLocation":"bottom","commentLocation":"bottom","replayContentOrder":"chronological","pinsGrowSize":"on","titlePage":"on","embedType":"stream","titleImage":"http://cdnmo.coveritlive.com/media/avitars/201501/phpudgchbhuskertalklive.jpg"}}'>&nbsp;</span></div>
-		</div><!-- /chat -->
+		<div style='display:none;'>Live Blog Signing Day 2015</div><iframe src="//embed.scribblelive.com/Embed/v7.aspx?Id=1808574&ThemeId=28105" width="515" height="650" frameborder="0"></iframe>
+		</div><!-- /chat --> <!-- when active, height = 950 -->
 		
 		
 		<script type='text/javascript'>window.cilAsyncInit = function() {cilEmbedManager.init()};(function() {if (window.cilVwRand === undefined) { window.cilVwRand = Math.floor(Math.random()*10000000); }var e = document.createElement('script');e.async = true;var domain = (document.location.protocol == 'http:' || document.location.protocol == 'file:') ? 'http://cdnsl.coveritlive.com' : 'https://cdnslssl.coveritlive.com';e.src = domain + '/vw.js?v=' + window.cilVwRand;e.id = 'cilScript-a813ace771';document.getElementById('cil-root-stream-a813ace771').appendChild(e);}());</script>
@@ -128,17 +129,18 @@
 		{% endfor %}
 		
 		
-		<h2 id="poll">SIGNING DAY POLL</h2>
-		<iframe class="hidden-xs" width="100%" height="500" scrolling="no" frameborder=0 src="http://dataomaha.com/slider/husker-signing-day-polls"></iframe>
-		<p><a style="font-weight: bold;" href="http://dataomaha.com/quick-hit/416#vote-which-husker-signees-with-have-the-biggest-impact-going-forward" class="visible-xs visible-xs-block">Vote for the 2015 recruiting class' hidden gem, instant impact player and more &raquo;</a></p>
+		<!-- <h2 id="poll">SIGNING DAY POLL</h2>
+		<iframe class="hidden-xs" width="100%" height="500" scrolling="no" frameborder=0 src="http://dataomaha.com/slider/husker-signing-day-2016-polls">
+		</iframe>
+		<p><a style="font-weight: bold;" href="http://dataomaha.com/quick-hit/416#vote-which-husker-signees-with-have-the-biggest-impact-going-forward" class="visible-xs visible-xs-block">Vote for the 2015 recruiting class' hidden gem, instant impact player and more &raquo;</a></p> -->
 		
 		{% if rankings %}
-		<h2 id="rankings" class="hidden-xs">BIG TEN RANKINGS</H2>
+		<!-- <h2 id="rankings" class="hidden-xs">BIG TEN RANKINGS</H2>
 			<div class="rankings hidden-xs">
 			{% for story in rankings %}
 				{{ story.body|safe }}
 			{% endfor %}
-			</div>
+			</div> -->
 		{% endif %}
 		<br />
 		

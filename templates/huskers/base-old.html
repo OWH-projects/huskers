@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	
+	<title>{% block title %}{% endblock %}</title>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="description" content="Nebraska football rosters and recruiting information for every season since 1984." />
+
+	<script type="text/javascript" src="/media/scripts/jquery-1.5.1.js"></script>
+	<script type="text/javascript" src="/media/scripts/thumbs/jquery.thumbs.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("a.thumb, img.thumb").jThumb(); // the wrapping function
+			$("a.thumb img, img.thumb").jThumbImg(); // the img positioning function (optional)
+		});
+	</script>
+
+	<link rel="shortcut icon" href="/media/favicon.ico" type="image/x-icon" /> 
+	<link rel="stylesheet" type="text/css" href="/media/huskers/huskers.css">
+
+{% block header %}
+{% endblock %}
+
+	<!-- Dataomaha Google Analytics -->
+	<script type="text/javascript">
+
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-17420602-3']);
+		  _gaq.push(['_setDomainName', '.dataomaha.com']);
+		  _gaq.push(['_trackPageview']);
+
+		  (function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+
+	</script>
+	
+	
+<!-- BH Media Google Analytics  -->
+
+		<script>
+			  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+			  ga('create', 'UA-43117949-3', 'omaha.com');
+			  ga('send', 'pageview');
+		</script>	
+
+
+	
+</head>
+
+<body>
+
+<div id="omaha-header">
+
+
+<a href="http://www.omaha.com/bigred"><img class="logo" src="http://bloximages.newyork1.vip.townnews.com/omaha.com/content/tncms/live/global/resources/images/_site/_huskers/huskers_header.jpg" title="Big Red Today - Nebraska's best Husker coverage" alt="Big Red Today - Nebraska's best Husker coverage"></a>
+
+</div>
+
+<div class="outer">
+
+
+{% block content %}
+{% endblock %}
+
+</div><!-- end outer -->
+
+	<!-- Chartbeat -->
+	
+		<script type='text/javascript'>var _sf_startpt=(new Date()).getTime()</script>
+	
+	
+		<script type='text/javascript'>
+			var _sf_async_config={};
+			/** CONFIGURATION START **/
+			_sf_async_config.uid = 52047;
+			_sf_async_config.domain = 'omaha.com';
+			_sf_async_config.useCanonical = true;
+			_sf_async_config.sections = 'Dataomaha'; 
+			_sf_async_config.authors = 'Omaha.com';
+			/** CONFIGURATION END **/
+			(function(){
+			  function loadChartbeat() {
+				window._sf_endpt=(new Date()).getTime();
+				var e = document.createElement('script');
+				e.setAttribute('language', 'javascript');
+				e.setAttribute('type', 'text/javascript');
+				e.setAttribute('src', '//static.chartbeat.com/js/chartbeat.js');
+				document.body.appendChild(e);
+			  }
+			  var oldonload = window.onload;
+			  window.onload = (typeof window.onload != 'function') ?
+				 loadChartbeat : function() { oldonload(); loadChartbeat(); };
+			})();
+		</script>
+		
+	<!-- Chartbeat -->
+
+
+
+
+</body>
+
+	<!-- NDN video embeds, April 2014 -->
+	
+		<script type="text/javascript" async src="http://launch.newsinc.com/js/embed.js" id="_nw2e-js"></script>	
+	
+	<!-- end NDN -->
+
+
+
+
+{% block footer %}
+{% endblock %}
+
+
+</html>
+
+
+
