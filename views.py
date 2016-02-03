@@ -87,7 +87,7 @@ def Splash(request):
 def YearXML(request, year):
     statelist = Player.objects.filter(year=year).values('state').filter(Q(status='Scholarship') | Q(status__isnull=True)).exclude(transfer_status='University').annotate(statecount=Count('state'))
 
-    return render_to_response('huskers/main.xml', { "statelist": statelist, }, mimetype="application/xhtml+xml")
+    return render_to_response('huskers/main.xml', { "statelist": statelist, })
 
 def StateXML(request):
     statelist = Player.objects.all().values('state').filter(Q(status='Scholarship') | Q(status__isnull=True)).exclude(transfer_status='University').annotate(statecount=Count('state'))
