@@ -134,6 +134,7 @@ class Player(models.Model):
     player_twitter = models.CharField(max_length=100, null=True, blank=True, help_text='Username only. No @ symbol.')
     player_instagram = models.CharField(max_length=100, null=True, blank=True, help_text='Username only. No @ symbol.')
     offer_date = models.DateField(blank=True, null=True)
+    distance = models.PositiveIntegerField(blank=True, null=True)
 	
     def save(self):
         self.nameslug = slugify(self.player_name)

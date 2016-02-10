@@ -43,8 +43,8 @@
 				<tbody>	
 				{% for player in scholarships %}
 				<tr>
-					<td style="width: 60px;">{% if player.cropped_mug %}<a href="/huskers/player/{{ player.player_name|slugify }}"><img src="/media/{{ player.cropped_mug }}" style="border-radius: 50%; width: 40px;" /></a>{% endif %}</td>
-					<td><a href="/huskers/player/{{ player.player_name|slugify }}"><b>{{ player.player_name }}</b></a></td>
+					{% if player.cropped_mug %}<td style="width: 60px;"><a href="/huskers/player/{{ player.player_name|slugify }}"><img src="/media/{{ player.cropped_mug }}" style="border-radius: 50%; width: 40px;" /></a></td>{% endif %}
+					<td {% if not player.cropped_mug %}colspan="2"{% endif %}><a href="/huskers/player/{{ player.player_name|slugify }}"><b>{{ player.player_name }}</b></a></td>
 					<td>{% if player.stars_247c %}{% if player.stars_247c == "5 stars" %}<img class="rating" src="/media/huskers/five-stars.png">{% endif %}{% if player.stars_247c == "4 stars" %}<img class="rating" src="/media/huskers/four-stars.png">{% endif %}{% if player.stars_247c == "3 stars" %}<img class="rating" src="/media/huskers/three-stars.png">{% endif %}{% if player.stars_247c == "2 stars" %}<img class="rating" src="/media/huskers/two-stars.png">{% endif %}{% if player.stars_247c == "1 stars" %}<img class="rating" src="/media/huskers/one-star.png">{% endif %}{% endif %}</td>
 					<td>{{ player.position }}</td>
 					<td class="hidden-xs hidden-sm">{{ player.height }}</td>
@@ -168,7 +168,7 @@
 				<tbody>
 					<tr><td><a href="#scholarships">Scholarships</a></td><td class="r">{{ scholarships.count }}</td></tr>
 					<tr><td><a href="#transfers">Transfers</a></td><td class="r">{{ transfers.count }}</td></tr>
-					<tr><td><a href="#walk-ons">Walk-Ons</a></td><td class="r">{{ walkons.count }}</td></tr>
+					<tr><td><a href="#walk-ons">Walk-ons</a></td><td class="r">{{ walkons.count }}</td></tr>
 					<tr><td><a href="#targets">Targets</td><td class="r">{{ targets.count }}</td></tr>
 				</tbody>
 			</table>

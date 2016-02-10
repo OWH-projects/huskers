@@ -42,13 +42,13 @@
 				{% if player.status != "Walk-on" %}
 				<tr class="player" id="{{ player.player_name|slugify }}">
 					<td rowspan="2"><a href="/huskers/player/{{ player.player_name|slugify }}" target="_blank"><img class="mug" src="/media/{{ player.cropped_mug }}" /></td>
-					<td><b><a style="text-decoration: underline;" href="/huskers/player/{{ player.player_name|slugify }}" target="_blank">{{ player.first_name }} {{ player.last_name }}</a></b></td>
+					<td><b><a style="text-decoration: underline;" href="/huskers/player/{{ player.player_name|slugify }}" target="_blank">{{ player.first_name }}<br>{{ player.last_name }}</a></b></td>
 					<td class="r">{% if player.stars_247c %}{% if player.stars_247 == "5 stars" %}<img class="rating" src="/media/huskers/five-stars.png">{% endif %}{% if player.stars_247 == "4 stars" %}<img class="rating" src="/media/huskers/four-stars.png">{% endif %}{% if player.stars_247 == "3 stars" %}<img class="rating" src="/media/huskers/three-stars.png">{% endif %}{% if player.stars_247 == "2 stars" %}<img class="rating" src="/media/huskers/two-stars.png">{% endif %}{% if player.stars_247 == "1 stars" %}<img class="rating" src="/media/huskers/one-star.png">{% endif %}{% endif %}</td>
 				</tr>
 				<tr class="player" id="{{ player.player_name|slugify }}">
 					<td colspan="2" style="font-size: 80%; padding-bottom: 2em !important;">{{ player.position }} &bull; {{ player.height }} &bull; {{ player.weight }}<div style="clear: both;"></div></td>
 					<td>{% if player.signed == 1 %} <img 
-		src="http://dataomaha.com/media/huskermugs/x-mark-green.png" style="padding-right: 20px;" class="check">{% endif %}</td>
+		src="http://dataomaha.com/media/huskermugs/x-mark-green.png" style="padding-right: 20px; margin-top: -30px;" class="check">{% endif %}</td>
 				</tr>
 				
 				
@@ -103,7 +103,7 @@
 		<h2>LIVE COVERAGE</h2>
 		
 		
-			<iframe src="//embed.scribblelive.com/Embed/v7.aspx?Id=1808574&ThemeId=28105" width="100%" height="650" frameborder="0"></iframe>
+			<iframe src="//embed.scribblelive.com/Embed/v7.aspx?Id=1808574&ThemeId=28105" width="100%" height="950" frameborder="0"></iframe>
 		
 		
 		
@@ -128,18 +128,18 @@
 		{% endfor %}
 		
 		
-		<!-- <h2 id="poll">SIGNING DAY POLL</h2>
+		<h2 id="poll">SIGNING DAY POLL</h2>
 		<iframe class="hidden-xs" width="100%" height="500" scrolling="no" frameborder=0 src="http://dataomaha.com/slider/husker-signing-day-2016-polls">
 		</iframe>
-		<p><a style="font-weight: bold;" href="http://dataomaha.com/quick-hit/416#vote-which-husker-signees-with-have-the-biggest-impact-going-forward" class="visible-xs visible-xs-block">Vote for the 2015 recruiting class' hidden gem, instant impact player and more &raquo;</a></p> -->
+		<!-- <p><a style="font-weight: bold;" href="http://dataomaha.com/quick-hit/416#vote-which-husker-signees-with-have-the-biggest-impact-going-forward" class="visible-xs visible-xs-block">Vote for the 2015 recruiting class' hidden gem, instant impact player and more &raquo;</a></p> -->
 		
 		{% if rankings %}
-		<!-- <h2 id="rankings" class="hidden-xs">BIG TEN RANKINGS</H2>
+		<h2 id="rankings" class="hidden-xs">BIG TEN RANKINGS</H2>
 			<div class="rankings hidden-xs">
 			{% for story in rankings %}
 				{{ story.body|safe }}
 			{% endfor %}
-			</div> -->
+			</div>
 		{% endif %}
 		<br />
 		

@@ -9,7 +9,7 @@ class PlayerAdmin(admin.ModelAdmin):
     filter_horizontal = [ 'badges' ]
     fieldsets = (
         (None, {
-            'fields': ('year', 'player_name', ('first_name', 'last_name'), 'position', ('height', 'weight'), ('city', 'state', 'country'), 'highschool', 'bio', 'bio_huskers', 'related_features', ('status', 'target_schools', 'transfer_status', 'juco_name'),  'offer_date', 'commit_date', 'decommit_date', 'official_visit_date', 'signed', 'used_redshirt')
+            'fields': ('year', 'player_name', ('first_name', 'last_name'), 'position', ('height', 'weight'), ('city', 'state', 'country', 'distance'), 'highschool', 'bio', 'bio_huskers', 'related_features', ('status', 'target_schools', 'transfer_status', 'juco_name'),  'offer_date', 'commit_date', 'decommit_date', 'official_visit_date', 'signed', 'used_redshirt')
         }),
         ('Photos', {
             'fields': ('mugshot', 'feature_photo_credit', 'feature_photo_caption', 'cropped_mug')
