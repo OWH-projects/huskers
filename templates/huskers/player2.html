@@ -4,13 +4,31 @@
 {% block title %}{{ player.player_name }} - {{ player.position }} - Class of {{ player.year }} -{% endblock %}
 
 
-{% block extra-styles %}
-<style type="text/css">
-	.red { color: #c80000; }
-	.white { color: #ccc; text-decoration: underline; }
-	.photo-credit { color: #444; }
-</style>
-{% endblock %}
+	{% block extra-styles %}
+	<style type="text/css">
+		.red { color: #c80000; }
+		.white { color: #ccc; text-decoration: underline; }
+		.photo-credit { color: #444; }
+	</style>
+	{% endblock %}
+
+	{% block meta %}
+	
+	<meta property="og:title" content="{{ player.player_name }} - Class of {{ player.year }} - Nebraska football recruits">
+	<meta property="og:image" content="http://dataomaha.com/media/{{ player.cropped_mug }}">
+	<meta property="og:description" content='{% if player.status = "Target" %}{% if player.bio %}{{ player.bio|linebreaks|truncatewords:50|striptags }}{% else %}{{ player.first_name }} {{ player.last_name }} is a Nebraska football target in the Class of {{ player.year }}.{% if player.target_schools %}<p>Also being pursued by {{ player.target_schools }}.{% endif %}{% endif %}{% else %}{% if player.bio %}{% autoescape off %}{{ player.bio|linebreaks|truncatewords:50|striptags }}{% endautoescape %}{% else %}{{ player.player_name }} joined the Huskers in {{ player.year }} {% if player.status == "Scholarship" %}after earning a scholarship{% endif %}{% if player.status == "Walk-on" %} as a walk-on {% endif %} at the {{ player.position }} position. At {{ player.height }} and {{ player.weight }} pounds, {{ player.last_name }} came to NU after playing previously at {{ player.highschool }}. He is from {{ player.city }}{% if player.state %}, {{ player.state }}{% else %}, {{ player.country }}{% endif %}.{% endif %}{% endif %}'>
+	<meta property="fb:app_id" content="117714391577072">
+	
+	
+    <!-- Twitter Card - Large image // Docs: https://dev.twitter.com/cards/types/summary-large-image -->	
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:site" content="@OWHbigred">
+	<meta name="twitter:title" content="{{ player.player_name }} - Class of {{ player.year }} - Nebraska football recruits">
+	<meta name="twitter:image" content="http://dataomaha.com/media/{{ player.cropped_mug }}">
+	<meta name="twitter:description" content='{% if player.status = "Target" %}{% if player.bio %}{{ player.bio|linebreaks|truncatewords:50|striptags }}{% else %}{{ player.first_name }} {{ player.last_name }} is a Nebraska football target in the Class of {{ player.year }}.{% if player.target_schools %}<p>Also being pursued by {{ player.target_schools }}.{% endif %}{% endif %}{% else %}{% if player.bio %}{% autoescape off %}{{ player.bio|linebreaks|truncatewords:50|striptags }}{% endautoescape %}{% else %}{{ player.player_name }} joined the Huskers in {{ player.year }} {% if player.status == "Scholarship" %}after earning a scholarship{% endif %}{% if player.status == "Walk-on" %} as a walk-on {% endif %} at the {{ player.position }} position. At {{ player.height }} and {{ player.weight }} pounds, {{ player.last_name }} came to NU after playing previously at {{ player.highschool }}. He is from {{ player.city }}{% if player.state %}, {{ player.state }}{% else %}, {{ player.country }}{% endif %}.{% endif %}{% endif %}'>
+	
+	{% endblock %}
+
 
 
 {% block content %}
@@ -44,12 +62,12 @@
 				{% if player.status and player.status != "Target" %}<tr><td class="hidden-xs hidden-sm">Recruitment<span class="visible-xs visible-sm"><b>{% if player.transfer_status == "University" %}Transfer{% else %}{{ player.status }}{% endif %}</b></span></td><td class="hidden-xs hidden-sm">{% if player.transfer_status == "University" %}Transfer{% else %}{{ player.status }}{% endif %}</td></tr>{% endif %}
 				{% if player.recruiter_1 %}
 					<tr>
-						<td class="hidden-xs hidden-sm">{% if player.recruiter_2 %}Recruiters{% else %}Recruiter{% endif %}<span class="visible-xs visible-sm"><b><a href="/huskers/recruiter/{{ player.recruiter_1.nameslug }}">{{ player.recruiter_1 }}</a>{% if player.recruiter_2 %}, <a href="/huskers/recruiter/{{ player.recruiter_2.nameslug }}">{{ player.recruiter_2 }}</a>{% endif %}</b></span></td>
-						<td class="hidden-xs hidden-sm"><a href="/huskers/recruiter/{{ player.recruiter_1.nameslug }}">{{ player.recruiter_1 }}</a>{% if player.recruiter_2 %},<br> <a href="/huskers/player.recruiter_2.nameslug }}">{{ player.recruiter_2 }}</a>{% endif %}</td>
+						<td class="hidden-xs hidden-sm">{% if player.recruiter_2 %}Recruiters{% else %}Recruiter{% endif %}<span class="visible-xs visible-sm"><b><a class="white" href="/huskers/recruiter/{{ player.recruiter_1.nameslug }}">{{ player.recruiter_1 }}</a>{% if player.recruiter_2 %}, <a class="white" href="/huskers/recruiter/{{ player.recruiter_2.nameslug }}">{{ player.recruiter_2 }}</a>{% endif %}</b></span></td>
+						<td class="hidden-xs hidden-sm"><a class="white" href="/huskers/recruiter/{{ player.recruiter_1.nameslug }}">{{ player.recruiter_1 }}</a>{% if player.recruiter_2 %},<br> <a class="white" href="/huskers/player.recruiter_2.nameslug }}">{{ player.recruiter_2 }}</a>{% endif %}</td>
 					</tr>
 				{% endif %}
 				{% if player.offer_date %}<tr><td>Offer date</td><td>{{ player.offer_date|date:"N j, Y" }}</td></tr>{% endif %}
-				{% if player.official_visit_date %}<tr><td>Official visit</td><td>{{ player.official_visit_date|date:"N j, Y" }}</td></tr>{% endif %}
+				{% if player.official_visit_date %}<tr><td>Official visit</td><td><a href="/huskers/visits/{{ player.official_visit_date|date:"Y" }}/{{ player.official_visit_date|date:"m" }}/{{ player.official_visit_date|date:"d" }}">{{ player.official_visit_date|date:"N j, Y" }}</a></td></tr>{% endif %}
 				{% if player.commit_date %}<tr><td>Commit date</td><td>{{ player.commit_date|date:"N j, Y" }}</td></tr>{% endif %}
 				{% if player.decommit_date %}<tr><td>Decommit date</td><td>{{ player.decommit_date|date:"N j, Y" }}</td></tr>{% endif %}
 
@@ -64,6 +82,10 @@
 		
 		
 			<div id="center" class="col-sm-7">
+				
+			<!-- NDN Pixel Perfect -->
+			<div style="margin-bottom: 25px;" class="ndn_embed" id="ndn-video-player-1" data-config-distributor-id="91341" data-config-width="608" data-config-height="342"></div>
+			<!-- NDN Pixel Perfect ends -->
 	
 			{% if player.status = "Target" %}
 				<div class="player-bio">
@@ -174,7 +196,14 @@
 			
 			{% endif %}
 
-			<div class="hidden-xs ndn_embed" data-config-type="InView" data-config-tracking-group="91341" data-config-width="600"></div><script type="text/javascript">var _ndnq = _ndnq || []; _ndnq.push(['embed']);</script>
+			<!-- NDN Pixel Perfect -->
+			<div style="margin-bottom: 25px;" class="ndn_embed" id="ndn-video-player-2" data-config-distributor-id="91341" data-config-width="608" data-config-height="342"></div>
+			<!-- NDN Pixel Perfect ends -->
+				
+			<!-- NDN InView ad -->
+			<div class="hidden-xs ndn_embed" data-config-type="InView" data-config-tracking-group="91341" data-config-width="608" data-config-height="342"></div><script type="text/javascript">var _ndnq = _ndnq || []; _ndnq.push(['embed']);</script>
+			<!-- NDN InView ad ends-->
+			
 			
 		</div><!-- /center -->
 		
@@ -194,40 +223,48 @@
 				{% if player.stars_247 or player.stars_rivals or player.stars_scouts %}<tr><td><b>Ratings</b></td><td></td></tr>{% endif %}
 
 					{% if player.stars_247 %}<tr class="small"><td><p>247Sports</td><td class="r">
+					{% if player.profile_link_247 %}<a href="{{ player.profile_link_247 }}">{% endif %}	
 						{% if player.stars_247 == "5 stars" %}<img class="rating" src="/media/huskers/five-stars.png">{% endif %}
 						{% if player.stars_247 == "4 stars" %}<img class="rating" src="/media/huskers/four-stars.png">{% endif %}
 						{% if player.stars_247 == "3 stars" %}<img class="rating" src="/media/huskers/three-stars.png">{% endif %}
 						{% if player.stars_247 == "2 stars" %}<img class="rating" src="/media/huskers/two-stars.png">{% endif %}
 						{% if player.stars_247 == "1 stars" %}<img class="rating" src="/media/huskers/one-star.png">{% endif %}
 						{% if player.stars_247 == "Unranked" %}<img class="rating" src="/media/huskers/not-rated.png">{% endif %}
+					{% if player.profile_link_247 %}</a>{% endif %}
 					</td></tr>{% endif %}
 
 					{% if player.stars_rivals %}<tr class="small"><td><p>Rivals </td><td class="r">
+					{% if player.profile_link_rivals %}<a href="{{ player.profile_link_rivals }}">{% endif %}	
 						{% if player.stars_rivals == "5 stars" %}<img class="rating" src="/media/huskers/five-stars.png">{% endif %}
 						{% if player.stars_rivals == "4 stars" %}<img class="rating" src="/media/huskers/four-stars.png">{% endif %}
 						{% if player.stars_rivals == "3 stars" %}<img class="rating" src="/media/huskers/three-stars.png">{% endif %}
 						{% if player.stars_rivals == "2 stars" %}<img class="rating" src="/media/huskers/two-stars.png">{% endif %}
 						{% if player.stars_rivals == "1 stars" %}<img class="rating" src="/media/huskers/one-star.png">{% endif %}
 						{% if player.stars_rivals == "Unranked" %}<img class="rating" src="/media/huskers/not-rated.png">{% endif %}
+					{% if player.profile_link_rivals %}</a>{% endif %}	
 					</td></tr>{% endif %}
 
 					
 					{% if player.stars_scouts %}<tr class="small"><td><p>ESPN </td><td class="r">
+					{% if player.profile_link_espn %}<a href="{{ player.profile_link_espn }}">{% endif %}	
 						{% if player.stars_scouts == "5 stars" %}<img class="rating" src="/media/huskers/five-stars.png">{% endif %}
 						{% if player.stars_scouts == "4 stars" %}<img class="rating" src="/media/huskers/four-stars.png">{% endif %}
 						{% if player.stars_scouts == "3 stars" %}<img class="rating" src="/media/huskers/three-stars.png">{% endif %}
 						{% if player.stars_scouts == "2 stars" %}<img class="rating" src="/media/huskers/two-stars.png">{% endif %}
 						{% if player.stars_scouts == "1 stars" %}<img class="rating" src="/media/huskers/one-star.png">{% endif %}
 						{% if player.stars_scouts == "Unranked" %}<img class="rating" src="/media/huskers/not-rated.png">{% endif %}
+					{% if player.profile_link_espn %}</a>{% endif %}	
 					</td></tr>{% endif %}
 
-					{% if player.stars_scouts %}<tr class="small"><td><p>Scout </td><td class="r">
+					{% if player.stars_fox %}<tr class="small"><td><p>Scout </td><td class="r">
+					{% if player.profile_link_scout %}<a href="{{ player.profile_link_scout }}">{% endif %}	
 						{% if player.stars_fox == "5 stars" %}<img class="rating" src="/media/huskers/five-stars.png">{% endif %}
 						{% if player.stars_fox == "4 stars" %}<img class="rating" src="/media/huskers/four-stars.png">{% endif %}
 						{% if player.stars_fox == "3 stars" %}<img class="rating" src="/media/huskers/three-stars.png">{% endif %}
 						{% if player.stars_fox == "2 stars" %}<img class="rating" src="/media/huskers/two-stars.png">{% endif %}
 						{% if player.stars_fox == "1 stars" %}<img class="rating" src="/media/huskers/one-star.png">{% endif %}
 						{% if player.stars_fox == "Unranked" %}<img class="rating" src="/media/huskers/not-rated.png">{% endif %}
+					{% if player.profile_link_scout %}</a>{% endif %}	
 					</td></tr>{% endif %}	
 					
 					{% endif %}

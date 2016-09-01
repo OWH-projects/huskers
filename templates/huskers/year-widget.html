@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+    <title>Class of {{ year }} Nebraska football recruits - Omaha.com - Omaha World-Herald</title>
+
+	<meta property="og:title" content="Class of {{ year }} Nebraska football recruits">
+	<meta property="og:image" content="http://dev.dataomaha.com/media/huskers/headline-photos/Recruiting_6small_68.png">
+	
+    <!-- Bootstrap base layer -->
+    <link href="http://dataomaha.com/media/scripts/bootstrap/3.2.0/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/media/huskers/huskers2.css" rel="stylesheet">
+    
+    
+	<!--  Google fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700italic,400italic,700,300' rel='stylesheet' type='text/css'>
+
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+	
+<style type="text/css">
+	.red { color: #c80000; }
+	#center { margin: 0px auto; padding: 0px; }
+	h1 { margin-top: 0; font-size: 24px; margin-top: 25px; }
+	.container { background-color: #ffffff; padding: 0px; }
+	body { background: none; }
+	.col-sm-12 { margin: 0px; padding: 0px; }
+	th.table { border-bottom: 1px solid #ddd; }
+	
+</style>
+	
+</head>
+
+<body data-spy="scroll" data-target=".navbar-scroller">
+
+
+
+
+	<div class="container">
+	<div class="col-sm-12">
+
+		<div id="center" style="padding: 0px;"><!-- padding added here -->
+
+			<a href="http://dataomaha.com/huskers/class/{{ year }}?source=widget" target="_blank"><h1>Class of {{ year }} commits</h1></a>
+
+			
+			<div class="table-responsive">
+			<table class="table player-list sortable">
+				<thead>
+					<tr>
+						<th class="text-muted" colspan=2>{{ scholarships.count }} scholarship player{{ scholarships|pluralize }}</th>
+						<th></th>
+						<th class="hidden-xs hidden-sm">Position</th>
+						<th class="hidden-xs hidden-sm">Height</th>
+						<th class="hidden-xs hidden-sm">Weight</th>
+						<th class="hidden-xs hidden-sm">State</th>
+						<th class="hidden-xs hidden-sm">Recruiters</th>
+					</tr>
+				</thead>
+				
+				<tbody>	
+				{% for player in scholarships %}
+				<tr>
+					{% if player.cropped_mug %}<td style="width: 60px;"><a href="/huskers/player/{{ player.player_name|slugify }}?source=widget" target="_blank"><img src="/media/{{ player.cropped_mug }}" style="border-radius: 50%; width: 40px;" /></a></td>{% endif %}
+					<td {% if not player.cropped_mug %}colspan="2"{% endif %}><a href="/huskers/player/{{ player.player_name|slugify }}?source=widget" target="_blank"><b>{{ player.player_name }}</b></a></td>
+					<td>{% if player.stars_247c %}{% if player.stars_247c == "5 stars" %}<img class="rating" src="/media/huskers/five-stars.png">{% endif %}{% if player.stars_247c == "4 stars" %}<img class="rating" src="/media/huskers/four-stars.png">{% endif %}{% if player.stars_247c == "3 stars" %}<img class="rating" src="/media/huskers/three-stars.png">{% endif %}{% if player.stars_247c == "2 stars" %}<img class="rating" src="/media/huskers/two-stars.png">{% endif %}{% if player.stars_247c == "1 stars" %}<img class="rating" src="/media/huskers/one-star.png">{% endif %}{% endif %}</td>
+					<td>{{ player.position }}</td>
+					<td class="hidden-xs hidden-sm">{{ player.height }}</td>
+					<td class="hidden-xs hidden-sm">{{ player.weight }}</td>
+					<td class="hidden-xs hidden-sm">{{ player.state }}</td>
+					<td class="hidden-xs hidden-sm">{% if player.recruiter_1 %}<a class="text-muted" href="/huskers/recruiter/{{ player.recruiter_1.nameslug }}" target="_blank">{{ player.recruiter_1.full_name }}</a>{% endif %}{% if player.recruiter_2 %}, <a class="text-muted" href="/huskers/recruiter/{{ player.recruiter_2.nameslug }}" target="_blank">{{ player.recruiter_2.full_name }}</a>{% endif %}</td>
+				</tr>
+				{% endfor %}
+				</tbody>
+			</table>
+			</div>
+			
+			<p><strong>Who's next?</strong> See who Nebraska is <em>really</em> pursuing with <a href="/huskers/class/{{ year }}/bigboard" target="_blank">our {{ year }} Big Board &raquo;</a></p>
+
+
+	
+		</div><!-- /center -->
+	</div>
+	
+	</div><!-- /container -->	
+
+	</body>
+  
+
+</html>
+	
+	
+
+

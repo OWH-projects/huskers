@@ -1,0 +1,193 @@
+{% extends 'huskers/base-new.html' %}
+
+{% block title %} Class of {{ year }} Big Board - {% endblock %}
+
+
+	{% block meta %}
+	
+	<meta property="og:title" content="Class of {{ year }} - Nebraska football recruits">
+	<meta property="og:image" content="http://dev.dataomaha.com/media/huskers/headline-photos/Recruiting_6small_68.png">
+	<meta property="og:description" content="Information about the Nebraska football Class of {{ year }}. {{ scholarships.count }} scholarship{{ scholarships|pluralize }}, {{ transfers.count }} transfer{{ transfers|pluralize }}, {{ walkons.count }} walk-on{{ walkons|pluralize }}, {{ targets.count }} target{{ targets|pluralize }}">
+	<meta property="fb:app_id" content="117714391577072">
+	
+	
+    <!-- Twitter Card - Large image // Docs: https://dev.twitter.com/cards/types/summary-large-image -->	
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="@OWHbigred">
+	<meta name="twitter:title" content="Class of {{ year }} - Nebraska football recruits">
+	<meta property="og:image" content="http://dev.dataomaha.com/media/huskers/headline-photos/Recruiting_6small_68.png">
+	<meta name="twitter:description" content="Information about the Nebraska football Class of {{ year }}. {{ scholarships.count }} scholarship{{ scholarships|pluralize }}, {{ transfers.count }} transfer{{ transfers|pluralize }}, {{ walkons.count }} walk-on{{ walkons|pluralize }}, {{ targets.count }} target{{ targets|pluralize }}">
+	
+	{% endblock %}
+
+
+{% block extra-styles %}
+<style type="text/css">
+	.red { color: #c80000; }
+</style>
+{% endblock %}
+
+{% block content %}
+
+	<div class="jumbotron name">
+		<div class="container">
+			<h4 class="red"><b>NEBRASKA FOOTBALL</b></h4>
+			<h1>Class of {{ year }} Big Board</h1>
+			
+		</div>
+		</div>
+
+	<div class="container">
+	<div class="col-sm-12">
+
+		<div id="center">
+		
+		
+		{% if players %}
+
+		<p class="lead">These are, by The World-Herald staff's estimation, the Huskers' top recruiting targets for the {{ year }} cycle. Click each player's name  below to see a bio, which coach is recruiting them, Hudl highlights, detailed star rankings and more. To see Nebraska's complete list of {{ year }} commits and targets, <a href="http://dataomaha.com/huskers/class/{{ year }}">click here</a>.</p>
+
+		<a name="targets"></a>
+			<div class="table-responsive">
+			<table class="table player-list sortable">
+				<thead>
+					<tr>
+						<th class="text-muted">{{ players.count }} top target{{ players|pluralize }}</th>
+						<th></th>
+						<th>Position</th>
+						<th class="hidden-xs hidden-sm">Height</th>
+						<th class="hidden-xs hidden-sm">Weight</th>
+						<th class="hidden-xs hidden-sm">State</th>
+						<th class="hidden-xs hidden-sm">Committed</th>
+						<th class="hidden-xs hidden-sm">Announcement</th>
+					</tr>
+				</thead>
+				
+				<tbody>	
+				{% for player in players %}
+				<tr>
+					<td><a href="/huskers/player/{{ player.player_name|slugify }}"><b>{{ player.player_name }}</b></a></td>
+					<td>{% if player.stars_247c %}{% if player.stars_247c == "5 stars" %}<img class="rating" src="/media/huskers/five-stars.png">{% endif %}{% if player.stars_247c == "4 stars" %}<img class="rating" src="/media/huskers/four-stars.png">{% endif %}{% if player.stars_247c == "3 stars" %}<img class="rating" src="/media/huskers/three-stars.png">{% endif %}{% if player.stars_247c == "2 stars" %}<img class="rating" src="/media/huskers/two-stars.png">{% endif %}{% if player.stars_247c == "1 stars" %}<img class="rating" src="/media/huskers/one-star.png">{% endif %}{% endif %}</td>
+					<td>{{ player.position }}</td>
+					<td class="hidden-xs hidden-sm">{{ player.height }}</td>
+					<td class="hidden-xs hidden-sm">{{ player.weight }}</td>
+					<td class="hidden-xs hidden-sm">{{ player.state }}</td>
+					<td class="hidden-xs hidden-sm">{{ player.committed_school }}</td>
+					<td class="hidden-xs hidden-sm">{% if player.announcement_date %}{{ player.announcement_date }}{% endif %}</td>
+				</tr>
+				{% endfor %}
+				</tbody>
+			</table>
+			</div>
+			
+			
+			{% if got_away %}
+			<hr />
+			<h4>The ones that got away</h4>
+			<p class="small text-muted">Nebraska pushed for these guys, but seems to have lost the recruiting battle.</p>
+			<div class="table-responsive">
+			<table class="table player-list sortable">
+				<thead>
+					<tr>
+					<th class="text-muted">{{ got_away.count }} top target{{ got_away|pluralize }}</th>
+						<th></th>
+						<th>Position</th>
+						<th class="hidden-xs hidden-sm">Height</th>
+						<th class="hidden-xs hidden-sm">Weight</th>
+						<th class="hidden-xs hidden-sm">State</th>
+						<th class="hidden-xs hidden-sm">Committed</th>
+					</tr>
+				</thead>
+				
+				<tbody>	
+				{% for player in got_away %}
+				<tr>
+					<td><a href="/huskers/player/{{ player.player_name|slugify }}"><b>{{ player.player_name }}</b></a></td>
+					<td>{% if player.stars_247c %}{% if player.stars_247c == "5 stars" %}<img class="rating" src="/media/huskers/five-stars.png">{% endif %}{% if player.stars_247c == "4 stars" %}<img class="rating" src="/media/huskers/four-stars.png">{% endif %}{% if player.stars_247c == "3 stars" %}<img class="rating" src="/media/huskers/three-stars.png">{% endif %}{% if player.stars_247c == "2 stars" %}<img class="rating" src="/media/huskers/two-stars.png">{% endif %}{% if player.stars_247c == "1 stars" %}<img class="rating" src="/media/huskers/one-star.png">{% endif %}{% endif %}</td>
+					<td>{{ player.position }}</td>
+					<td class="hidden-xs hidden-sm">{{ player.height }}</td>
+					<td class="hidden-xs hidden-sm">{{ player.weight }}</td>
+					<td class="hidden-xs hidden-sm">{{ player.state }}</td>
+					<td class="hidden-xs hidden-sm">{{ player.committed_school }}</td>
+				</tr>
+				{% endfor %}
+				</tbody>
+			</table>
+			</div>
+			{% endif %}
+			
+			{% if commits %}
+			<hr />
+			<h4>Committed</h4>
+			<p class="small text-muted">Nebraska has already earned a commitment from these players.</p>
+			<div class="table-responsive">
+			<table class="table player-list sortable">
+				<thead>
+					<tr>
+					<th class="text-muted">{{ commits.count }} commit{{ commits|pluralize }}</th>
+						<th></th>
+						<th>Position</th>
+						<th class="hidden-xs hidden-sm">Height</th>
+						<th class="hidden-xs hidden-sm">Weight</th>
+						<th class="hidden-xs hidden-sm">State</th>
+						<th class="hidden-xs hidden-sm">Commit date</th>
+						<th class="hidden-xs hidden-sm">Recruiter</th>
+					</tr>
+				</thead>
+				
+				<tbody>	
+				{% for player in commits %}
+				<tr>
+					<td><a href="/huskers/player/{{ player.player_name|slugify }}"><b>{{ player.player_name }}</b></a></td>
+					<td>{% if player.stars_247c %}{% if player.stars_247c == "5 stars" %}<img class="rating" src="/media/huskers/five-stars.png">{% endif %}{% if player.stars_247c == "4 stars" %}<img class="rating" src="/media/huskers/four-stars.png">{% endif %}{% if player.stars_247c == "3 stars" %}<img class="rating" src="/media/huskers/three-stars.png">{% endif %}{% if player.stars_247c == "2 stars" %}<img class="rating" src="/media/huskers/two-stars.png">{% endif %}{% if player.stars_247c == "1 stars" %}<img class="rating" src="/media/huskers/one-star.png">{% endif %}{% endif %}</td>
+					<td>{{ player.position }}</td>
+					<td class="hidden-xs hidden-sm">{{ player.height }}</td>
+					<td class="hidden-xs hidden-sm">{{ player.weight }}</td>
+					<td class="hidden-xs hidden-sm">{{ player.state }}</td>
+					<td class="hidden-xs hidden-sm">{% if player.commit_date %}{{ player.commit_date }}{% endif %}</td>
+					<td class="hidden-xs hidden-sm">{% if player.recruiter_1 %}<a class="text-muted" href="/huskers/recruiter/{{ player.recruiter_1.nameslug }}">{{ player.recruiter_1.full_name }}</a>{% endif %}{% if player.recruiter_2 %}, <a class="text-muted" href="/huskers/recruiter/{{ player.recruiter_2.nameslug }}">{{ player.recruiter_2.full_name }}</a>{% endif %}</td>
+				</tr>
+				{% endfor %}
+				</tbody>
+			</table>
+			</div>
+			{% endif %}
+			
+		{% else %}
+		
+		<p>No top targets designated for {{ year }}. Visit the <a href="/huskers/class/{{ year }}">Class of {{ year }} page</a> for more information.</p>
+
+		{% endif %}
+		</div><!-- /center -->
+	</div>
+	
+
+		
+	
+	</div><!-- /container -->
+	
+	{% include 'huskers/jumbo-search.html' %}
+	
+
+
+
+{% endblock %}
+
+{% block extra-scripts %}
+
+		<script>
+		$(document).ready(function() {
+		
+			$('table.sortable').DataTable( {
+				"paging": false,
+				"searching": false,
+				"info": false,
+			} );
+		} );
+	
+	</script>
+	
+	
+	
+	
+{% endblock %}

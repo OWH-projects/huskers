@@ -2,6 +2,25 @@
 
 {% block title %} Class of {{ title }} - {% endblock %}
 
+
+	{% block meta %}
+	
+	<meta property="og:title" content="Class of {{ title }} - Nebraska football recruits">
+	<meta property="og:image" content="http://dev.dataomaha.com/media/huskers/headline-photos/Recruiting_6small_68.png">
+	<meta property="og:description" content="Information about the Nebraska football Class of {{ title }}. {{ scholarships.count }} scholarship{{ scholarships|pluralize }}, {{ transfers.count }} transfer{{ transfers|pluralize }}, {{ walkons.count }} walk-on{{ walkons|pluralize }}, {{ targets.count }} target{{ targets|pluralize }}">
+	<meta property="fb:app_id" content="117714391577072">
+	
+	
+    <!-- Twitter Card - Large image // Docs: https://dev.twitter.com/cards/types/summary-large-image -->	
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="@OWHbigred">
+	<meta name="twitter:title" content="Class of {{ title }} - Nebraska football recruits">
+	<meta property="og:image" content="http://dev.dataomaha.com/media/huskers/headline-photos/Recruiting_6small_68.png">
+	<meta name="twitter:description" content="Information about the Nebraska football Class of {{ title }}. {{ scholarships.count }} scholarship{{ scholarships|pluralize }}, {{ transfers.count }} transfer{{ transfers|pluralize }}, {{ walkons.count }} walk-on{{ walkons|pluralize }}, {{ targets.count }} target{{ targets|pluralize }}">
+	
+	{% endblock %}
+
+
 {% block extra-styles %}
 <style type="text/css">
 	.red { color: #c80000; }
@@ -22,7 +41,8 @@
 	<div class="col-sm-10">
 
 		<div id="center">
-
+		
+		<h2>Commits</h2>
 
 		<a name="scholarships"></a>
 			
@@ -124,10 +144,14 @@
 			</div>
 			
 			{% else %}
-			<h4>No walk-ons signed.</h4>
+			<!-- <h4>No walk-ons signed.</h4> -->
 			{% endif %}
 		
 		{% if targets %}
+		
+		<h2 style="display: inline;">Targets</h2> &nbsp; <p style="display: inline; padding-bottom: 25px; color: #999; font-style: italic;">Who's next? See which recruits Nebraska is <em>really</em> focused on with <a href="/huskers/class/{{ title }}/bigboard">our {{ year }} Big Board &raquo;</a></p>
+		<br><br>
+		
 		<a name="targets"></a>
 			<div class="table-responsive">
 			<table class="table player-list sortable">
@@ -183,7 +207,7 @@
 				</tbody>
 			</table>
 			
-			</div>
+		</div>
 		
 	
 	</div>

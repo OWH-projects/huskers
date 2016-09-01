@@ -1,6 +1,8 @@
 from models import *
 from django.shortcuts import *
 from django.db.models import *
+from datetime import *
+
 
 years = Player.objects.all().values('year').distinct().order_by('-year')
 states = Player.objects.all().values('state').distinct().order_by('state')
@@ -112,8 +114,12 @@ def Year(request, year):
 	
     return render_to_response('huskers/yearpage2.html', { "title": title, "scholarships": scholarships, "walkons": walkons, "targets": targets, "years": years, "states": states, "ratings": ratings, "transfers": transfers, })
 
-
-
+def YearWidget(request, year):
+    year = year
+    scholarships = Player.objects.filter(year=year).filter(Q(status__isnull=True) | Q(status="Scholarship")).exclude(transfer_status='University').order_by("last_name", "first_name")
+    
+    return render_to_response('huskers/year-widget.html', { "year": year, "scholarships": scholarships, })
+	
 #def State(request, state):
 #    title = state
 #    statelist = Player.objects.filter(state=state).order_by('-year', 'last_name')
@@ -135,8 +141,9 @@ def State2(request, state):
     walkons = players.filter(status="Walk-on")
     transfers = players.filter(transfer_status="University")
     positions = players.values("position").distinct().annotate(positioncount=Count('position')).order_by('-positioncount')
-
-    return render_to_response('huskers/statepage2.html',  { "title": title, "players": players, "scholarships": scholarships, "walkons": walkons, 'positions': positions,  "years": years, "states": states, "transfers": transfers, })
+    state_rank = Player.objects.exclude(status="Target").order_by('state').values('state').annotate(statecount=Count('state')).order_by('-statecount')
+	
+    return render_to_response('huskers/statepage2.html',  { "title": title, "players": players, "scholarships": scholarships, "walkons": walkons, 'positions': positions,  "years": years, "states": states, "transfers": transfers, "state_rank": state_rank, })
 
 def AllStates(request):
     scholarships = Player.objects.filter(status="Scholarship").order_by('state').values('state').annotate(statecount=Count('state'))
@@ -187,7 +194,7 @@ def PlayerPage(request, playername):
 	
 
 def Recruiting(request):
-    recentlist = Player.objects.all().filter(year='2016').exclude(transfer_status="University").order_by('last_name', 'first_name')
+    recentlist = Player.objects.all().filter(year='2017').exclude(transfer_status="University").order_by('last_name', 'first_name')
     headlines = RecruitHeadline.objects.filter(tags__icontains='recruiting').order_by('priority').order_by('-priority')[:15]
     topschools = Player.objects.all().values('highschool', 'city').annotate(schoolcount=Count('highschool')).order_by('-schoolcount')[:10]
     topschoolcount = topschools[0]
@@ -195,6 +202,13 @@ def Recruiting(request):
 
     dictionaries = { 'recentlist': recentlist, 'headlines': headlines, 'topschools': topschools, 'topschoolcount': topschoolcount, 'yearlist': yearlist, }
     return render_to_response('huskers/recruiting.html', dictionaries)
+
+
+def RecruitingMapWidget(request):
+    recentlist = Player.objects.all().filter(year='2017').exclude(transfer_status="University").order_by('last_name', 'first_name')
+
+    dictionaries = { 'recentlist': recentlist, }
+    return render_to_response('huskers/recruit-map-widget.html', dictionaries)
 	
 	
 def RecruitingWidget(request):
@@ -263,4 +277,23 @@ def RecruiterSingle(request, nameslug):
     players = Player.objects.filter(status="Scholarship").filter(Q(recruiter_1__nameslug=nameslug) | Q(recruiter_2__nameslug=nameslug)).order_by('-year')
 
     dictionaries = { 'this_recruiter': this_recruiter, 'players': players, }
-    return render_to_response('huskers/recruiter-single.html', dictionaries)	
+    return render_to_response('huskers/recruiter-single.html', dictionaries)
+    
+def BigBoard(request, year):
+    year = year
+    players = Player.objects.filter(year=year).filter(top_target=True).exclude(hard_commit_elsewhere=True).exclude(committed_school='Nebraska').order_by('last_name', 'first_name')
+    got_away = Player.objects.filter(year=year).filter(top_target=True).filter(hard_commit_elsewhere=True).order_by('last_name', 'first_name')
+    commits = Player.objects.filter(year=year).filter(committed_school='Nebraska').order_by('last_name', 'first_name')
+    ratings = players.aggregate(two_star=Sum(Case(When(stars_247c="2 stars", then=1),output_field=IntegerField())), three_star=Sum(Case(When(stars_247c="3 stars", then=1),output_field=IntegerField())), four_star=Sum(Case(When(stars_247c="4 stars", then=1),output_field=IntegerField())), five_star=Sum(Case(When(stars_247c="5 stars", then=1),output_field=IntegerField())))
+
+    
+    dictionaries = { 'year': year, 'players': players, 'got_away': got_away, 'ratings': ratings, 'commits': commits, }
+    return render_to_response('huskers/yearpage-bigboard.html', dictionaries)	
+
+def Visits(request, year, month, day):
+    date = datetime(int(year),int(month),int(day))
+    players = Player.objects.filter(official_visit_date__year=year).filter(official_visit_date__month=month).filter(official_visit_date__day=day).order_by('last_name', 'first_name')
+    ratings = players.aggregate(two_star=Sum(Case(When(stars_247c="2 stars", then=1),output_field=IntegerField())), three_star=Sum(Case(When(stars_247c="3 stars", then=1),output_field=IntegerField())), four_star=Sum(Case(When(stars_247c="4 stars", then=1),output_field=IntegerField())), five_star=Sum(Case(When(stars_247c="5 stars", then=1),output_field=IntegerField())))
+    
+    dictionaries = { 'date': date, 'players': players, 'ratings': ratings, }
+    return render_to_response('huskers/official-visit-date.html', dictionaries)   

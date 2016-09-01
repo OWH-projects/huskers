@@ -8,6 +8,8 @@
    
     <title>{% block title %}{% endblock %}Nebraska football recruits - Omaha.com - Omaha World-Herald</title>
 
+	{% block meta %}
+	
 	<meta property="og:title" content="Nebraska football recruits">
 	<meta property="og:image" content="http://dev.dataomaha.com/media/huskers/headline-photos/Recruiting_6small_68.png">
 	<meta property="og:description" content="Every Husker ever. Take a trip back through the recent history of the Nebraska football program.">
@@ -19,8 +21,10 @@
 	<meta name="twitter:site" content="@OWHbigred">
 	<meta name="twitter:creator" content="@OWHbigred">
 	<meta name="twitter:title" content="Nebraska football recruits">
-	<meta name="twitter:image:src" content="http://dev.dataomaha.com/media/huskers/headline-photos/Recruiting_6small_68.png">
+	<meta name="twitter:image" content="http://dev.dataomaha.com/media/huskers/headline-photos/Recruiting_6small_68.png">
 
+	{% endblock %}
+	
     <!-- Bootstrap base layer -->
     <link href="http://dataomaha.com/media/scripts/bootstrap/3.2.0/css/bootstrap.css" rel="stylesheet">
 
@@ -46,22 +50,16 @@
 
 	
 
-	<!-- google analytics for dataomaha -->
-	<script type="text/javascript">
-
-	  var _gaq = _gaq || [];
-	  _gaq.push(['_setAccount', 'UA-17420602-3']);
-	  _gaq.push(['_trackPageview']);
-
-	  (function() {
-		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-	  })();
-
-	</script>
-
-	<!-- /google analytics -->
+	<!-- Dataomaha Google Analytics -->
+		<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+		ga('create', 'UA-17420602-3', 'auto', 'dataomaha');  // Replace with your property ID.
+		ga('dataomaha.send', 'pageview');
+		</script>
+	<!-- / Dataomaha Google Analytics -->
 	
 	
 	<!-- BH Media Google Analytics  -->
@@ -91,13 +89,14 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/huskers"><b>Husker Recruiting</b></a>
+          <a class="navbar-brand" href="http://omaha.com/recruiting"><b>Husker Recruiting</b></a>
         </div>
         <div class="collapse navbar-collapse">
 
 		<ul class="nav navbar-nav navbar-scroller">
-			<li><a href="/huskers">News</a></li>
+			<li><a href="http://omaha.com/recruiting">News</a></li>
 			<li><a href="/huskers/class">Classes</a></li>
+			<li><a href="/huskers/class/2017/bigboard">Big Board</a></li>
 			<li><a href="/huskers/state">States</a></li>
 			<li><a href="/huskers/signing-day-2016">Signing Day</a></li>
 			<li><a href="/huskers/draft">NFL draft</a></li>

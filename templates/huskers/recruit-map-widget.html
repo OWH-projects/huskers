@@ -1,0 +1,21 @@
+		
+			<!-- AMMAP SECTION ALL GOES AS ONE-->
+				<body onLoad="ammap.focus()">
+				<!-- saved from url=(0013)about:internet -->
+				<!-- ammap script-->
+				  <script type="text/javascript" src="/media/ammaps/swfobject.js"></script>
+					<div id="flashcontent">
+						<strong>You need to upgrade your Flash Player</strong>
+					</div>
+				
+					<script type="text/javascript">
+						// <![CDATA[		
+						var so = new SWFObject("/media/ammaps/ammap.swf", "ammap", "300px", "210px", "8", "#ffffff");
+				    so.addVariable("path", "/media/ammaps/");
+						so.addVariable("data_file", escape("/huskers/main/2017"));
+				    so.addVariable("settings_file", escape("/media/ammaps/huskermap_settings.xml"));		
+						so.addVariable("preloader_color", "#999999");
+						so.write("flashcontent");
+						// ]]>
+					</script>
+			<!-- END OF AMMAP -->

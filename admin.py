@@ -9,13 +9,13 @@ class PlayerAdmin(admin.ModelAdmin):
     filter_horizontal = [ 'badges' ]
     fieldsets = (
         (None, {
-            'fields': ('year', 'player_name', ('first_name', 'last_name'), 'position', ('height', 'weight'), ('city', 'state', 'country', 'distance'), 'highschool', 'bio', 'bio_huskers', 'related_features', ('status', 'target_schools', 'transfer_status', 'juco_name'),  'offer_date', 'commit_date', 'decommit_date', 'official_visit_date', 'signed', 'used_redshirt')
+            'fields': ('year', 'player_name', ('first_name', 'last_name'), 'position', ('height', 'weight'), ('city', 'state', 'country', 'distance'), 'highschool', 'bio', 'bio_huskers', 'related_features', ('status', 'target_schools', 'transfer_status', 'juco_name'),  ('top_target', 'committed_school', 'hard_commit_elsewhere', 'announcement_date'), 'offer_date', 'commit_date', 'decommit_date', 'official_visit_date', 'signed', 'used_redshirt')
         }),
         ('Photos', {
             'fields': ('mugshot', 'feature_photo_credit', 'feature_photo_caption', 'cropped_mug')
         }),
         ('Ratings', {
-            'fields': (('stars_247', 'rating_national_247', 'rating_position_247'), ('stars_247c', 'rating_national_247c', 'rating_position_247c'), ('stars_rivals', 'rating_national_rivals', 'rating_position_rivals'), ('stars_scouts', 'rating_national_espn', 'rating_position_espn'), ('stars_fox', 'rating_national_scout', 'rating_position_scout'))
+            'fields': (('stars_247', 'rating_national_247', 'rating_position_247', 'profile_link_247'), ('stars_247c', 'rating_national_247c', 'rating_position_247c'), ('stars_rivals', 'rating_national_rivals', 'rating_position_rivals', 'profile_link_rivals'), ('stars_scouts', 'rating_national_espn', 'rating_position_espn', 'profile_link_espn'), ('stars_fox', 'rating_national_scout', 'rating_position_scout', 'profile_link_scout'))
         }),	
         ('Hudl', {
             'fields': ('hudl_title', 'hudl_image', 'hudl_embed', 'hudl_link')

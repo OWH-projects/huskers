@@ -1,12 +1,16 @@
 {% extends 'huskers/base-new.html' %}
-{% block title %} Players from the state of {{ title }} - {% endblock %}
+
 {% load statename %}
+{% load humanize %}
+
+{% block title %} Players from the state of {{ title|state_name }} - {% endblock %}
 
 {% block content %}
 
 	<div class="jumbotron name">
 		<div class="container">
 			<h1>{{ players.count }} Husker{{ players|pluralize }} from {{ title|state_name }}</h1>
+			
 		</div>
 		</div>
 
