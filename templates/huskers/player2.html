@@ -285,7 +285,11 @@
 					<!-- {{ player.badges }} -->
 					<p>
 					{% for badge in player.badges.all %}
-						<a href="/huskers/badges/{{ badge.nameslug }}"><img src="/media/{{ badge.image }}" class="col-xs-6 player-badge" data-toggle="tooltip" data-placement="top" title="{{ badge.name }} - {{ badge.notes }}"/></a>
+							{% if badge.nameslug == "big-board" %}	
+								<a href="/huskers/class/{{ player.year }}/bigboard"><img src="/media/{{ badge.image }}" class="col-xs-6 player-badge" data-toggle="tooltip" data-placement="top" title="{{ badge.name }} - {{ badge.notes }}"/></a>
+							{% else %}
+								<a href="/huskers/badges/{{ badge.nameslug }}"><img src="/media/{{ badge.image }}" class="col-xs-6 player-badge" data-toggle="tooltip" data-placement="top" title="{{ badge.name }} - {{ badge.notes }}"/></a>
+							{% endif %}
 					{% endfor %}
 					</p>	
 					<div style="clear: both;"></div>
